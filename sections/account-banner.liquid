@@ -1,0 +1,28 @@
+{% if customer.id == null %}
+
+{% else %}
+
+<div class="subscription-banner" style="background-image: url({{ 'account-bkg.jpg' | asset_url }});">
+	<div class="user-data">
+
+	  <h3 class="user-name">hi, {{ customer.first_name }}</h3>
+		  {% assign index = 0 %}
+		  {% for order in customer.orders reversed %}
+		    {% if index == 0 %}
+			  	<p class="first_date">member since {{ order.created_at |  date: '%B %Y'}} </p>
+			{% endif %}
+			{% assign index = index | plus: 1 %}
+		  {% endfor %}
+	</div>
+</div>
+<div class="top_bar">
+	<ul class="top_bar_items">
+		<li class="top_bar_item"><a href="/tools/recurring/login/">manage subscriptions</a></li>
+		<li class="top_bar_item"><a href="/account">order history</a></li>
+		<li class="top_bar_item"><a href="/pages/rewards">rewards</a></li>
+		<li class="top_bar_item"><a href="/account/logout/">logout</a></li>
+
+		<!-- <li class="top_bar_item">settings</li> -->
+	</ul>
+</div>
+{% endif %}

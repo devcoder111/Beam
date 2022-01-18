@@ -1,0 +1,241 @@
+
+<!-- Begin ReCharge code -->
+{% include 'subscription-cart-footer' %}
+<!-- End ReCharge code -->
+<img height="1" width="1" style="border-style:none;" alt="" src="https://insight.adsrvr.org/track/pxl/?adv=iv5xfdn&ct=0:ydqbmcz&fmt=3"/>
+<div class="container mt3 pt6--md" style="max-width: 1240px;">
+
+<div class="page mt5 pt5 pt2--md">
+
+    <main class="page-content pt4 pt0--md">
+      {% if cart.item_count > 0 %}
+<div class="row">
+
+      <div class="col c7--lg c7--xl mb3">
+        <h1 class="sans--large fw--300 mb4 tc tl--lg">
+          my cart <span>({{ cart.item_count }})</span>
+        </h1>
+
+      
+        <div class="hide--md">
+
+        <form class="cart" action="/cart" method="post">
+
+          <input id="checkoutBtn" class="button button--checkout full-width" type="submit" name="checkout" value="check out" />   
+
+          {% comment %}Paypal and Google checkout buttons{% endcomment %}
+          {% if additional_checkout_buttons %}
+          <span class="additional-checkout-buttons">
+
+          <p class="additional-checkout-buttons">
+            {{ content_for_additional_checkout_buttons }}
+          </p>
+          </span>
+          {% endif %}
+        </form>
+
+        <a class="cs-button db fw--400 mt2 mb3 button button--checkout-secondary full-width" href="/collections/all-products-collection-page-products-collection-page">← continue shopping</a>
+        <a class="cs-button-subs db fw--400 mt2 mb3 button button--checkout-secondary full-width" href="/pages/subscriptions">← continue shopping</a>
+        </div>
+
+
+
+        <div class="row" style="background-color: #fdf3e5;">
+
+          {% unless cart.item_count == 0 %}
+          <div class="db col c12">
+          <div class="db pt2 tc">
+          {% if cart.total_price >= 9000 %}
+          <strong class="color--blue sans--medium">omg, you get free shipping!</strong>
+          {% else %}
+            <span class="sans--medium">hey you, you're only <strong class="color--blue">{{ 9000 | minus: cart.total_price | money }}</strong> away from <strong class="color--blue">free shipping!</strong></span>
+          {% endif %}
+          </div>
+          </div>
+          {% endunless %}
+
+
+
+
+        {% for product in collections.upsells.products %}
+
+        <div class="col c4 mt1 mb2 tc clearfix {% if hide_upsell %} hidden{% endif %}">
+
+
+          <form method="post" action="/cart/add">
+            <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+            <img class="" src="{{ product.featured_image | product_img_url: 'large' }}" alt="{{ product.title | escape  }}" style="max-width: 100px;" />    
+            <h5 class="sans--small fw--600">{{ product.title | escape  }}</h5>
+            <h6 class="mb1 sans--small fw--300">{{ product.vendor | escape  }}</h6>
+            <h6 class="mb1 sans--small fw--600">{{ product.price | money_without_trailing_zeros }}</h6>
+            <input type="submit" id="add-{{ forloop.index }}" value="add" class="button-pill" />
+          </form> 
+
+
+          <div class="clearfix"></div>
+        </div>   
+        
+        <script type="text/javascript">
+          const addButton{{ forloop.index }} = document.getElementById('add-{{ forloop.index }}');
+        
+          addButton{{ forloop.index }}.addEventListener('click', function() { 
+            utag.link({
+            "product_id"               : ["{{ product.id }}"],                           //Required
+            "product_name"             : ["{{ product.title }}"],  //Required
+            "product_price"            : ["{{ product.price | money }}"],                             //Required
+            "product_quantity"         : "1",                                        //Required
+            "product_sku"              : ["{{ variant.sku }}"],                   //Required
+            "tealium_event"            : "cart_add"                                        //Required                                     
+            }); 
+          },
+          false
+          );
+          </script>             
+        
+        {% endfor %}
+
+
+
+
+        </div>
+
+
+
+        <form class="cart" action="/cart" method="post">
+          {% assign hide_default_title = false %}
+ 
+              <div class="cart">
+
+                <div class="cart-list">
+                  {% for item in cart.items %}    
+                  {% if item.variant.title contains 'Default Title' %}
+                  {% assign hide_default_title = true %}
+                  {% endif %}
+                {% if item.product.id == 4528627089463 %}
+                {% assign hide_upsell = true %}
+                {% endif %}
+                  <div class="cart-item bg--white color--black">
+                 
+                    <div class="cart-item-block cart-item-figure">
+                      <a href="{{ collection_url }}{{ item.url }}">
+                        <img class="cart-item-image" src="{{ item | img_url: '500x340', crop: 'center' }}"  alt="{{ item.title | escape }}" />
+                      </a>
+                      <div class="clearfix"></div>
+                    </div>
+
+                    <div class="cart-item-block">
+                      <div class="sans--medium fw--300"><a href="{{ collection_url }}{{ item.url }}">{{ item.product.title }}</a></div>
+                      {% if item.variant.title %} <div class="sans--small fw--300 {% if hide_default_title %} hidden{% endif %}"><a href="{{ collection_url }}{{ item.url }}">{{ item.variant.title }}</a></div>{% endif %}
+                      <div class="cart-item-price mt1 mb1">
+                        {{ item.line_price | money }}
+                        {% if item.total_discount > 0 %}
+                        <s>{{ item.original_line_price | money }}</s><br />
+                        <div class="sans--small fw--600">({{ item.message }})</div>
+                      {% endif %}
+                      </div>
+                      <div class="sans--small fw--300 ellipsis pt0 pb0 mb2">
+                        qty: <input type="number" name="updates[]" id="updates_{{ item.id }}" class="quantity" value="{{ item.quantity }}" />
+                      </div>
+                      <a class="remove-item sans--small color--gray" href="/cart/change?line={{ forloop.index }}&quantity=0">remove</a>
+                    </div>  
+
+                    <div class="clearfix"></div>
+                  
+                  </div>
+
+                  <script type="text/javascript">
+                  
+                  $('a.remove-item').click( function(e) {
+                    e.preventDefault();
+                      utag.link({
+                      "product_id"               : ["{{ item.product.id }}"],                           
+                      "product_name"             : ["{{ item.product.title }}"],  
+                      "product_price"            : ["{{ item.line_price | money_without_currency }}"],                           
+                      "product_quantity"         : ["{{ item.quantity }}"],                                        
+                      "product_sku"              : ["{{ item.variant.sku }}"],                   
+                      "tealium_event"            : "cart_remove"                                                                        
+                      }); 
+                      location.href = "/cart/change?line={{ forloop.index }}&quantity=0";
+                      return false;
+                  });
+                    </script>
+
+                  {% endfor %}
+            </div>
+         
+          </div>
+          <input class="button button--index full-width rounded mb2" type="submit" name="update" value="update cart" />
+
+
+        </form>
+        </div>
+
+            <div class="col c1 show--lg"></div>
+
+            <div class="pt0 p2 col c4--lg c4--xl pt8--lg tl">
+
+                <h2 class="sans--medium fw--300 mb2 show--lg">cart summary</h2>
+                <hr class="mb2 mb3--lg" />
+                {% if cart.total_discount > 1 %}
+                <div class="sans--small fw--300 pt1">
+                  you save <strong>{{ cart.total_discount | money }}!</strong>
+                </div>
+                {% endif %}
+
+                <div class="sans--medium fw--300 pt1">
+                  Subtotal: <em><span class="sc-discount-total sc_money">{{ cart.total_price | money }}</span></em>
+                </div>
+                <form class="cart" action="/cart" method="post">
+                  <div class="sans--medium fw--300 pt1">
+                    add a note:</div>
+                  <textarea name="note" class="mb1" style="width: 100%; height: 60px;" id="CartNote">{{ cart.note }}</textarea>   
+                <input id="checkoutBtn" class="button button--checkout full-width" type="submit" name="checkout" value="check out" />   
+
+                {% comment %}Paypal and Google checkout buttons{% endcomment %}
+                {% if additional_checkout_buttons %}
+                <span class="additional-checkout-buttons">
+
+                <p class="additional-checkout-buttons">
+                  {{ content_for_additional_checkout_buttons }}
+                </p>
+                </span>
+                {% endif %}
+              </form>
+
+              <a class="cs-button db fw--400 mt2 mb3 button button--checkout-secondary full-width" href="/collections/all-products-collection-page-products-collection-page">← continue shopping</a>
+              <a class="cs-button-subs db fw--400 mt2 mb3 button button--checkout-secondary full-width" href="/pages/subscriptions">← continue shopping</a>
+                       
+                <hr class="mb2 mb3--lg" />
+
+                <p class="db mt4 mb4 sans--small fw--300">rewards can be applied at checkout.</p>
+
+
+           </div>
+      
+        </div>
+
+        {% else %}
+          
+        <div class="mt7 pt4 mb6 tc" style="min-height:300px;">
+          <h2 class="gamma">It appears that your cart is currently empty!</h2>
+          <h3 class="delta">You can continue browsing <a href="/collections/all-products-collection-page">here</a>.</h3>
+        </div>
+      
+        {% endif %}
+    </main>
+
+</div>
+</div>
+
+<style>
+  .hide-coupon-form #af_cart_page, .hide-coupon-form .cs-button, .cs-button-subs {display: none !important;}
+  .hide-coupon-form .cs-button-subs {display: block !important;}
+</style>
+
+<script src="https://widget.sezzle.com/v1/javascript/price-widget?uuid=e60e7d5f-8b5c-4c2c-ae89-8f6f3099dbba"></script>
+
+{% if settings.tealium_enabled %}
+
+  {% include 'utag' %}
+
+{% endif %}

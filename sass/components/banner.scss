@@ -1,0 +1,15 @@
+.banner {
+	min-height: $banner-height;
+	padding: 15px 20px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: $z-index-banner;
+	transform: translate3d(0, -100%, 0);
+	transition: 300ms transform cubic-bezier(0, 0, 0, 1);
+
+	&.active {
+		transform: translate3d(0, 0, 0);
+	}
+}

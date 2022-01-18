@@ -1,0 +1,191 @@
+{% comment %}
+  A word on drop-down menus: Shopify has no concept of them.
+  Drop-down menus in Shopify themes are a hack that relies on a naming convention.
+  To create a drop-down menu, the merchant must create a link list that has the same name as the link he wants the drop-down for.
+  For example, if he wants a drop-down under a 'Shop by brand' link (say, he has such link in his Main Menu), he needs to create a linklist called 'Shop by brand', and populate it with links. Once he has done that, there'll be a drop-down under 'Shop by brand'.
+  Shopify has a visual how-to guide here: http://docs.shopify.com/manual/your-website/navigation/create-drop-down-menu.
+  The naming convention hack won't work well if a shop's navigation uses non-English characters. There's a much more verbose coding solution that handles non-English characters here: http://docs.shopify.com/manual/configuration/store-customization/currencies-and-translations/translations/can-i-have-drop-down-menus-that-use-non-english-characters.
+  A word on sub-categories: Shopify manages sub-categories using product tags: http://docs.shopify.com/manual/configuration/store-customization/page-specific/collections/subcategories
+{% endcomment %}
+
+  <ul class="list list--horizontal list--forward gutter--none">
+    <li class="list__item last">
+
+      <div class="media media--horizontal media--forward gutter--none ">
+        <div class="media__fixed p1">
+  
+      <a class="media media--horizontal media--forward align--middle link--opacity link--wave lowercase" href="/collections/shop-all">
+        <span class="media__fluid">
+          <span class="db sans--small fw--600">
+            shop all
+          </span>
+        </span>
+        <span class="media__fixed header__expand-icon-container"></span>
+      </a>
+      
+      </div>
+      <div class="media__fluid"></div>
+      </div>
+  
+        </li>
+
+
+    {% for link in linklists.main-menu.links %}
+    {% assign has_sub_menu = false %}
+    {% assign has_sub_categories = false %}
+    {% assign parent_link_active = false %}
+    {% assign child_list_handle = link.title | handle %}
+    {% if linklists[child_list_handle] and linklists[child_list_handle].links.size > 0 %}
+      {% assign has_sub_menu = true %}
+      {% for l in linklists[child_list_handle].links %}
+        {% if handle != blank and handle == l.object.handle %}
+          {% assign parent_link_active = true %}
+        {% elsif page_title == l.title %}
+          {% assign parent_link_active = true %}
+        {% endif %}
+      {% endfor %}
+    {% elsif link.type == 'collection_link' and link.object.all_tags.size > 0 %}
+      {% assign has_sub_categories = true %}
+    {% endif %}
+
+
+
+
+
+    <li class="list__item {% if link.active or parent_link_active %} active{% endif %}{% if has_sub_menu or has_sub_categories %} has-dropdown{% endif %}{% if forloop.first %} first{% elsif forloop.last %} last{% endif %}">
+      <div class="media media--horizontal media--forward gutter--none">
+        <div class="media__fixed p1">
+
+      <a class="media media--horizontal media--forward align--middle link--opacity link--wave lowercase" href="{{ link.url }}">
+        <span class="media__fluid">
+          <span class="db sans--small fw--600">
+            {{ link.title }}{% if has_sub_menu or has_sub_categories %} <i class="fa fa-angle-down"></i>{% endif %}
+          </span>
+        </span>
+        <span class="media__fixed header__expand-icon-container"></span>
+      </a>
+      {% if has_sub_menu or has_sub_categories %}
+      <ul class="sub-nav">
+        {% if has_sub_menu %}
+          {% for l in linklists[child_list_handle].links %}
+          <li class="db list__item{% if l.active %} active{% endif %}">
+            <a class="sans--small fw--600 link--opacity lowercase" href="{{ l.url }}">{{ l.title }}</a>
+          </li>
+          {% endfor %}
+        {% elsif has_sub_categories %}
+          {% for tag in link.object.all_tags %}
+          <li class="{% if current_tags contains tag %} active{% endif %}">
+            <a href="{{ link.url }}/{{ tag | handle }}">{{ tag }}</a>
+          </li>
+          {% endfor %}
+        {% endif %}
+      </ul>
+      {% endif %}
+      </div>
+      <div class="media__fluid"></div>
+      </div>
+    </li>
+    {% endfor %}
+
+    <li class="list__item last hide--md hidden">
+
+    <div class="media media--horizontal media--forward gutter--none  hide--md">
+      <div class="media__fixed p1">
+
+    <a class="media media--horizontal media--forward align--middle link--opacity link--wave lowercase swym-wishlist" href="#swym-wishlist">
+      <span class="media__fluid">
+        <span class="db sans--small fw--600">
+          wishlist
+        </span>
+      </span>
+      <span class="media__fixed header__expand-icon-container"></span>
+    </a>
+    
+    </div>
+    <div class="media__fluid"></div>
+    </div>
+
+      </li>
+    <li class="list__item last fr hidden">
+
+      <a href="#swym-wishlist" class="swym-wishlist">
+        <i aria-hidden="true" focusable="false" role="presentation" class="fa fa-heart mt1 mr2"></i>
+      </a>
+      </li>
+    <li class="list__item last fr show--md hidden">
+      <form class="search" action="/search">
+        <input class="search-input" type="text" name="q" value="{{ search.terms | escape }}"  />
+        <i class="fa fa-search"></i>
+    </form>
+</li>
+
+
+  </ul>
+
+
+  <style>
+.search-input {
+  cursor: pointer;
+  outline: none;
+  height: 2em;
+  width: 2em;
+  background-color: transparent;
+  border: none;
+  font-size: 1em;
+  border-radius: 0;
+  padding: 0 8px;
+  color: #fff;
+  margin-top: 2px;
+  transition: all .2s ease-in;
+}
+.search-input:focus {
+    width: 10em;
+    transition: all .2s ease-in;
+    border-radius: 4px;
+    color: #000;    
+    background-color: #E6F1FF;
+    cursor: default;
+  }
+
+.search
+.fa {
+  cursor: pointer;
+  color: #000;
+  position: relative;
+  left: -1.8em;
+  pointer-events: none;
+}
+ul li.has-dropdown {
+  position: relative;
+}
+ul li.has-dropdown ul.sub-nav {
+    background: #fff;
+    visibility: hidden;
+  opacity: 0;
+  min-width: 5rem;
+    position: absolute;
+  transition: all 0.5s ease;
+  margin-top: -6px;
+    left: 0;
+  display: none;
+  padding: 12px 24px;
+  border-bottom: 1px solid #e6e6e6;
+    border-left: 1px solid #e6e6e6;
+		border-right: 1px solid #e6e6e6;
+}
+
+ul li.has-dropdown:hover ul.sub-nav,
+ul li:focus-within ul.sub-nav, /* this is the line we add */
+ul li.has-dropdown ul.sub-nav:hover {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+  margin-top: 0rem;
+}
+
+ul li.has-dropdown ul.sub-nav li {
+    clear: both;
+  width: 100%;
+}
+
+  </style>

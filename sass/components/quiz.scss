@@ -1,0 +1,350 @@
+//
+// === CTA ===
+//
+
+.quiz__cta__container--desktop {
+	z-index: $z-index-cta;
+	position: fixed;
+	bottom: 5px;
+	right: 10px;
+	animation: ctaBob 3000ms ease-in-out infinite;
+}
+
+@keyframes ctaBob {
+	0% {
+		transform: translate3d(0, 0, 0)
+	}
+
+	50% { 
+		transform: translate3d(0, -5px, 0)
+	}
+
+	100% { 
+		transform: translate3d(0, 0, 0)
+	}
+}
+
+.quiz__cta--desktop {
+	width: 120px;
+	height: 120px;
+	border-radius: 120px;
+	text-align: center;
+	background-image: linear-gradient(to bottom, #F1CD9D, #A6C1E4);
+	box-shadow: -2px 2px 4px rgba(color(black), 0.3);
+	transition: 300ms transform cubic-bezier(0, 0, 0, 1);
+	transform-origin: center;
+	transform: translate3d(0, 150px, 0) scale(0.7);
+
+	> * {
+		position: absolute;
+		top: 50%;
+		left: 0;
+		right: 0;
+		transform: translate3d(0, -50%, 0);
+		transform-origin: center;
+	}
+
+	&.active {
+		transform: translate3d(0, 0, 0) scale(1);
+	}
+
+	@include breakpoint(md) {
+		> * {
+			transition: 500ms transform cubic-bezier(0, 0, 0, 1);
+		}
+
+		&:hover,
+		&:focus {
+			transform: scale(1.1);
+
+			> * {
+				transform: translate3d(0, -50%, 0) scale(0.90909);
+			}
+
+			&:disabled {
+				transform: scale(1);
+
+				> * {
+					transform: translate3d(0, -50%, 0) scale(1) ;
+				}
+			}
+		}
+
+		&:disabled {
+			transform: scale(1);
+
+			> * {
+				transform: translate3d(0, -50%, 0) scale(1);
+			}
+		}
+	}
+}
+
+//
+// === Layout ===
+//
+
+.quiz__intro-illo {
+	height: 200px;
+	width: 200px;
+}
+
+.quiz__multi-choice-icon {
+	width: 40px;
+	height: 40px;
+}
+
+.quiz__underlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: $z-index-quiz;
+	background: rgba(color(tan), 0.97);
+}
+
+.quiz__container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: $z-index-quiz;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.quiz__logo {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-image: linear-gradient(to bottom, color(tan), color(tan), color(tan), rgba(color(tan), 0));
+	z-index: $z-index-cta;
+}
+
+.quiz__height {
+	min-height: 100vh;
+	min-height: var(--app-height);
+	padding-top: 80px;
+	padding-bottom: 80px;
+}
+
+.quiz__interstitial {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: $z-index-interstitial;
+}
+
+.quiz__input-floor {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: $grid-gutter-mobile;
+	
+	@include breakpoint(md) {
+		bottom: $grid-gutter-desktop;
+	}
+}
+
+.quiz__cancel-floor {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 100%;
+}
+
+.quiz__next {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: $z-index-quiz-fixed-ui;
+	transition: 300ms transform cubic-bezier(0, 0, 0, 1), opacity 300ms ease-out;
+	transform: translate3d(0, 100%, 0);
+	opacity: 0;
+
+	&.active {
+		transform: translate3d(0, 0, 0);
+		opacity: 1;
+		transition-delay: 500ms; // wait for page scroll
+	}
+}
+
+.quiz__range {
+	cursor: none !important;
+
+	* {
+		cursor: none !important;
+	}
+}
+
+.quiz__range-underlay {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: linear-gradient(to bottom, rgba(color(blue-light), 0), rgba(color(blue-light), 0.2) 60px, rgba(color(blue-light), 0.2));
+	transform-origin: top left;
+
+	&.not-last {
+		&:after {
+			content: '';
+			display: block;
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 100%;
+			height: 60px;
+			background: linear-gradient(to top, rgba(color(blue-light), 0), rgba(color(blue-light), 0.2));
+		}
+	}
+}
+
+.quiz__range-icon {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: $z-index-quiz-fixed-ui;
+	transform: translate(-50%, -50%);
+	height: 30px;
+	width: 30px;
+	transition: 100ms opacity ease-out;
+
+	&.hide {
+		opacity: 0;
+	}
+}
+
+.quiz__range-value {
+	font-family: $font-family-poppins;
+	font-size: 80px;
+	line-height: 80px;
+	min-width: 100px;
+
+	@include breakpoint(md) {
+		font-size: 100px;
+		line-height: 100px;
+	}
+}
+
+.quiz__result-container {
+	background: linear-gradient(to bottom, rgba(color(blue-light), 0), rgba(color(blue-light), 0.2) 50px, color(blue-light) 50%, #F1CD9D);
+}
+
+.quiz__result-hr {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	height: 13px;
+	border: none;
+	padding: 0;
+	margin: 0;
+
+	&:after {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		width: 200%;
+		background-image: url('../assets/images/quiz-answer-hr.svg');
+		background-size: 205px 13px;
+		background-repeat: repeat-x;
+		background-position: 0 0;
+		animation: hrMove 10000ms linear infinite;
+	}
+}
+
+.quiz__result--footer {
+	@include breakpoint(lg) {
+		position: absolute;
+		left: calc(33% + 20px);
+		right: 20px;
+		bottom: 30px;
+	}
+}
+
+@keyframes hrMove {
+	0% {
+		transform: translate3d(0, 0, 0)
+	}
+
+	100% {
+		transform: translate3d(-205px, 0, 0)
+	}
+ }
+
+//
+// === Transitions ===
+//
+
+$route-transition-timeout: 1000ms;
+$route-transition-components: 5;
+
+.quiz__transition-appear {
+	opacity: 0.01;
+}
+
+.quiz__transition-appear-active {
+	opacity: 1;
+	transition: opacity ($route-transition-timeout / 3) ease-out ($route-transition-timeout / 3);
+}
+
+.quiz__transition-enter {
+	opacity: 0.01;
+}
+
+.quiz__transition-enter-active {
+	opacity: 1;
+	transition: opacity ($route-transition-timeout / 3) ease-out ($route-transition-timeout / 3);
+}
+
+.quiz__transition-exit {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	opacity: 1;
+	pointer-events: none;
+}
+
+.quiz__transition-exit-active {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	opacity: 0.01;
+	transition: opacity ($route-transition-timeout / 3) ease-out;
+	pointer-events: none;
+}
+
+@for $i from 0 through $route-transition-components {
+	.quiz__transition-appear .quiz__transition__component--#{$i},
+	.quiz__transition-enter .quiz__transition__component--#{$i} {
+		opacity: 0.01;
+		transform: translate3d(0, 10px, 0);
+	}
+
+	.quiz__transition-appear-active .quiz__transition__component--#{$i},
+	.quiz__transition-enter-active .quiz__transition__component--#{$i} {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+		transition: opacity ($route-transition-timeout / 2) ease-out (($i * 100ms) + ($route-transition-timeout / 2)), transform ($route-transition-timeout / 2) cubic-bezier(0, 0, 0, 1) (($i * 100ms) + ($route-transition-timeout / 2));
+	}
+}
+.button--mobile-quiz-close {display: none;}
+.button--mobile-quiz-close.open {
+	display: block;
+	position: fixed;
+	top: 0;
+	left:0;
+	padding:20px;
+	z-index: 999999;
+}

@@ -1,0 +1,373 @@
+{% for item in cart.items %}    
+
+{% if item.product.id == 4528614113335 %}
+
+{% assign upsells = 'upsells-sleep' %}
+{% else %}
+{% assign upsells = 'upsells' %}
+
+{% endif %}
+
+{% if item.product.id == 4670936121399 %}
+{% assign upsells = 'upsells-elevate' %}
+{% endif %}
+{% if item.product.id == 4670890573879 %}
+{% assign upsells = 'upsells-elevate' %}
+{% endif %}
+{% if item.product.id == 4671087673399 %}
+{% assign upsells = 'upsells-elevate' %}
+{% endif %}
+{% if item.product.id == 4671120670775 %}
+{% assign upsells = 'upsells-elevate' %}
+{% endif %}
+
+{% endfor %}
+<!-- Begin ReCharge code -->
+{% include 'subscription-cart-footer' %}
+<!-- End ReCharge code -->
+<img height="1" width="1" style="border-style:none;" alt="" src="https://insight.adsrvr.org/track/pxl/?adv=iv5xfdn&ct=0:ydqbmcz&fmt=3"/>
+<div class="container mt3--md pt6--md" style="max-width: 1240px;">
+
+<div class="page mt0 pt0 mt5--md pt2--md">
+
+    <main class="page-content pt4 pt0--md">
+      {% if cart.item_count > 0 %}
+<div class="row">
+
+      <div class="col c8--xl mb3">
+        <h1 class="mt4 mb4 tc tl--lg hide--md">
+          <div class="sans--large fw--300">my cart </div><div class="">({{ cart.item_count }} items)</div>
+        </h1>
+           
+        <div class="hide--md mt4 mb3">
+
+          <form class="cart" action="/cart" method="post">
+  
+            <input id="checkoutBtn" class="button button--checkout full-width" type="submit" name="checkout" value="secure checkout" />   
+  
+            {% comment %}Paypal and Google checkout buttons{% endcomment %}
+            {% if additional_checkout_buttons %}
+            <span class="additional-checkout-buttons">
+  
+            <p class="additional-checkout-buttons">
+              {{ content_for_additional_checkout_buttons }}
+            </p>
+            </span>
+            {% endif %}
+          </form>
+  
+          </div>
+
+        {% for item in cart.items %}    
+        {% if item.variant.id == 32449032814647 %}
+
+        <div class=" db mt3 tc bg--blue-light pt3 pb3">
+          <span class="color--blue db mb2 tc fw--600" style="font-size: 21px;">for a limited time only</span>
+          <span class="sans--body db pl2 pr2 pl1--md pr1--md">receive a free sample of our best-selling topical with your order. we've automatically added it to your cart so just checkout and we'll handle the rest!
+          </span>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        {% if cart.total_price >= 7000 %}
+        {% else %}
+        <div class="row db mt3 tc bg--blue-light pt3 pb2 pb3--md">
+          <div class="db mb2 tc fw--600 pl1 pr1 pl2--md pr2--md">
+              <div class="sans--medium color--blue mb1" style="font-size: 21px;">you're only {{ 7000 | minus: cart.total_price | money }} away from a <strong class="color--blue">free</strong> mini fixer.</div>
+              <div class="sans--body db pl1 pr1 pl5--md pr5--md">receive a free sample of our best-selling topical with your order.<br class="show--md"> for a limited time only.</div>
+          </div>
+        </div>
+
+        <div class="row mb4--md pb3 hide--md bg--blue-light">
+
+
+  <div class="color--blue sans--body fw--400 pb1 tc">add some favorites to your order</div>
+
+
+
+{% for product in collections.[upsells].products %}
+
+<div class="col c4 mt2 mb2 tc clearfix {% if hide_upsellOLD %} hidden{% endif %}">
+
+
+  <form method="post" action="/cart/add">
+    <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+    <img class="" src="{{ product.featured_image | product_img_url: '220x220', crop: 'center' }}" alt="{{ product.title | escape  }}" style="max-width: 100%;border-radius: 18px;" />    
+    <h5 class="sans--small fw--600 mt1">{{ product.title | escape  }}</h5>
+    <h6 class="mb1 sans--small fw--300">{{ product.vendor | escape  }}</h6>
+    <h6 class="mb1 sans--small fw--600">{{ product.price | money_without_trailing_zeros }}</h6>
+    <input type="submit" id="add-{{ forloop.index }}" value="add" class="button-pill hide--md" />
+    <input type="submit" id="add-{{ forloop.index }}" value="add to cart" class="button-pill show--md" />
+  </form> 
+
+
+  <div class="clearfix"></div>
+</div>   
+
+ 
+
+{% endfor %}
+
+
+</div>
+        {% endif %}
+
+
+
+        <form class="cart" action="/cart" method="post">
+          {% assign hide_default_title = false %}
+
+
+              <div class="cart">
+
+                <div class="cart-list">
+                  {% for item in cart.items %}    
+                  {% if item.variant.title contains 'Default Title' %}
+                  {% assign hide_default_title = true %}
+                  {% endif %}
+                {% if item.product.id == 4528627089463 %}
+                    {% assign hide_upsell = true %}
+                {% endif %}
+                {% if item.product.title contains "subscription" %}
+                    {% assign hide_upsell = true %}
+                    <style>
+                      .fs-notice {display: none !important;}
+                      .sub-notice {display: block !important;}
+                    </style>
+                {% endif %}
+                {% if item.product.title contains "free trial" %}
+                <style>
+
+                </style>
+            {% endif %}               
+                  <div class="cart-item bg--white color--black product-{{ item.product.id }}">
+                 
+                    <div class="cart-item-block cart-item-figure">
+                      <a href="{{ collection_url }}{{ item.url }}">
+                        <img class="cart-item-image" src="{{ item | img_url: '500x340', crop: 'center' }}"  alt="{{ item.title | escape }}" />
+                      </a>
+                      <div class="clearfix"></div>
+                    </div>
+
+                    <div class="cart-item-block">
+
+                      <div class="sans--medium fw--300"><a href="{{ collection_url }}{{ item.url }}">{{ item.product.title }}</a></div>
+                      
+                      {% if item.variant.title %} <div class="sans--small fw--300 {% if hide_default_title %} hidden{% endif %}"><a href="{{ collection_url }}{{ item.url }}">{{ item.variant.title }}</a></div>{% endif %}
+
+                      {% if item.product.id == 4573939040311 %}
+                      <div class="sans--small fw--300">promotion not valid for this item</div>
+                      {% endif %}
+                      {% if item.product.id == 4608551452727 %}
+                      <div class="sans--small fw--300">promotion not valid for this item</div>
+                      {% endif %}
+                      {% if item.product.id == 4573926326327 %}
+                      <div class="sans--small fw--300">promotion not valid for this item</div>
+                      {% endif %}                                          
+                      {% if item.product.id == 4528628760631 %}
+                      <div class="sans--small fw--300">promotion not valid for this item</div>
+                      {% endif %}
+                      {% if item.product.id == 4639858524215 %}
+                      <div class="sans--small fw--300">promotion not valid for this item</div>
+                      {% endif %}    
+                      {% if item.variant.id == 32449032814647 %}
+                      <div class="sans--small fw--600 mb1">limited time only</div>
+                      <div class="sans--small fw--300">a soothing salve infused with lavender, eucalyptus, and nano hemp to fight soreness and fatigue.</div>
+
+                      <script>
+    
+                        let date = new Date(Date.now() + 64.64e+7);
+                        date = date.toUTCString();
+                        document.cookie = "minFixer=true; path=/; expires=" + date;
+
+                    </script>
+                      {% endif %}    
+
+                      <div class="cart-item-price mt1 mb1">
+                        {{ item.line_price | money }}
+                        {% if item.variant.id == 32449032814647 %}
+                        <s class="color--gray sans--small">$29.00</s><br />
+                        {% endif %}    
+
+                        {% if item.total_discount > 0 %}
+                        <s>{{ item.original_line_price | money }}</s><br />
+                        <div class="sans--small fw--600">({{ item.message }})</div>
+                      {% endif %}
+                      </div>
+                      <div class="sans--small fw--300 ellipsis pt0 pb0 mb2">
+                        qty: <input type="number" name="updates[]" id="updates_{{ item.id }}" class="quantity" value="{{ item.quantity }}" />
+                      </div>
+                      <a class="remove-item remove-main sans--small color--gray" href="/cart/change?line={{ forloop.index }}&quantity=0">remove</a>
+                      {% if item.variant.id == 32449032814647 %}
+                      <a class="remove-item sans--small color--gray" href="/cart/change?line={{ forloop.index }}&quantity=0">remove my free gift</a>
+                      {% endif %}    
+
+                    </div>  
+
+                    <div class="clearfix"></div>
+                  
+                  </div>
+
+
+
+                  {% endfor %}
+            </div>
+          </div>
+          <input class="button button--index full-width rounded mb2" type="submit" name="update" value="update cart" />
+
+      </form>
+
+    </div>
+
+            <div class="pt0 col c4--lg c4--xl pt4--lg tl">
+              <div class="pl3--md">
+                <h2 class="sans--medium fw--300 mb1 show--lg">summary</h2>
+                <hr class="mb2 mb3--lg" />
+                {% if cart.total_discount > 1 %}
+                <div class="sans--small fw--300 pt1">
+                  you save <strong>{{ cart.total_discount | money }}!</strong>
+                </div>
+                {% endif %}
+
+                <div class="sans--medium fw--300 pt1">
+                  subtotal: <em>{{ cart.total_price | money }}</em>
+                </div>
+                <div id="bfvip-wrap" class="hidden mt2 mb2 p1 tc bg--light-gray color--blue">
+                  <p>30% off will be applied at checkout</p>
+                </div>
+    
+                <form class="cart mt2" action="/cart" method="post">
+     
+                <input id="checkoutBtn" class="button button--checkout full-width" type="submit" name="checkout" value="check out" />   
+
+                {% comment %}Paypal and Google checkout buttons{% endcomment %}
+                {% if additional_checkout_buttons %}
+                <span class="additional-checkout-buttons">
+
+                <p class="additional-checkout-buttons">
+                  {{ content_for_additional_checkout_buttons }}
+                </p>
+                </span>
+                {% endif %}
+
+                {% assign found_title = false %}
+                {% for item in cart.items %}
+                  {% if item.variant.id == 32449032814647 %}
+                    {% assign found_title = true %}
+                  {% endif %}
+                {% endfor %}
+
+                {% if cart.total_price <= 6999 and found_title == true %}
+
+<script>
+$(document).ready(function() {
+                      var variantId2 = 32449032814647;
+                      jQuery.post('/cart/update.js', 'updates['+variantId2+']=0');
+                      setTimeout( 
+                        function() {
+                          window.location.reload(true);
+                        }, 500);
+                  });
+                
+  </script>
+                {% endif %}
+
+
+                {% if cart.total_price > 6999 and found_title == false %}
+                <script>
+                if (document.cookie.indexOf('minFixer') == -1 ) {
+                  $(document).ready(function() {
+                      var variantId = 32449032814647;
+                      jQuery.post('/cart/add.js', {
+                        quantity: 1,
+                        id: variantId
+                      });
+                      setTimeout( 
+                        function() {
+                          window.location.reload(true);
+                        }, 500);
+                  });
+                }
+</script>
+{% endif %}
+                
+              </form>
+              {% include 'guarantee' %}
+
+              <a class="cs-button db fw--400 mt2 mb3 button button--checkout-secondary full-width hide--md" href="/collections/all-products-collection-page-products-collection-page">← continue shopping</a>
+                       
+                <hr class="mb2 mb3--lg" />
+
+                <p class="db mt3 mb1 sans--small fw--300">rewards + discounts can be applied at checkout.</p>
+        {% if customer.id == null %}
+
+        <p class="db mt2 mb2 sans--small fw--300">earn your rewards by creating an account or signing in at checkout.</p>
+
+    {% endif %}
+           </div>
+      
+        </div>
+      </div>
+        {% else %}
+          
+        <div class="mt7 pt4 mb6 tc" style="min-height:300px;">
+          <h2 class="gamma">It appears that your cart is currently empty!</h2>
+          <h3 class="delta">You can continue browsing <a href="/collections/all-products-collection-page">here</a>.</h3>
+        </div>
+      
+        {% endif %}
+    </main>
+</div>
+
+<div class="row mb4--md pb3 pt2" style="background-color: #f7f7f7;">
+
+  <div class="color--blue sans--medium fw--400 pt1 pb1 tc">add some favorites to your order</div>
+
+
+
+{% for product in collections.[upsells].products %}
+
+<div class="col c4 mt2 mb2 tc clearfix {% if hide_upsellOLD %} hidden{% endif %}">
+
+
+  <form method="post" action="/cart/add">
+    <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+    <img class="" src="{{ product.featured_image | product_img_url: '220x220', crop: 'center' }}" alt="{{ product.title | escape  }}" style="max-width: 100%;border-radius: 18px;" />    
+    <h5 class="sans--small fw--600 mt1">{{ product.title | escape  }}</h5>
+    <h6 class="mb1 sans--small fw--300">{{ product.vendor | escape  }}</h6>
+    <h6 class="mb1 sans--small fw--600">{{ product.price | money_without_trailing_zeros }}</h6>
+    <input type="submit" id="add-{{ forloop.index }}" value="add" class="button-pill hide--md" />
+    <input type="submit" id="add-{{ forloop.index }}" value="add to cart" class="button-pill show--md" />
+  </form> 
+
+
+  <div class="clearfix"></div>
+</div>   
+
+ 
+
+{% endfor %}
+
+
+
+</div>
+</div>
+
+<style>
+.cart-list > .cart-item {
+  border: none ;
+}
+.cart-list > .cart-item ~ .cart-item{
+  border-top: 1px solid rgb(194, 194, 194) ;
+}
+.cart-list {margin-top: 0px;}
+  .product-4660694843447 .ellipsis {
+    display: none !important;
+  }
+  .product-4660694843447 .remove-main {
+    display: none !important;
+  }
+</style>
+
+<script src="https://widget.sezzle.com/v1/javascript/price-widget?uuid=e60e7d5f-8b5c-4c2c-ae89-8f6f3099dbba"></script>
+

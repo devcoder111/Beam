@@ -1,0 +1,35 @@
+{% if settings.tealium_enabled %}
+
+<script type="text/javascript">
+  var utag_data = {
+    "currency_code"           : "USD",                                            //Required
+    "category_id"             : "{% for collection in product.collections %}{{ collection.id }}, {% endfor %}",                                            //Suggested
+    "product_category"        : [{% for collection in product.collections %}"{{ collection.title }}", {% endfor %}],                              //Required
+    "product_image_url"       : ["{{ product | img_url: 'master' }}"],                  //Suggested
+    "product_original_price"  : ["{{ product.compare_at_price | money_without_currency }}"],                             //Suggested
+    "product_unit_price"       : ["{{ product.price | money_without_currency }}"],                             //Required
+    "product_url"             : ["{{ product.url }}"],   //Suggested
+    "site_section"            : "Products",                                       //Required
+    "tealium_event"           : "product_view",                                    //Required
+    "site_section": "product",
+    "product_id" : ["{{ product.id }}"],
+    "product_name" : ["{{ product.title }}"],
+    "product_brand" : ["{{ product.vendor }}"],
+
+    {% for variant in product.variants %}
+      {% if variant.price == product.price_min %}
+        "product_price" : ["{{ variant.price | money_without_currency }}"],
+        "product_sku" : ["{{ variant.sku }}"],
+
+      {% endif %}
+    {% endfor %}
+
+    {% include 'global_udo_vars' %}
+
+    "page_type": "product"
+  }
+</script>
+
+{% include 'utag' %}
+
+{% endif %}

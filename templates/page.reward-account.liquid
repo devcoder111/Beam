@@ -1,0 +1,109 @@
+
+
+{% if customer %}
+  <h1 class="reward-account-heading swell-desktop"></h1>
+  <div class="swell-reward-beam">
+    <div class="swell-heading-section account-heading">
+      <h1 class="swell-heading">my rewards</h1>
+    </div>    
+    <!-- Login Section Start -->
+      <div class="swell-login-section">
+        <div class="swell-container">
+          <div class="swell-heading-section">
+            <h3 class="swell-login-user">hi, {{ customer.first_name }}! <br> you have <span class="swell-point-balance">x</span> points.</h3>
+          </div>
+          <ul class="swell-link-list">
+            <li class="swell-link">
+              <a href="/cart" class="swell-redeem-now">Redeem Now</a>
+            </li>
+            <li class="swell-link">
+              <div class="swell-link-history swell-history-link">Rewards History</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    <!-- Login Section End -->
+
+    <!-- Redeem Discount Section Code Start -->
+      <div class="redeem-discount">
+        <div class="swell-container">
+          <div class="redeem-discount-content">
+            <div class="swell-heading-section">
+              <h2 class="swell-heading">redeem for discounts</h2>
+              <p class="swell-detail">Redeeming your hard-earned points is easy!<br class="swell-mobile"> Simply apply your points for a discount at checkout! <span>Every 100 points = $10</span></p>
+            </div>
+            <div class="swell-referral-loader">
+              <div class="lds-dual-ring"></div>
+            </div>
+            <ul class="swell-redemption-option-list">
+            </ul>
+          </div>
+          <div class="redeem-discount-image swell-desktop">
+            <img src="{{ 'swell-redeem.jpg' | asset_img_url: 'master' }}" class="redeem-image">
+          </div>
+        </div>
+      </div>
+    <!-- Redeem Discount Section Code End -->
+    
+    <!-- Referral Section Code Start -->
+      <div class="referral-section {% if customer %}logged-in{% endif %}">
+        <div class="referral-section-holder">
+          <div class="referral-sidebar-image swell-mobile">
+            <img src="{{ 'swell-referral-mobile.jpg' | asset_img_url: 'master' }}" class="refer-image">
+          </div>
+          <div class="swell-referral-holder">
+            <div class="swell-referral">
+              <div class="swell-referral-loader">
+                <div class="lds-dual-ring"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% if customer %}
+        <div class="referral-section-content">
+          <div class="referral-content-sidebar-image">
+            <img src="{{ 'swell-referral-content.png' | asset_img_url: 'master' }}" class="refer-content-image swell-desktop">
+          </div>
+          
+          <div class="referral-content-holder">
+            <div class="referral-content">
+              <a href="/pages/rewards" class="check-reward-balance">Check Rewards Balance</a>
+              <div class="swell-referral-heading">
+                <h2 class="swell-heading">your referrals</h2>
+              </div>
+              <div class="table-classes">
+                <div class="swell-table-responsive">
+                  <table class="swell-referral-table">
+                    <thead>
+                      <tr>
+                        <th>Email</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-data">
+                     </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="redeem-point">
+                <div class="swell-referral-heading">
+                  <h2 class="swell-heading">how do I redeem my points?</h2>
+                  <p class="swell-detail">Now, the fun part! Simply redeem any rewards credit you've earned directly in the cart.</p>
+                  <ul class="swell-link-list">
+                    <li class="swell-link">
+                      <a href="/" class="shop-btn">shop now</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    <!-- Referral Section Code End -->
+  </div>
+{% endif %}
+
+
+<div class="yotpo-widget-instance" data-yotpo-instance-id="24939"></div>

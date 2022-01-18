@@ -1,0 +1,15 @@
+.product-form__options {
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+
+	.product-form__options__col {
+		display: table-cell;
+		border-right: 1px solid color(blue);
+		vertical-align: top;
+
+		&:last-child {
+			border-right: none;
+		}
+	}
+}

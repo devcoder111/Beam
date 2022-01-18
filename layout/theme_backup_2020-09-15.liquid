@@ -1,0 +1,137 @@
+<!doctype html>
+<!--[if IE 8]><html class="no-js lt-ie9 bg--tan color--blue" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="ie9 no-js bg--tan color--blue" lang="en"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js bg--white color--black" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+  <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' /><![endif]-->
+
+  <title>
+  {{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  </title>
+
+  {% if page_description %}
+  <meta name="description" content="{{ page_description | escape }}" />
+  {% endif %}
+
+  <link rel="canonical" href="{{ canonical_url }}" />
+
+  <link href="https://cdn.shopify.com/s/files/1/0264/4076/1399/files/favicon.webp?v=1590204765" rel="shortcut icon">
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  {% include 'open-graph-tags' %}
+  {% include 'twitter-card' %}
+
+  {{ content_for_header }}
+
+  {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'social/social-icons.css' | global_asset_url | stylesheet_tag }}
+  <script src="https://kit.fontawesome.com/49e9932ef9.js" crossorigin="anonymous"></script>
+  <!--[if lt IE 9]>
+  {{ '//html5shiv.googlecode.com/svn/trunk/html5.js' | script_tag }}
+  <![endif]-->
+
+  {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+  {% if template contains 'customers' %}
+  {{ 'customer_area.js'  | shopify_asset_url | script_tag }}
+  {% endif %}
+
+  <!-- Additional Shopify helpers that will likely be added to the global shopify_common.js some day soon. -->
+  {{ 'shopify_common.js'  | asset_url | script_tag }}
+
+  {{ 'option_selection.js' | shopify_asset_url | script_tag }}
+  {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
+
+  <script>jQuery('html').removeClass('no-js').addClass('js');</script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+
+  <script>
+  var cartCount = {{ cart.item_count }};
+  $(document).ready(function(){   
+
+  {% if cart.item_count != 0 %}  
+    $('#cart-number span').removeClass('hidden').html(cartCount);
+    {% endif %}
+  });
+  </script>
+  <script type="text/javascript">
+    (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/0LI40gxVW5vb3SeTiECCcNOkg5eUiKEve1G2gfM8/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+  </script>
+
+{% if template contains 'refer' %}
+{{ 'swell-rewards.js' | asset_url | script_tag }}
+{% endif %}
+
+{% if template contains 'rewards' %}
+{{ 'swell-rewards.js' | asset_url | script_tag }}
+{% endif %}
+
+{% if template contains 'reward-account' %}
+{{ 'swell-rewards.js' | asset_url | script_tag }}
+{% endif %}
+
+{% include 'kart_discount' %}  <script src="https://cdn-widgetsrepository.yotpo.com/v1/loader/v8IcslH7TyTHoaG66Gq7nw" async></script>
+</head>
+
+<body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
+
+
+      {% section 'header' %}
+
+
+    <div id="main" role="main">
+      {{ content_for_layout }}
+    </div>
+
+
+
+{% section 'footer'%}
+
+
+  {{ 'theme.min.js'  | asset_url | script_tag }}
+
+  
+<!-- Taboola Pixel Code -->
+<script type='text/javascript'>
+  window._tfa = window._tfa || [];
+  window._tfa.push({notify: 'event', name: 'page_view', id: 1207717});
+  !function (t, f, a, x) {
+         if (!document.getElementById(x)) {
+            t.async = 1;t.src = a;t.id=x;f.parentNode.insertBefore(t, f);
+         }
+  }(document.createElement('script'),
+  document.getElementsByTagName('script')[0],
+  '//cdn.taboola.com/libtrc/unip/1207717/tfa.js',
+  'tb_tfa_script');
+</script>
+<noscript>
+  <img src='//trc.taboola.com/1207717/log/3/unip?en=page_view'
+      width='0' height='0' style='display:none'/>
+</noscript>
+<!-- End of Taboola Pixel Code -->
+
+
+
+      {% if template contains 'page' and page.url == '/pages/subscriptions' %}
+
+      <script>
+    
+        let date = new Date(Date.now() + 8.64e+7);
+        date = date.toUTCString();
+        document.cookie = "subsLP=true; path=/; expires=" + date;
+    
+    </script>
+
+      {% endif %}
+
+<script>
+const cookieValue = document.cookie.split('; ').find(row => row.startsWith('subsLP')).split('=')[1];
+if(cookieValue == 'true') {
+  document.getElementById("your-shopping-cart").classList.add("hide-coupon-form");
+}
+</script>
+    </body>
+</html>

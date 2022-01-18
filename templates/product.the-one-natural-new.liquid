@@ -1,0 +1,760 @@
+{% assign add_to_cart = 'Add to cart' %}
+{% assign sold_out = 'Sold Out' %}
+{% assign unavailable = 'Unavailable' %}
+{% assign product_id = 6536844574775 %}
+
+
+<meta itemprop="url" content="{{ shop.url }}{{ product.url }}" />
+<meta itemprop="image" content="{{ product | img_url: 'grande' }}" />
+<div class="modal hidden" id="download-modal"></div>
+<div class="modal--overlay hidden"></div>
+
+
+<!-- The Modal -->
+<div id="detailsModal" class="details-modal">
+
+
+    <!-- Modal content -->
+    <div class="details-modal-content pr" style="max-width: 1400px;">
+            <span class="close color--blue" style="font-weight: 400 !important;">&times;</span>
+            <div class="p2 p6--md">
+
+        <div class="row">
+
+<div class="col c3--md">
+
+    <h2 class="sans--medium fw--600 mb1 color--blue">description</h2>
+    <p class="sans--body">
+        all our products are made with carefully crafted broad-spectrum hemp extract, sourced from domestic farmers and bred for unique compound profiles. blended with refined hemp seed oil and grape seed oil for a clean, high purity profile.
+    </p>
+    <h2 class="sans--medium mb1 fw--600 color--blue mt3 mt5--md">ingredients</h2>
+    <p class="sans--body">
+        hemp seed oil, grape seed oil, phytocompound-rich hemp oil
+    </p>
+</div>
+<div class="col c9--md">
+<div class="dosage-border">
+    <h2 class="sans--medium fw--600 tc--md pt3 pt0--md mb1 color--blue"><span class="bg--white pl1--md pr1--md">serving + nutrition facts</span></h2>
+    <div class="dosage-nav">
+        <div class="dosage-nav-item valueprops" id="valuepropsDefaultOpen" onclick="openVP(event, 'nat2000mg')">2000mg</div>
+        <div class="dosage-nav-item valueprops" id="" onclick="openVP(event, 'nat1000mg')">1000mg</div>
+    </div>
+    <div class="dosage-images">
+        <img id="nat2000mg" class="full-width dosage-image valuepropscontent" src="{{ 'the-one-nat2000mg-hemp-1.jpg' | asset_url }}">
+        <img id="nat1000mg" class="full-width dosage-image valuepropscontent" src="{{ 'the-one-nat1000mg-hemp-1.jpg' | asset_url }}">
+    </div>
+</div>
+</div>
+
+</div>
+
+        </div>
+    </div>
+
+</div>
+
+
+{% section 'product-the-one-natural' %}
+
+
+<div class="yotpo yotpo-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}"
+    data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: " large"
+    |replace: '?' , '%3F' | replace: '&' ,'%26'}}" data-description="{{ product.description | escape }}"></div>
+
+
+
+    <div class="mt4 mb4 mt0--md mb8--md">
+        <div class="container">
+            <div class="row">
+                <div class="col c6--md">
+                    <a target="_blank" href="https://beamtlc.com/pages/sms-support"><img class="full-width" src="{{ 'have-questions.jpg' | asset_url }}">
+                    </div>
+                <div class="col c6--md mt2 mt0--md">
+                    <a href="/pages/refer"><img class="full-width" src="{{ 'sezzle-buy-now-pay-later.jpg' | asset_url }}">
+            </div>
+            </div>
+        </div>
+    </div>
+{% include 'klaviyo' %}
+
+<style>
+    #new-theone .swatch-element.natural {display: none !important;}
+.hero--desktop {
+    min-height: none;
+}
+.the-one-icons {
+    max-width: 100px;
+    position: absolute;
+    right: 24px;
+    top: 100px;
+}
+.yotpo .yotpo-bottomline .yotpo-icon-star, .yotpo .yotpo-bottomline .yotpo-icon-half-star, .yotpo .yotpo-bottomline .yotpo-icon-empty-star {
+    color: #f2bf7d;
+}
+.close {color: #2C2F84;}
+.close:hover {color: #2C2F84; opacity: .7;}
+
+.dosage-nav {
+        text-align: center;
+    }
+    .dosage-nav-item {
+        display: inline-block;
+        background-color:#E9F3FF;
+        color: #2C2F84;
+        padding: 10px 28px;
+        border-radius: 40px;
+        margin: 20px 6px 10px 6px;
+        border: solid 1px #2F358E;
+        font-weight: 600;
+
+    }
+
+    .dosage-image {margin-top: 16px;}
+    .dosage-border {
+        padding: 40px 40px 40px 40px;
+        margin-left: 20px;
+        border-radius: 50px;
+        border: solid 1px #2F358E;
+    }
+    .dosage-border h2 {
+        margin-top: -56px;
+    }
+@media (min-width: 1200px){
+.hero--desktop {
+    min-height: 870px;
+    background-color: #e6f1ff;
+
+}
+    .the-one-icons {
+        max-width: 80px;
+        top: 60px;
+    left: 60px;
+    }
+}
+.swatch input:checked + label {
+  color: #2F358E;
+  font-weight: 800; }
+    .swatch input:checked label {
+        background-color: aqua !important;
+        opacity: .7;
+    }
+    .swatch-element .label-active {
+        background-color: #E2E3FB;
+        color: #000;
+    }
+
+.swatch-element label {
+    background-color: #fafafa;
+    padding: 10px 14px;
+    border-radius: 14px;
+    border: 1px solid #2f358e;
+    display: inline-block;
+    margin: 6px;
+    margin-bottom: 3px;
+    font-weight: 600;
+    color: #2f358e;
+    cursor: pointer;
+}
+.swatch-element {
+    background-color: #fff;
+    padding: 6px 0;
+    border-radius: 0;
+    border: none;
+    display: inline-block;
+    margin-right: 0px;
+    margin-bottom: 0px;
+}
+    .swatch .header {display: none !important;}
+    .rc_radio_options {
+        border-radius: 14px;
+        border: 1px solid #2F358E;
+        margin-bottom: 10px;
+    }
+
+    div.rc_block__type.rc_block__type__onetime {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-top: 1px solid #2F358E;
+    }
+
+    div.rc_block__type {
+        border-radius: 14px;
+    }
+
+    .rounded-more {
+        border-radius: 14px;
+    }
+
+    .sans--body-new {
+        font-size: 13px;
+        letter-spacing: .15px;
+        line-height: 25px;
+    }
+
+    .template-product .header__nav {
+        background-color: #fff;
+        border-bottom: 1px solid #e6e6e6;
+    }
+
+    .rounded-image {
+        border-radius: 68px;
+    }
+
+    .pill--blue {
+        border-radius: 32px;
+        display: inline-block;
+        background-color: #2F358E;
+        color: #fff;
+        transition: 200ms ease-in-out;
+        min-width: 220px;
+        width: auto !important;
+        padding-right: 32px;
+        padding-left: 32px;
+
+    }
+
+    .pill {
+        border-radius: 32px;
+        display: inline-block;
+        border: #2F358E;
+        transition: 200ms ease-in-out;
+        min-width: 220px;
+        width: auto !important;
+        padding-right: 32px;
+        padding-left: 32px;
+
+    }
+
+    .pill--blue:hover {
+        background-color: #494fa7;
+    }
+
+    .pill:hover {
+        background-color: #E9F2FF;
+    }
+
+    .marquee {
+        position: relative;
+        width: 100vw;
+        max-width: 100%;
+        height: 26px;
+        overflow-x: hidden;
+    }
+
+    .marquee .content {
+        font-size: 18px;
+        line-height: 26px;
+    }
+
+    .track {
+        position: absolute;
+        white-space: nowrap;
+        will-change: transform;
+        animation: marquee 104s linear infinite;
+    }
+
+    @keyframes marquee {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(-50%);
+        }
+    }
+
+    @media screen and (min-width: 600px) {
+
+        .slideshow-second .slick-dots li {
+            width: 19%;
+            display: inline-block;
+            margin-right: 1%;
+        }
+
+        .slideshow-second .slick-dots {
+            bottom: -10px !important;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .details-modal-content {
+            width: 90%;
+            margin: 60px auto;
+        }
+        .dosage-nav {
+        text-align: center;
+    }
+    .dosage-nav-item {
+        display: inline-block;
+        background-color:#E9F3FF;
+        color: #2C2F84;
+        padding: 10px 0;
+        width: 46%;
+        border-radius: 40px;
+        margin: 3px 3px;
+        border: solid 1px #2F358E;
+        font-weight: 600;
+
+    }
+
+    .dosage-image {margin-top: 16px;}
+    .dosage-border {
+        padding: 0;
+        margin-left: 0;
+        border-radius: 0;
+        border: 0
+    }
+    .dosage-border h2 {
+        margin-top: 0;
+    }
+        .valuepropscontent {text-align: center;}
+        .hero--desktop .grid-container {
+            padding: 0 !important;
+            margin-top: -8px;
+        }
+        .qtydiv .btnqty.qtyplus {
+    margin-left: 0;
+}
+        span.rc_label__delivery {font-size: 10px !important;}
+
+        .rounded-image {
+            border-radius: 28px;
+        }
+
+        .pill {
+            border-radius: 32px;
+            display: inline-block;
+            border: #2F358E;
+            transition: 200ms ease-in-out;
+            min-width: 100%;
+            width: 100% !important;
+            padding-right: 32px;
+            padding-left: 32px;
+
+        }
+
+        .marquee {
+            position: relative;
+            width: 100vw;
+            max-width: 100%;
+            height: 22px;
+            overflow-x: hidden;
+        }
+
+        .marquee .content {
+            font-size: 16px;
+            line-height: 22px;
+        }
+
+        .track {
+            position: absolute;
+            white-space: nowrap;
+            will-change: transform;
+            animation: marquee 144s linear infinite;
+        }
+    }
+
+        .slick-dots {
+            top: auto !important;
+            bottom: -20px !important;
+            left: auto !important;
+            right: auto;
+            text-align: center;
+        }
+
+        .slick-dots li {
+            display: inline;
+            margin-right: 8px;
+        }
+
+        .slideshow.slideshow-mobile .slick-dots {
+            bottom: 24px !important;
+        }
+
+        .slideshow.slideshow-mobile .slick-dots li button {
+            background-color: transparent;
+        }
+
+        .slick-dots li button {
+            background-color: #C2C2C2;
+        }
+
+        .slick-dots li button {
+            text-indent: -100000px;
+            border-radius: 100%;
+            border: solid rgba(255, 255, 255, 0.781) 1px;
+            background-color: #C2C2C2;
+            width: 14px;
+            height: 14px;
+        }
+
+        .slideshow.slideshow-mobile .slick-dots li.slick-active button,
+        .slick-dots li.slick-active button {
+            background-color: #8c8cf0;
+        }
+    
+</style>
+
+<script>
+
+
+
+function openVP(evt, cityName) {
+  // Declare all variables
+  var i, valuepropscontent, valueprops;
+
+  valuepropscontent = document.getElementsByClassName("valuepropscontent");
+  for (i = 0; i < valuepropscontent.length; i++) {
+    valuepropscontent[i].style.display = "none";
+  }
+
+  valueprops = document.getElementsByClassName("valueprops");
+  for (i = 0; i < valueprops.length; i++) {
+    valueprops[i].className = valueprops[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+document.getElementById("valuepropsDefaultOpen").click();
+
+    $('.qtybox .btnqty').on('click', function () {
+        var qty = parseInt($(this).parent('.qtybox').find('.quantity-input').val());
+        if ($(this).hasClass('qtyplus')) {
+            qty++;
+        } else {
+            if (qty > 1) {
+                qty--;
+            }
+        }
+        qty = (isNaN(qty)) ? 1 : qty;
+        $(this).parent('.qtybox').find('.quantity-input').val(qty);
+    });
+
+
+    $('.pdp-images.slideshow').slick({
+        autoplay: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        fade: true,
+        useTransform: true,
+        arrows: true,
+        dots: true,
+        autoplaySpeed: 5000,
+        adaptiveHeight: false,
+        pauseOnHover: true,
+        customPaging: function (slick, index) {
+            var targetImage = slick.$slides.eq(index).find('img').attr('src');
+            return '<img src=" ' + targetImage + ' "/>';
+        },
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    fade: false,
+                    arrows: false,
+                    dots: true,
+                    customPaging: function (slider, i) {
+                        return $('<button type="button" />').text(i + 1);
+                    },
+                    lazyLoad: $(this).find('[data-lazy]').length > 0 ? 'progressive' : null
+                }
+            }
+        ]
+    });
+
+
+
+    $('.ingredient-slider').slick({
+        autoplay: true,
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        fade: false,
+        useTransform: true,
+        arrows: false,
+        dots: false,
+        autoplaySpeed: 5000,
+        adaptiveHeight: false,
+        pauseOnHover: true,
+        responsive: [
+            {
+                breakpoint: 1424,
+                settings: {
+                    fade: false,
+                    slidesToShow: 3,
+                    fade: false,
+                    arrows: false,
+                    dots: true,
+                    customPaging: function (slider, i) {
+                        return $('<button type="button" />').text(i + 1);
+                    }
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
+                    fade: false,
+                    arrows: false,
+                    dots: true,
+                    customPaging: function (slider, i) {
+                        return $('<button type="button" />').text(i + 1);
+                    }
+                }
+            }
+        ]
+    });
+
+    $('.brand-slider').slick({
+        autoplay: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        fade: false,
+        useTransform: true,
+        arrows: false,
+        dots: false,
+        autoplaySpeed: 5000,
+        adaptiveHeight: false,
+        pauseOnHover: true,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    fade: false
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
+                    fade: false,
+                    arrows: false,
+                    dots: true,
+                    customPaging: function (slider, i) {
+                        return $('<button type="button" />').text(i + 1);
+                    }
+                }
+            }
+        ]
+    });
+
+    $('.mobile-icon-section').slick({
+        autoplay: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        fade: false,
+        useTransform: true,
+        arrows: false,
+        dots: false,
+        autoplaySpeed: 5000,
+        pauseOnHover: true,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    fade: false
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
+                    fade: false,
+                    arrows: false,
+                    dots: true,
+                    customPaging: function (slider, i) {
+                        return $('<button type="button" />').text(i + 1);
+                    }
+                }
+            }
+        ]
+    });
+
+
+    
+    $(".testimonial-slider").slick({
+	dots: true,
+	customPaging: function (slider, i) {
+		return $('<button type="button" />').text(i + 1);
+	},
+	centerMode: true,
+	centerPadding: "24%",	
+	infinite: true,
+	autoplay: true,
+	autoplaySpeed: 5000,
+	responsive: [{
+		breakpoint: 992,
+		settings: {
+			centerPadding: "120px"
+		}
+	},
+	{
+		breakpoint: 768,
+		settings: {
+			centerPadding: "80px"
+		}
+		
+	},
+	{
+		breakpoint: 554,
+		settings: {
+			centerPadding: "10px"
+		}
+	}]
+});
+    
+    
+var selectCallback = function(variant, selector) {
+    
+  
+    // BEGIN SWATCHES
+    if (variant) {
+      var form = jQuery('#' + selector.domIdPrefix).closest('form');
+      for (var i=0,length=variant.options.length; i<length; i++) {
+        var radioButton = form.find('.swatch[data-option-index="' + i + '"] :radio[value="' + variant.options[i] +'"]');
+        if (radioButton.size()) {
+          radioButton.get(0).checked = true;
+        }
+      }
+    }
+    // END SWATCHES
+    
+    
+        if (variant) {
+          // Swap image.
+          if (variant.featured_image) {
+            var newImage = variant.featured_image; // New image object.
+            var mainImageDomEl = jQuery('.product-photo-container img')[0]; // DOM element of main image we need to swap.
+            Shopify.Image.switchImage(newImage, mainImageDomEl, switchImage); // Define switchImage (the callback) in your theme's JavaScript file.
+          }
+          
+          // Selected a valid variant that is available.
+          if (variant.available) {
+                
+            // Enabling add to cart button.
+            jQuery('#add').removeClass('disabled').prop('disabled', false).val({{ add_to_cart | json }});
+          
+            // If item is backordered yet can still be ordered, we'll show special message.
+            if (variant.inventory_management && variant.inventory_quantity <= 0) {
+              jQuery('#selected-variant').html({{ product.title | json }}{% unless hide_default_title %} + ' - ' + variant.title{% endunless %});
+              jQuery('#backorder').removeClass("hidden");
+            } else {
+              jQuery('#backorder').addClass("hidden");
+            }
+            
+          } else {
+            // Variant is sold out.
+            jQuery('#backorder').addClass('hidden');
+            jQuery('#add').val({{ sold_out | json }}).addClass('disabled').prop('disabled', true);       
+          }
+          
+          // Whether the variant is in stock or not, we can update the price and compare at price.
+          if ( variant.compare_at_price > variant.price ) {
+            jQuery('#product-price').html('<span class="product-price sans--medium on-sale">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") +'</span>'+'&nbsp;<s class="product-compare-price">'+Shopify.formatMoney(variant.compare_at_price, "{{ shop.money_format }}")+ '</s>');
+            jQuery('#mobileProductPrice').html('<span class="topProductPrice on-sale">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") +'</span>'+'&nbsp;<s class="product-compare-price">'+Shopify.formatMoney(variant.compare_at_price, "{{ shop.money_format }}")+ '</s>');
+  
+          } else {
+            jQuery('#mobileProductPrice').html('<span class="topProductPrice fw--600">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") + '</span>' );
+            jQuery('#product-price').html('<span class="product-price sans--medium fw--600">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") + '</span>' );
+          }         
+        } else {
+          // variant doesn't exist.
+          jQuery('#product-price, mobileProductPrice').empty();
+          jQuery('#backorder').addClass('hidden');
+          jQuery('#add').val({{ unavailable | json }}).addClass('disabled').prop('disabled', true);
+        }      
+      
+       
+      };
+        
+      jQuery(function($) {
+      
+        new Shopify.OptionSelectors('product-select', { product: {{ product | json }}, onVariantSelected: selectCallback, enableHistoryState: true });
+        
+        // Add label if only one product option and it isn't 'Title'.
+        {% if product.options.size == 1 and product.options.first != 'Title' %}
+          $('.selector-wrapper:eq(0)').prepend('<label class="form-label form-label--alternate form-label--inlineSmall">{{ product.options.first }}</label>');
+        {% endif %}
+      
+      });
+      
+      Shopify.Image.preload({{ product.images | json }}, 'grande');
+      Shopify.Image.preload({{ product.images | json }}, '1024x1024');
+      
+    
+    
+    jQuery(function() {
+      jQuery('.swatch :radio').change(function() {
+        var optionIndex = jQuery(this).closest('.swatch').attr('data-option-index');
+        var optionValue = jQuery(this).val();
+        jQuery(this)
+          .closest('form')
+          .find('.single-option-selector')
+          .eq(optionIndex)
+          .val(optionValue)
+          .trigger('change');
+      });
+    });
+
+
+
+    // Get the modal
+    var modal = document.getElementById("detailsModal");
+
+    // Get the button that opens the modal
+    var btn2 = document.getElementById("detailsModalBtn2");
+    var btn1 = document.getElementById("detailsModalBtn");
+
+    // When the user clicks on the button, open the modal
+    btn2.onclick = function () {
+        modal.style.display = "block";
+    }
+    // When the user clicks on the button, open the modal
+    btn1.onclick = function () {
+        modal.style.display = "block";
+    }
+    // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+
+    function openVP(evt, cityName) {
+  // Declare all variables
+  var i, valuepropscontent, valueprops;
+
+  valuepropscontent = document.getElementsByClassName("valuepropscontent");
+  for (i = 0; i < valuepropscontent.length; i++) {
+    valuepropscontent[i].style.display = "none";
+  }
+
+  valueprops = document.getElementsByClassName("valueprops");
+  for (i = 0; i < valueprops.length; i++) {
+    valueprops[i].className = valueprops[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+document.getElementById("valuepropsDefaultOpen").click();
+
+
+    
+
+</script>

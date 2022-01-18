@@ -1,0 +1,1125 @@
+@charset "UTF-8";
+@-ms-viewport {
+  width: device-width;
+}
+@font-face {
+  font-family: "Austin";
+  src: url("../fonts/swell-Austin.woff2") format("woff2"), url("../fonts/swell-Austin.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "swell-rewards";
+  src: url("../fonts/swell-rewards.eot?rsdht4");
+  src: url("../fonts/swell-rewards.eot?rsdht4#iefix") format("embedded-opentype"), url("../fonts/swell-rewards.ttf?rsdht4") format("truetype"), url("../fonts/swell-rewards.woff?rsdht4") format("woff"), url("../fonts/swell-rewards.svg?rsdht4#swell-rewards") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+[class^=swell-icon-], [class*=" swell-icon-"] {
+  font-family: "swell-rewards" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.swell-icon-copy-link:before {
+  content: "";
+  color: #30388c;
+}
+
+.swell-icon-share:before {
+  content: "";
+  color: #30388c;
+}
+
+.swell-icon-message:before {
+  content: "";
+  color: #30388c;
+}
+
+.swell-icon-sms:before {
+  content: "";
+  color: #30388c;
+}
+
+.swell-icon-tweet:before {
+  content: "";
+  color: #30388c;
+}
+
+.swell-icon-beam:before {
+  content: "";
+  color: #30388c;
+}
+
+.swell-icon-birthday-reward .path1:before {
+  content: "";
+  color: white;
+}
+
+.swell-icon-birthday-reward .path2:before {
+  content: "";
+  margin-left: -1.220703125em;
+  color: #303b89;
+}
+
+.swell-icon-birthday-reward .path3:before {
+  content: "";
+  margin-left: -1.220703125em;
+  color: white;
+}
+
+.swell-icon-birthday-reward-hover .path1:before {
+  content: "";
+  color: #9cc0d8;
+}
+
+.swell-icon-birthday-reward-hover .path2:before {
+  content: "";
+  margin-left: -1.220703125em;
+  color: #303b89;
+}
+
+.swell-icon-birthday-reward-hover .path3:before {
+  content: "";
+  margin-left: -1.220703125em;
+  color: #9cc0d8;
+}
+
+.swell-icon-create-an-account .path1:before {
+  content: "";
+  color: white;
+}
+
+.swell-icon-create-an-account .path2:before {
+  content: "";
+  margin-left: -1.142578125em;
+  color: #30388c;
+}
+
+.swell-icon-create-an-account-hover .path1:before {
+  content: "";
+  color: #9cc0d8;
+}
+
+.swell-icon-create-an-account-hover .path2:before {
+  content: "";
+  margin-left: -1.142578125em;
+  color: #30388c;
+}
+
+.swell-icon-follow-on-facebook .path1:before {
+  content: "";
+  color: white;
+}
+
+.swell-icon-follow-on-facebook .path2:before {
+  content: "";
+  margin-left: -0.9736328125em;
+  color: #303b89;
+}
+
+.swell-icon-follow-on-facebook .path3:before {
+  content: "";
+  margin-left: -0.9736328125em;
+  color: white;
+}
+
+.swell-icon-follow-on-facebook-hover .path1:before {
+  content: "";
+  color: #9cc0d8;
+}
+
+.swell-icon-follow-on-facebook-hover .path2:before {
+  content: "";
+  margin-left: -0.9736328125em;
+  color: #303b89;
+}
+
+.swell-icon-follow-on-facebook-hover .path3:before {
+  content: "";
+  margin-left: -0.9736328125em;
+  color: #9cc0d8;
+}
+
+.swell-icon-follow-on-instagram .path1:before {
+  content: "";
+  color: white;
+}
+
+.swell-icon-follow-on-instagram .path2:before {
+  content: "";
+  margin-left: -0.9228515625em;
+  color: #303b89;
+}
+
+.swell-icon-follow-on-instagram .path3:before {
+  content: "";
+  margin-left: -0.9228515625em;
+  color: white;
+}
+
+.swell-icon-follow-on-instagram-hover .path1:before {
+  content: "";
+  color: #9cc0d8;
+}
+
+.swell-icon-follow-on-instagram-hover .path2:before {
+  content: "";
+  margin-left: -0.9228515625em;
+  color: #303b89;
+}
+
+.swell-icon-follow-on-instagram-hover .path3:before {
+  content: "";
+  margin-left: -0.9228515625em;
+  color: #9cc0d8;
+}
+
+.swell-icon-points-for-purchase .path1:before {
+  content: "";
+  color: white;
+}
+
+.swell-icon-points-for-purchase .path2:before {
+  content: "";
+  margin-left: -1.419921875em;
+  color: #303b89;
+}
+
+.swell-icon-points-for-purchase-hover .path1:before {
+  content: "";
+  color: #9cc0d8;
+}
+
+.swell-icon-points-for-purchase-hover .path2:before {
+  content: "";
+  margin-left: -1.419921875em;
+  color: #303b89;
+}
+
+.swell-icon-punch-card .path1:before {
+  content: "";
+  color: white;
+}
+
+.swell-icon-punch-card .path2:before {
+  content: "";
+  margin-left: -1.025390625em;
+  color: #303b89;
+}
+
+.swell-icon-punch-card-hover .path1:before {
+  content: "";
+  color: #9cc0d8;
+}
+
+.swell-icon-punch-card-hover .path2:before {
+  content: "";
+  margin-left: -1.025390625em;
+  color: #303b89;
+}
+
+.swell-icon-raf-a-friend .path1:before {
+  content: "";
+  color: white;
+}
+
+.swell-icon-raf-a-friend .path2:before {
+  content: "";
+  margin-left: -1.095703125em;
+  color: #303b89;
+}
+
+.swell-icon-raf-a-friend-hover .path1:before {
+  content: "";
+  color: #9cc0d8;
+}
+
+.swell-icon-raf-a-friend-hover .path2:before {
+  content: "";
+  margin-left: -1.095703125em;
+  color: #303b89;
+}
+
+.swell-icon-read-our-blog .path1:before {
+  content: "";
+  color: white;
+}
+
+.swell-icon-read-our-blog .path2:before {
+  content: "";
+  margin-left: -1.0244140625em;
+  color: #303b89;
+}
+
+.swell-icon-read-our-blog .path3:before {
+  content: "";
+  margin-left: -1.0244140625em;
+  color: white;
+}
+
+.swell-icon-read-our-blog-hover .path1:before {
+  content: "";
+  color: #9cc0d8;
+}
+
+.swell-icon-read-our-blog-hover .path2:before {
+  content: "";
+  margin-left: -1.0244140625em;
+  color: #303b89;
+}
+
+.swell-icon-read-our-blog-hover .path3:before {
+  content: "";
+  margin-left: -1.0244140625em;
+  color: #9cc0d8;
+}
+
+.swell-icon-write-a-product-review .path1:before {
+  content: "";
+  color: white;
+}
+
+.swell-icon-write-a-product-review .path2:before {
+  content: "";
+  margin-left: -1.0390625em;
+  color: #303b89;
+}
+
+.swell-icon-write-a-product-review-hover .path1:before {
+  content: "";
+  color: #9cc0d8;
+}
+
+.swell-icon-write-a-product-review-hover .path2:before {
+  content: "";
+  margin-left: -1.0390625em;
+  color: #303b89;
+}
+
+/* Icons generated Code End */
+/* RoseBud Reward and Refer Page Code Start */
+.swell-reward-beam {
+  /* Some Generic Section Code Start */
+  /* Some Generic Section Code End */
+}
+.swell-reward-beam ul {
+  padding: 0;
+  margin: 0;
+}
+.swell-reward-beam ul li {
+  list-style-type: none;
+}
+.swell-reward-beam img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center top;
+  object-position: center top;
+  vertical-align: -webkit-baseline-middle;
+}
+.swell-reward-beam .swell-heading-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+@media (min-width: 480px) {
+  .swell-reward-beam .swell-heading-section {
+    margin-bottom: 60px;
+  }
+}
+.swell-reward-beam .swell-heading-section .swell-heading {
+  font-family: "Poppins", sans-serif;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #30388c;
+  margin: 0 auto 10px;
+  text-transform: lowercase;
+}
+@media (min-width: 480px) {
+  .swell-reward-beam .swell-heading-section .swell-heading {
+    font-size: 42px;
+  }
+}
+@media (min-width: 768px) {
+  .swell-reward-beam .swell-heading-section .swell-heading {
+    font-size: 35px;
+  }
+}
+.swell-reward-beam .swell-heading-section .swell-detail {
+  font-family: "Austin";
+  font-size: 14px;
+  font-weight: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000;
+  max-width: 250px;
+  margin: 0 auto;
+}
+@media (min-width: 480px) {
+  .swell-reward-beam .swell-heading-section .swell-detail {
+    max-width: 320px;
+    font-size: 22px;
+  }
+}
+@media (min-width: 768px) {
+  .swell-reward-beam .swell-heading-section .swell-detail {
+    max-width: 100%;
+    font-size: 16px;
+  }
+}
+.swell-reward-beam .swell-desktop {
+  display: none;
+}
+.swell-reward-beam .swell-mobile {
+  display: block;
+}
+@media (min-width: 768px) {
+  .swell-reward-beam .swell-desktop {
+    display: block;
+  }
+  .swell-reward-beam .swell-mobile {
+    display: none;
+  }
+}
+.swell-reward-beam .swell-container {
+  max-width: 1920px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.swell-reward-beam .swell-referral-loader-campaigns,
+.swell-reward-beam .swell-referral-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+.swell-reward-beam .swell-referral-loader-campaigns img,
+.swell-reward-beam .swell-referral-loader img {
+  max-width: 75px;
+}
+.swell-reward-beam .swell-referral-loader-campaigns .lds-dual-ring,
+.swell-reward-beam .swell-referral-loader .lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.swell-reward-beam .swell-referral-loader-campaigns .lds-dual-ring:after,
+.swell-reward-beam .swell-referral-loader .lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #30388c;
+  border-color: #30388c transparent #30388c transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Referral Section Code Start */
+@media (min-width: 768px) {
+  .referral-section .referral-section-holder {
+    background-image: url(swell-referral.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 10px;
+  }
+}
+.referral-section .referral-section-holder .swell-referral-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #92bcd4;
+  margin-top: -5%;
+}
+@media (min-width: 768px) {
+  .referral-section .referral-section-holder .swell-referral-holder {
+    flex-basis: 55%;
+    margin-top: 0;
+    background-color: transparent;
+  }
+}
+@media (min-width: 1024px) {
+  .referral-section .referral-section-holder .swell-referral-holder {
+    flex-basis: 50%;
+  }
+}
+.referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-sidebar {
+  display: none;
+}
+.referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+.referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-register {
+  padding: 0 5px 40px;
+  min-height: 267px;
+  max-width: 320px;
+  width: 100%;
+  text-align: center;
+}
+@media (min-width: 480px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-register {
+    padding: 0 5px 60px;
+    min-height: 386px;
+    max-width: 475px;
+  }
+}
+@media (min-width: 768px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-register {
+    padding: 40px 5px;
+    min-height: 347px;
+    max-width: 410px;
+    text-align: left;
+  }
+}
+@media (min-width: 1024px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-register {
+    min-height: 374px;
+    max-width: 502px;
+  }
+}
+.referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-refer {
+  padding: 0 5px 40px;
+  min-height: 374px;
+  max-width: 320px;
+  width: 100%;
+  text-align: center;
+}
+@media (min-width: 480px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-refer {
+    padding: 0 5px 60px;
+    min-height: 525px;
+    max-width: 475px;
+  }
+}
+@media (min-width: 768px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-refer {
+    padding: 40px 5px;
+    min-height: 423px;
+    max-width: 410px;
+    text-align: left;
+  }
+}
+@media (min-width: 1024px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-refer {
+    min-height: 453px;
+    max-width: 502px;
+  }
+}
+.referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-heading {
+  font-family: "Poppins", sans-serif;
+  font-size: 38px;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #30388c;
+  text-transform: lowercase;
+  margin: 0 auto 5px;
+}
+@media (min-width: 480px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-heading {
+    font-size: 58px;
+  }
+}
+@media (min-width: 768px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-heading {
+    font-size: 50px;
+    margin-left: 0;
+  }
+}
+@media (min-width: 1024px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-heading {
+    font-size: 56px;
+  }
+}
+.referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-details {
+  font-family: "Austin";
+  font-size: 16px;
+  font-weight: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000;
+  margin: 0 auto 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(48, 56, 140, 0.23);
+}
+@media (min-width: 480px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-details {
+    font-size: 24px;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+  }
+}
+@media (min-width: 768px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-details {
+    font-size: 17px;
+  }
+}
+@media (min-width: 1024px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-details {
+    font-size: 21px;
+  }
+}
+.referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .refer-customer-error {
+  color: red;
+  text-align: left;
+}
+.referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-form-wrapper .swell-referral-form-header-details {
+  font-family: "Austin";
+  font-size: 12px;
+  font-weight: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000;
+  margin: 0 auto 20px;
+  text-align: left;
+}
+@media (min-width: 480px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-form-wrapper .swell-referral-form-header-details {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+}
+@media (min-width: 768px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-form-wrapper .swell-referral-form-header-details {
+    font-size: 14px;
+  }
+}
+@media (min-width: 1024px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-form-wrapper .swell-referral-form-header-details {
+    font-size: 16px;
+  }
+}
+.referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-form-wrapper .swell-referral-form-list .swell-referral-form-list-field {
+  display: flex;
+  border-bottom: 1px solid #30388c;
+  margin-bottom: 0;
+}
+.swell-referral-form-list-field-input:-webkit-autofill{
+  transition: background-color 5000s ease-in-out 0s;
+}
+.referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-form-wrapper .swell-referral-form-list .swell-referral-form-list-field .swell-referral-form-list-field-input {
+  flex: 6;
+  font-family: "Poppins", sans-serif;
+  background: none;
+  border: none;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: rgba(0, 0, 0, 0.3);
+  outline: 0;
+  width: 100%;
+  padding: 7px 10px 7px 0;
+  margin-bottom: 0;
+  text-transform: initial;
+}
+.referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-form-wrapper .swell-referral-form-list .swell-referral-form-list-field .swell-referral-form-list-field-input::placeholder {
+  color: rgba(0, 0, 0, 0.3);
+}
+@media (min-width: 480px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-form-wrapper .swell-referral-form-list .swell-referral-form-list-field .swell-referral-form-list-field-input {
+    font-size: 14px;
+  }
+}
+.referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-form-wrapper .swell-referral-form-list .swell-referral-form-list-field .swell-referral-form-list-field-input:-webkit-autofill, .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-form-wrapper .swell-referral-form-list .swell-referral-form-list-field .swell-referral-form-list-field-input:-webkit-autofill:hover, .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-form-wrapper .swell-referral-form-list .swell-referral-form-list-field .swell-referral-form-list-field-input:-webkit-autofill:focus, .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-form-wrapper .swell-referral-form-list .swell-referral-form-list-field .swell-referral-form-list-field-input:-webkit-autofill:active, .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-form-wrapper .swell-referral-form-list .swell-referral-form-list-field .swell-referral-form-list-field-input:-internal-autofill-selected {
+  background-color: rgba(0, 0, 0, 0) !important;
+  -webkit-box-shadow: 0 0 0 30px rgba(0, 0, 0, 0) inset !important;
+  -webkit-text-fill-color: rgba(0, 0, 0, 0.3) !important;
+}
+.referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-form-wrapper .swell-referral-form-list .swell-referral-form-list-field .swell-referral-form-list-submit {
+  flex: 1;
+  background: none;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: right;
+  color: #30388c;
+  width: 100%;
+  outline: 0;
+  padding: 7px 0;
+  text-transform: lowercase;
+}
+@media (min-width: 480px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-form-wrapper .swell-referral-form-list .swell-referral-form-list-field .swell-referral-form-list-submit {
+    font-size: 18px;
+  }
+}
+.referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-media-wrapper {
+  margin-top: 20px;
+}
+@media (min-width: 480px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-media-wrapper {
+    margin-top: 30px;
+  }
+}
+@media (min-width: 768px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-media-wrapper {
+    max-width: 330px;
+  }
+}
+@media (min-width: 1024px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-media-wrapper {
+    max-width: 410px;
+  }
+}
+.referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-media-wrapper .swell-referral-media-details {
+  font-family: "Austin";
+  font-size: 14px;
+  font-weight: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000;
+  max-width: 220px;
+  margin: 0 auto 20px;
+}
+@media (min-width: 480px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-media-wrapper .swell-referral-media-details {
+    font-size: 18px;
+    max-width: 280px;
+  }
+}
+@media (min-width: 768px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-media-wrapper .swell-referral-media-details {
+    font-size: 13px;
+    max-width: 100%;
+    margin-bottom: 15px;
+  }
+}
+@media (min-width: 1024px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-media-wrapper .swell-referral-media-details {
+    font-size: 15px;
+  }
+}
+.referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-media-wrapper .swell-referral-media-list {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-media-wrapper .swell-referral-media-list .swell-referral-medium {
+  font-family: "Austin";
+  font-size: 12px;
+  font-weight: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000;
+  margin: 0;
+  cursor: pointer;
+}
+@media (min-width: 480px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-media-wrapper .swell-referral-media-list .swell-referral-medium {
+    font-size: 18px;
+  }
+}
+@media (min-width: 768px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-media-wrapper .swell-referral-media-list .swell-referral-medium {
+    font-size: 13px;
+  }
+}
+@media (min-width: 1024px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-media-wrapper .swell-referral-media-list .swell-referral-medium {
+    font-size: 15px;
+  }
+}
+@media (min-width: 768px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-media-wrapper .swell-referral-media-list .swell-referral-medium .swell-referral-medium-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+}
+.referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-media-wrapper .swell-referral-media-list .swell-referral-medium .swell-referral-medium-content .swell-referral-media-icon {
+  display: block;
+  margin-bottom: 10px;
+}
+@media (min-width: 768px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-media-wrapper .swell-referral-media-list .swell-referral-medium .swell-referral-medium-content .swell-referral-media-icon {
+    display: inline-block;
+    margin-bottom: 0;
+    margin-right: 10px;
+  }
+}
+@media (min-width: 768px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-media-wrapper .swell-referral-media-list .swell-referral-medium.swell-share-referral-sms {
+    display: none;
+  }
+}
+.referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-thanks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  padding: 0 5px 40px;
+  min-height: 374px;
+  max-width: 320px;
+  width: 100%;
+  text-align: center;
+}
+@media (min-width: 480px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-thanks {
+    padding: 0 5px 60px;
+    min-height: 525px;
+    max-width: 475px;
+  }
+}
+@media (min-width: 768px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-thanks {
+    padding: 40px 5px;
+    min-height: 423px;
+    max-width: 410px;
+    text-align: left;
+    align-items: flex-start;
+  }
+}
+@media (min-width: 1024px) {
+  .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-thanks {
+    min-height: 453px;
+    max-width: 502px;
+  }
+}
+.referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-thanks .swell-referral-details {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.referral-section.logged-in .referral-section-content {
+  display: block;
+}
+@media (min-width: 768px) {
+  .referral-section.logged-in .referral-section-content {
+    display: flex;
+  }
+}
+
+/* Referral Section Code End */
+/* Cross Link Code Start */
+.swell-referral-back-link {
+  width: 2.5em;
+  height: 2.5em;
+  max-width: 42px;
+  max-height: 42px;
+  display: block;
+  vertical-align: middle;
+  margin-left: auto;
+  cursor: pointer;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.swell-referral-back-link:after, .swell-referral-back-link:before {
+  background: #30388c;
+  content: "";
+  height: 2px;
+  max-width: calc(42px * 1.414);
+  position: absolute;
+  top: 0;
+  transition: 0.05s ease-in-out background-color;
+  width: calc(2.5em * 1.414);
+}
+.swell-referral-back-link:before {
+  left: 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-transform-origin: left;
+  -ms-transform-origin: left;
+  transform-origin: left;
+}
+.swell-referral-back-link:after {
+  right: 0;
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-transform-origin: right;
+  -ms-transform-origin: right;
+  transform-origin: right;
+}
+@media (min-width: 768px) {
+  .swell-referral-back-link {
+    width: 2em;
+    height: 2em;
+    max-width: 30px;
+    max-height: 30px;
+    top: 65px;
+  }
+  .swell-referral-back-link:after, .swell-referral-back-link:before {
+    max-width: calc(30px * 1.414);
+    width: calc(2em * 1.414);
+  }
+}
+
+/* Cross Link Code End */
+/* Copy Pop-up Code Start */
+.swell-referral-copy {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+}
+.swell-referral-copy .swell-referral-copy-content {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #ebe5dc;
+  padding: 40px 5px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.swell-referral-copy .swell-referral-copy-content .swell-referral-copy-sidebar {
+  display: none;
+}
+.swell-referral-copy .swell-referral-copy-content .swell-referral-copy-main .swell-referral-back-link {
+  top: -75px;
+}
+.swell-referral-copy .swell-referral-copy-content .swell-referral-copy-main .swell-referral-back-link:after, .swell-referral-copy .swell-referral-copy-content .swell-referral-copy-main .swell-referral-back-link:before {
+  background: #fff;
+}
+.swell-referral-copy .swell-referral-copy-content .swell-referral-copy-main .swell-referral-heading {
+  display: none;
+}
+.swell-referral-copy .swell-referral-copy-content .swell-referral-copy-main .swell-referral-form-wrapper .swell-referral-copy-link {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #30388c;
+  margin: 0 auto 10px;
+  text-transform: uppercase;
+}
+@media (min-width: 480px) {
+  .swell-referral-copy .swell-referral-copy-content .swell-referral-copy-main .swell-referral-form-wrapper .swell-referral-copy-link {
+    font-size: 35px;
+  }
+}
+@media (min-width: 768px) {
+  .swell-referral-copy .swell-referral-copy-content .swell-referral-copy-main .swell-referral-form-wrapper .swell-referral-copy-link {
+    font-size: 30px;
+  }
+}
+.swell-referral-copy .swell-referral-copy-content .swell-referral-copy-main .swell-referral-form-wrapper .swell-referral-copy-button {
+  max-width: 140px;
+  width: 100%;
+  min-height: 35px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 2.25;
+  letter-spacing: normal;
+  color: #30388c;
+  background-color: transparent;
+  border: 1px solid #30388c;
+  margin: 0 auto 30px;
+  text-transform: lowercase;
+  border-radius: 0;
+  padding: 0;
+  outline: 0;
+}
+@media (min-width: 480px) {
+  .swell-referral-copy .swell-referral-copy-content .swell-referral-copy-main .swell-referral-form-wrapper .swell-referral-copy-button {
+    max-width: 220px;
+    font-size: 16px;
+    min-height: 50px;
+    margin-bottom: 40px;
+  }
+}
+.swell-referral-copy .swell-referral-copy-content .swell-referral-copy-main .swell-referral-form-wrapper .swell-referral-copy-button:hover {
+  background-color: #30388c;
+  color: #fff;
+}
+.swell-referral-copy .swell-referral-copy-content .swell-referral-copy-main .swell-referral-form-wrapper .swell-referral-details {
+  font-family: "Austin";
+  font-size: 12px;
+  font-weight: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #30388c;
+  margin: 0 auto;
+}
+@media (min-width: 480px) {
+  .swell-referral-copy .swell-referral-copy-content .swell-referral-copy-main .swell-referral-form-wrapper .swell-referral-details {
+    font-size: 16px;
+  }
+}
+
+/* Copy Pop-up Code End */
+/* Post Checkout Pop-up Code Start */
+.swell-post-checkout-beam {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 99;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.swell-post-checkout-beam .swell-post-checkout-holder {
+  padding: 0 5px;
+  width: 100%;
+  max-width: 600px;
+}
+@media(min-width: 1024px) {
+  .swell-post-checkout-beam .swell-post-checkout-holder {
+    max-width: 670px
+  }
+}
+.swell-post-checkout-beam .swell-post-checkout-holder .checkout-heading {
+  text-align: center;
+}
+.swell-post-checkout-beam .swell-post-checkout-holder .checkout-heading .swell-post-checkout-heading {
+  font-family: "Poppins", sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #fff;
+  text-transform: initial;
+  margin: 0 auto 15px;
+}
+@media (min-width: 480px) {
+  .swell-post-checkout-beam .swell-post-checkout-holder .checkout-heading .swell-post-checkout-heading {
+    font-size: 38px;
+  }
+}
+.swell-post-checkout-beam .swell-post-checkout-holder .checkout-heading .swell-referral-back-link {
+  position: relative;
+  top: auto;
+  margin-bottom: 15px;
+}
+.swell-post-checkout-beam .swell-post-checkout-holder .checkout-heading .swell-referral-back-link:after, .swell-post-checkout-beam .swell-post-checkout-holder .checkout-heading .swell-referral-back-link:before {
+  background-color: #fff;
+}
+.swell-post-checkout-beam .swell-post-checkout-holder .referral-section .referral-section-holder {
+  background-image: none;
+  background-color: #ebe5dc;
+  padding: 0;
+  min-height: auto;
+}
+.swell-post-checkout-beam .swell-post-checkout-holder .referral-section .referral-section-holder .swell-referral-holder {
+  flex-basis: 100%;
+  margin-top: 0;
+  background-color: transparent;
+}
+.swell-post-checkout-beam .swell-post-checkout-holder .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-refer {
+  padding: 40px 5px;
+  min-height: 414px;
+}
+@media (min-width: 480px) {
+  .swell-post-checkout-beam .swell-post-checkout-holder .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-refer {
+    padding: 30px 5px;
+    min-height: 485px;
+  }
+}
+@media (min-width: 768px) {
+  .swell-post-checkout-beam .swell-post-checkout-holder .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-refer {
+    padding: 50px 5px 40px;
+    min-height: 450px;
+  }
+}
+@media (min-width: 1024px) {
+  .swell-post-checkout-beam .swell-post-checkout-holder .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-refer {
+    padding: 55px 5px 45px;
+    min-height: 500px;
+  }
+}
+.swell-post-checkout-beam .swell-post-checkout-holder .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-details {
+  margin: 0 auto 20px;
+  padding-bottom: 20px;
+}
+@media (min-width: 768px) {
+  .swell-post-checkout-beam .swell-post-checkout-holder .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-details {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+  }
+}
+.swell-post-checkout-beam .swell-post-checkout-holder .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-form-wrapper .swell-referral-form-header-details {
+  margin: 0 auto 20px;
+}
+@media (min-width: 768px) {
+  .swell-post-checkout-beam .swell-post-checkout-holder .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-form-wrapper .swell-referral-form-header-details {
+    margin-bottom: 30px;
+  }
+}
+.swell-post-checkout-beam .swell-post-checkout-holder .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-media-wrapper {
+  margin-top: 20px;
+}
+@media (min-width: 768px) {
+  .swell-post-checkout-beam .swell-post-checkout-holder .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-media-wrapper {
+    margin-top: 30px;
+  }
+}
+.swell-post-checkout-beam .swell-post-checkout-holder .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-thanks {
+  padding: 40px 5px;
+  min-height: 414px;
+}
+@media (min-width: 480px) {
+  .swell-post-checkout-beam .swell-post-checkout-holder .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-thanks {
+    padding: 30px 5px;
+    min-height: 485px;
+  }
+}
+@media (min-width: 768px) {
+  .swell-post-checkout-beam .swell-post-checkout-holder .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-thanks {
+    padding: 50px 5px 40px;
+    min-height: 450px;
+  }
+}
+@media (min-width: 1024px) {
+  .swell-post-checkout-beam .swell-post-checkout-holder .referral-section .referral-section-holder .swell-referral-holder .swell-referral-content-container .swell-referral-content-main .swell-referral-thanks {
+    padding: 55px 5px 45px;
+    min-height: 500px;
+  }
+}
+
+/* Post Checkout Pop-up Code End */

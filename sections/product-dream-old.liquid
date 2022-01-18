@@ -1,0 +1,408 @@
+{% assign add_to_cart = 'Add to cart' %}
+{% assign sold_out = 'Sold Out' %}
+{% assign unavailable = 'Unavailable' %}
+
+<div class="productView container mt7 mt4--md">
+    <div itemscope itemtype="http://schema.org/Product">
+  
+      <div data-event-type="product" data-entity-id="{{product.id}}"
+      data-name="{{product.title}}">
+  
+  
+      {% assign variant = product.selected_or_first_available_variant  %}
+      {% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
+  
+      <div class="mt0 mt2--md pt4">
+        <form action="/cart/add" data-productid="{{ product.id }}" method="post" class="product-form" id="add-to-cart" enctype="multipart/form-data">
+  
+  
+  
+          <div class="container hide--lg">
+  
+          <div class="row">
+            <div class="col c5">
+  
+              <div class="mb1">
+                <h1 class="sans--medium-large fw--300" style="line-height: 1" temprop="name">{{product.title}}</h1>
+                <p class="sans--small fw--600 color--gray">{{ product.type }}</p>
+              </div>
+  
+            </div>
+            <div class="col c7">
+     
+        <div class="tr">
+            {% include 'stars' %}    
+          </div>
+        </div>
+      </div>
+    </div>
+          <div class="row">
+  
+   
+  
+  
+            <div class="col c5--md c6--lg c7--xl">
+  
+                <div class="of--hidden" data-image-gallery>
+        
+                  <div class="pdp-images slideshow product-photo-container">
+                    {% for image in product.images%}
+                    {% if forloop.index != 6 %}
+                    {% if image != featured_image %}
+                    {% if image != product.images[0] %}
+                      <div class="slide slide-{{ forloop.index }}">
+                        <img src="{{ image.src | product_img_url: '800x600', crop: 'center' }}" >
+                      </div>
+                    {% endif %}
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                  </div>
+  
+                </div>
+  
+  
+              </div>
+              <div class="col c7--md c6--lg c5--xl">
+                <div class="pl1--md">
+                      <div class="container-mobile">
+                          <div class="">
+                              <div class="">
+                                  <div class="pt0 pt3--lg">
+  
+                                      <div class="mb1 show--lg">
+                                          <h1 class="sans--large fw--300" temprop="name">{{product.title}}</h1>
+                                          
+  
+                                          <p class="sans--small fw--600 color--gray">{{ product.type }}</p>
+  
+                                          {% include 'stars' %}
+  
+                                      </div>
+                                      <div class="mb2">
+  
+                                          <div class="product-details row align--left mb2 hide--lg">
+  
+                                            <div class="col c6 tl">
+                                            
+                                              <div class="row gutter--none">
+                                                <div class="col c4">
+                                                  <img class="" style="width: 100%;" src="{{ 'better-sleep-purple.svg' | asset_url }}"/>
+                                                </div>
+                                                <div class="col c8">
+                                                  <p class="sans--small fw--600 pt1">better <br/>zzz’s</p>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col c6 tl">
+                                            
+                                              <div class="row gutter--none">
+                                                <div class="col c4">
+                                                  <img class="" style="width: 100%;" src="{{ 'sense-of-calm-purple.svg' | asset_url }}"/>
+                                                </div>
+                                                <div class="col c8">
+                                                  <p class="sans--small fw--600 pt1">sense <br/>of calm</p>
+                                                </div>
+                                              </div>
+                                            </div>
+   
+  
+                                            </div>
+                                            </div>
+  
+  
+                                          <div class="hero__product-description rich-text" itemprop="description">
+                                              {{ product.description }}                                          
+                                          </div>
+                                          <p id="detailsModalBtn" class="mt2 mb2 fw--600 hero__product-description pointer underline color--blue"><span class="hide--md">tap</span><span class="show--md">click</span> for ingredients + product details</p>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="media__fixed">
+  
+                                  {% if product.available and product.variants.size > 1 %}
+                                  {% render 'swatch' for product.options as swatch %}
+                                  {% endif %}
+  
+                                  {% assign hide_default_title = false %}
+                                  {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+                                    {% assign hide_default_title = true %}
+                                  {% endif %}       
+                                  <div id="product-variants" class="select--product-option{% if hide_default_title %} hidden{% endif %}">
+                                    <select id="product-select" class="form-select" name="id" data-productid="{{ product.id }}">
+                                    {% for variant in product.variants %}
+                                      <option class="form-select" {% if variant == product.selected_or_first_available_variant %} selected{% endif %} value="{{ variant.id }}">
+                                      {{ variant.title }} - {{ variant.price | money }}
+                                      </option>
+                                    {% endfor %}
+                                    </select>
+                                  </div>  
+  
+                                  <div class="fw--600 mb1" style="font-size: 16px;">subscription includes:</div>
+                                    <div class="fw--600 ml1">+ free beam mug</div>
+                                    <div class="fw--600 ml1 mb2">+ free beam frother</div>
+  <!-- Begin ReCharge code -->
+  {% if product.available %}{% include 'subscription-product-dream' %}{% endif %}
+  <!-- End ReCharge code -->
+                                  <div class="sans--small pb2 hidden">
+                                    <div id="product-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="delta">
+                                      <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+                                      {% if product.available %}
+                                      <link itemprop="availability" href="http://schema.org/InStock" />
+                                      {% else %}
+                                      <link itemprop="availability" href="http://schema.org/OutOfStock" />
+                                      {% endif %}
+                                      <p>
+                                        {% assign variant = product.selected_or_first_available_variant %}
+                                        {% if product.compare_at_price > product.price %}
+                                        <span class="product-price on-sale" itemprop="price">{{ variant.price | money }}</span>
+                                        <s class="product-compare-price">{{ variant.compare_at_price | money }}</s>
+                                        {% else %}
+                                        <span class="product-price sans--medium fw--600" itemprop="price">{{ variant.price | money }}</span>
+                                        {% endif %}
+                                      </p>
+                                    </div>
+                                 
+                                  </div>
+  
+                                  
+  
+  
+                                  <div id="backorder" class="hidden tc">
+                                    <p>{{ '%s is back-ordered. We will ship it separately in 10 to 15 days.' | replace: '%s', '<span id="selected-variant"></span>' }}</p>
+                                  </div>
+                                    
+                                  <div id="product-add" class="form-action">
+                                    <div class="qtydiv">
+                                      <div class="qtybox">
+                                        <span class="btnqty qtyminus icon-minus">-</span>
+                                        <input type="text" id="productQuantity" name="quantity" value="1" min="1" class="quantity-selector quantity-input" readonly="">
+                                        <span class="btnqty qtyplus icon-plus">+</span>
+                                      </div>
+                              </div>
+                                    <input type="submit" name="add" id="add" class="button button--primary" value="{{ add_to_cart | escape }}">
+                                  </div>
+                                    
+                                    {% include 'guarantee' %}
+  
+                                </div>
+  
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </form>
+          </div>
+      </div>
+  
+  
+  </div>
+  
+  
+    </div>
+  
+  
+  <div class="container mt5 mb0 hide--md">
+    <h5 class="mb1"><strong>FAQs</strong></h5>
+    <div class="accordion bt--gray">
+      <div class="item">
+        <a href="#acc1" class="acc-heading disable-focus-ring">how do i take this product? <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+    
+        <section id="acc1" class="acc-content">
+          <div class="inner">
+            we suggest blending the powder with a warm cup of water or milk (like almond or oat milk).  
+          </div><!-- / .inner -->
+        </section>
+      </div><!-- / .item -->
+    
+      <div class="item">
+        <a href="#acc2" class="acc-heading disable-focus-ring">when do i take this product?  <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+    
+        <section id="acc2" class="acc-content">
+          <div class="inner">
+            you should take dream when you are ready to go to bed.
+          </div><!-- / .inner -->
+        </section>
+      </div><!-- / .item -->
+      <div class="item">
+        <a href="#acc3" class="acc-heading disable-focus-ring">what does dream taste like? <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+    
+        <section id="acc3" class="acc-content">
+          <div class="inner">
+            the dream powder is mixed with organic cacao powder and organic cinnamon powder. it tastes like a healthy hot cocoa. 
+          </div><!-- / .inner -->
+        </section>
+      </div><!-- / .item -->
+  
+  
+
+  
+    </div><!-- / .accordion -->
+  
+  <div class="mt3 tc">
+      <a href="https://beamtlc.com/pages/sms-support" class="fw--600 underline color--primary">need help? text us!</a>
+  </div>
+  
+  
+  </div>
+  
+  
+  
+  <div class="mt3 mb0 show--md">
+    <div class="container pt2--md pb2--md">
+        <div class="row align--center mb2">
+  
+  <div class="col c4--md c4--lg pt3--md mb3 tc tl--md">
+  
+    <div class="row align--center">
+      <div class="col c4">
+        <img class="" style="width: 100%;" src="{{ 'better-sleep-purple.svg' | asset_url }}"/>
+      </div>
+      <div class="col c7">
+        <p class="sans--medium fw--600 pt2">better <br/>zzz’s</p>
+      </div>
+    </div>
+  
+    
+  </div>
+  <div class="col c4--md c4--lg pt3--md mb3 tc tl--md">
+  
+    <div class="row align--center">
+      <div class="col c4">
+        <img class="" style="width: 100%;" src="{{ 'sense-of-calm-purple.svg' | asset_url }}"/>
+      </div>
+      <div class="col c7">
+        <p class="sans--medium fw--600 pt2">sense <br/>of calm</p>
+      </div>
+    </div>
+  </div>
+  
+  </div>
+  </div>
+  </div>
+  
+  
+  
+  
+        <!-- Section 6 -->
+        <div class="container pt0--md pb8--md mb3 mb8--md">
+          <div class="row">
+              <div class="col c7--md c6--lg pt3--md mb3 mt5 tc tl--md">
+                  <div class="col c5--md c5--lg mb2 mt3 mb0--md hide--md">
+                      <div class="pr">
+                          <div class="push-up" style="border-radius: 20px;">
+                              <picture class="full-width">
+                                  <source
+                                      srcset="{{ 'mathewfras__b_e_a_c_o_n_2021_01_29_07_06_30.jpg' | asset_url }}"
+                                      media="(min-width: 800px)"><img class="full-width"
+                                      alt="an all-natural alternative"
+                                      style="border-radius: 28px;"
+                                      src="{{ 'mathewfras__b_e_a_c_o_n_2021_01_29_07_06_30.jpg' | asset_url }}">
+                              </picture>
+                          </div>
+                      </div>
+                  </div>
+                  <h6 class="sans--body mb3"><span class="color--white bg--purple fw--600" style="padding: 2px 16px; border-radius: 5px; opacity: .6;">they love us</span></h6>
+                  <h2 class="fw--600 sans--large mb2 color--blue">why the fittest man on earth loves dream</h2>
+                  <h3 class="fw--300 sans--medium mb2">"at 10:00pm every night, we turn off the tv and cozy up with a cup of @beam dream. we talk about the day, the future and spend time winding down before bed."</h3>
+                  <h2 class="sans--medium fw--600">-mat fraser</h2>
+                  <span>5x fittest man on earth</span>
+              </div>
+              <div class="col c1--lg show--md"></div>
+                  <div class="col c5--md c5--lg mb2 mt4 mb0--md show--md">
+                      <div class="pr">
+                          <div class="push-up" style="border-radius: 20px;">
+                              <picture class="full-width">
+                                  <source
+                                      srcset="{{ 'mathewfras__b_e_a_c_o_n_2021_01_29_07_06_30.jpg' | asset_url }}"
+                                      media="(min-width: 800px)"><img class="full-width"
+                                      alt="an all-natural alternative"
+                                      style="border-radius: 28px;"
+                                      src="{{ 'mathewfras__b_e_a_c_o_n_2021_01_29_07_06_30.jpg' | asset_url }}">
+                              </picture>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+  
+  
+  
+      <div class="bg--blue-light pt4 pb0 pt8--md pb8--md show--md">
+        <h2 class="fw--600 sans--large mb2 color--blue tc pr1--md pl1--md">
+            you’ve got questions,<br /> we’ve got answers
+        </h2>
+        <div class="container">
+            <div class="row">
+                <div class="col c3--md c4--lg pt3--md mb3 tc tl--md">
+                    <div class="pr">
+                        <div class="push-up">
+                            <picture class="full-width">
+                                <source
+                                    srcset="{{ 'dream-blend.jpg' | asset_url }}"
+                                    media="(min-width: 800px)"><img class="full-width"
+                                    alt="an all-natural alternative"
+                                    src="{{ 'dream-blend.jpg' | asset_url }}">
+                            </picture>
+                        </div>
+                    </div>
+                </div>
+                <div class="col c1--md c1--lg pt3--md mb3 tc tl--md show--md">
+                </div>
+                <div class="col c8--md c7--lg pt3--md mb4 pb3 tc tl--md">
+                    <div class="accordion">
+                        <div class="item">
+                            <a href="#acc1Desk" class="acc-heading-desktop sans--medium mt1 mb1 disable-focus-ring">
+                                how do i take this product?
+                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            </a>
+                            <section id="acc1Desk" class="acc-content-desktop">
+                                <div class="inner">
+                                    we suggest blending the powder with a warm cup of water or milk (like almond or oat milk).
+                                </div><!-- / .inner -->
+                            </section>
+                        </div><!-- / .item -->
+  
+                        <div class="item">
+                            <a href="#acc2Desk" class="acc-heading-desktop sans--medium mt1 mb1 disable-focus-ring">
+                                when do i take this product?
+                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            </a>
+                            <section id="acc2Desk" class="acc-content-desktop">
+                                <div class="inner">
+                                    you should take dream when you are ready to go to bed.
+                                </div><!-- / .inner -->
+                            </section>
+                        </div><!-- / .item -->
+  
+                        <div class="item">
+                            <a href="#acc3Desk" class="acc-heading-desktop sans--medium mt1 mb1 disable-focus-ring">
+                                what does dream taste like?
+                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            </a>
+                            <section id="acc3Desk" class="acc-content-desktop">
+                                <div class="inner">
+                                    the dream powder is mixed with organic cacao powder and organic cinnamon powder. it tastes like a healthy hot cocoa.
+                                </div><!-- / .inner -->
+                            </section>
+                        </div><!-- / .item -->
+  
+
+  
+
+                    </div><!-- / .accordion -->
+                    <div class="mt3">
+                      <a href="/pages/support" class="mr2 button--wave-primary-bottom">visit faq’s</a>
+                      <a href="" class="mr2 button--wave-primary-bottom hidden">need help?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+  
+  
+  
+  {% include 'only-the-best' %}
+  
+  {% include 'brands' %}

@@ -1,0 +1,446 @@
+{% assign add_to_cart = 'Add to cart' %}
+{% assign sold_out = 'Sold Out' %}
+{% assign unavailable = 'Unavailable' %}
+
+
+<meta itemprop="url" content="{{ shop.url }}{{ product.url }}" />
+<meta itemprop="image" content="{{ product | img_url: 'grande' }}" />
+<div class="modal hidden" id="download-modal"></div>
+<div class="modal--overlay hidden"></div>
+
+
+<!-- The Modal -->
+<div id="detailsModal" class="details-modal">
+
+
+    <!-- Modal content -->
+    <div class="details-modal-content" style="max-width: 700px;">
+        <div class="details-header tl color--white orange-header">
+            <h1 class="sans--large fw--300 lowercase" temprop="name">{{product.title}}</h1>
+            <p class="sans--small fw--600">{{ product.type }}</p>
+            <span class="close fw--600" style="font-weight: 600 !important;">&times;</span>
+        </div>
+        <div class="inner">
+            <img style="width: 100%;height: auto;" src="{{ 'hemp-nutritionfacts-revive-caps30.jpg' | asset_url }}">
+
+        </div>
+    </div>
+
+</div>
+
+{% section 'product-revive-new' %}
+
+
+<div class="yotpo yotpo-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}"
+    data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: " large"
+    |replace: '?' , '%3F' | replace: '&' ,'%26'}}" data-description="{{ product.description | escape }}"></div>
+
+
+<div class="mt4 mb4 mt0--md mb8--md">
+    <div class="container">
+        <div class="row">
+            <div class="col c6--md">
+                <a target="_blank" href="https://beamtlc.com/pages/sms-support"><img class="full-width"
+                        src="{{ 'have-questions-text-us.jpg' | asset_url }}">
+            </div>
+            <div class="col c6--md mt2 mt0--md">
+                <a href="/pages/refer"><img class="full-width" src="{{ 'give20-get20-beam.jpg' | asset_url }}">   
+            </div>
+        </div>
+    </div>
+</div> 
+
+{% include 'klaviyo' %}
+
+<style>
+    .rc_radio_options {
+        border-radius: 14px;
+        border: 1px solid #2F358E;
+        margin-bottom: 10px;
+    }
+
+    div.rc_block__type.rc_block__type__onetime {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-top: 1px solid #2F358E;
+    }
+
+    div.rc_block__type {
+        border-radius: 14px;
+    }
+
+    .rounded-more {
+        border-radius: 14px;
+    }
+
+    .sans--body-new {
+        font-size: 13px;
+        letter-spacing: .15px;
+        line-height: 25px;
+    }
+
+    .template-product .header__nav {
+        background-color: #fff;
+        border-bottom: 1px solid #e6e6e6;
+    }
+
+    .rounded-image {
+        border-radius: 68px;
+    }
+
+    .pill--blue {
+        border-radius: 32px;
+        display: inline-block;
+        background-color: #2F358E;
+        color: #fff;
+        transition: 200ms ease-in-out;
+        min-width: 220px;
+        width: auto !important;
+        padding-right: 32px;
+        padding-left: 32px;
+
+    }
+
+    .pill {
+        border-radius: 32px;
+        display: inline-block;
+        border: #2F358E;
+        transition: 200ms ease-in-out;
+        min-width: 220px;
+        width: auto !important;
+        padding-right: 32px;
+        padding-left: 32px;
+
+    }
+
+    .pill--blue:hover {
+        background-color: #494fa7;
+    }
+
+    .pill:hover {
+        background-color: #E9F2FF;
+    }
+
+    .marquee {
+        position: relative;
+        width: 100vw;
+        max-width: 100%;
+        height: 26px;
+        overflow-x: hidden;
+    }
+
+    .marquee .content {
+        font-size: 18px;
+        line-height: 26px;
+    }
+
+    .track {
+        position: absolute;
+        white-space: nowrap;
+        will-change: transform;
+        animation: marquee 74s linear infinite;
+    }
+
+    @keyframes marquee {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(-50%);
+        }
+    }
+
+    @media screen and (min-width: 600px) {
+
+        .slideshow-second .slick-dots li {
+            width: 19%;
+            display: inline-block;
+            margin-right: 1%;
+        }
+
+        .slideshow-second .slick-dots {
+            bottom: -10px !important;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .rounded-image {
+            border-radius: 28px;
+        }
+
+        .pill {
+            border-radius: 32px;
+            display: inline-block;
+            border: #2F358E;
+            transition: 200ms ease-in-out;
+            min-width: 100%;
+            width: 100% !important;
+            padding-right: 32px;
+            padding-left: 32px;
+
+        }
+
+        .marquee {
+            position: relative;
+            width: 100vw;
+            max-width: 100%;
+            height: 22px;
+            overflow-x: hidden;
+        }
+
+        .marquee .content {
+            font-size: 16px;
+            line-height: 22px;
+        }
+
+        .track {
+            position: absolute;
+            white-space: nowrap;
+            will-change: transform;
+            animation: marquee 124s linear infinite;
+        }
+    }
+
+    @media screen and (max-width: 1424px) {
+        .slick-dots {
+            top: auto !important;
+            bottom: -20px !important;
+            left: auto !important;
+            right: auto;
+            text-align: center;
+        }
+
+        .slick-dots li {
+            display: inline;
+            margin-right: 8px;
+        }
+
+        .slideshow.slideshow-mobile .slick-dots {
+            bottom: 24px !important;
+        }
+
+        .slideshow.slideshow-mobile .slick-dots li button {
+            background-color: transparent;
+        }
+
+        .slick-dots li button {
+            background-color: #C2C2C2;
+        }
+
+        .slick-dots li button {
+            text-indent: -100000px;
+            border-radius: 100%;
+            border: solid rgba(255, 255, 255, 0.781) 1px;
+            background-color: #C2C2C2;
+            width: 14px;
+            height: 14px;
+        }
+
+        .slideshow.slideshow-mobile .slick-dots li.slick-active button,
+        .slick-dots li.slick-active button {
+            background-color: #8c8cf0;
+        }
+    }
+</style>
+
+<script>
+
+
+    $(document).ready(function () {
+        $('.add_to_cart_revive').click(function () {
+            addItemToCart()
+            return false;
+        });
+        $('.add_to_cart_dreamSingle').click(function () {
+            addItemToCartSingle()
+            return false;
+        });
+        $('.add_to_cart_dreamDuo').click(function () {
+            addItemToCartDuo()
+            return false;
+        });
+
+    });
+
+    function addItemToCart() {
+        data = {
+            "id": 32473921552439,
+            "quantity": 1,
+            "properties": {
+                "shipping_interval_frequency": "30",
+                "shipping_interval_unit_type": "Days"
+            }
+        }
+        jQuery.ajax({
+            type: 'POST',
+            url: '/cart/add.js',
+            data: data,
+            dataType: 'json',
+            success: function () {
+                window.location.href = '/cart';
+            }
+        });
+    }
+
+
+    $('.qtybox .btnqty').on('click', function () {
+        var qty = parseInt($(this).parent('.qtybox').find('.quantity-input').val());
+        if ($(this).hasClass('qtyplus')) {
+            qty++;
+        } else {
+            if (qty > 1) {
+                qty--;
+            }
+        }
+        qty = (isNaN(qty)) ? 1 : qty;
+        $(this).parent('.qtybox').find('.quantity-input').val(qty);
+    });
+
+
+    $('.pdp-images.slideshow').slick({
+        autoplay: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        fade: true,
+        useTransform: true,
+        arrows: true,
+        dots: true,
+        autoplaySpeed: 5000,
+        adaptiveHeight: false,
+        pauseOnHover: true,
+        customPaging: function (slick, index) {
+            var targetImage = slick.$slides.eq(index).find('img').attr('src');
+            return '<img src=" ' + targetImage + ' "/>';
+        },
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    fade: false,
+                    arrows: false,
+                    dots: true,
+                    customPaging: function (slider, i) {
+                        return $('<button type="button" />').text(i + 1);
+                    },
+                    lazyLoad: $(this).find('[data-lazy]').length > 0 ? 'progressive' : null
+                }
+            }
+        ]
+    });
+
+
+
+    $('.ingredient-slider').slick({
+        autoplay: true,
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        fade: false,
+        useTransform: true,
+        arrows: false,
+        dots: false,
+        autoplaySpeed: 5000,
+        adaptiveHeight: false,
+        pauseOnHover: true,
+        responsive: [
+            {
+                breakpoint: 1424,
+                settings: {
+                    fade: false,
+                    slidesToShow: 3,
+                    fade: false,
+                    arrows: false,
+                    dots: true,
+                    customPaging: function (slider, i) {
+                        return $('<button type="button" />').text(i + 1);
+                    }
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
+                    fade: false,
+                    arrows: false,
+                    dots: true,
+                    customPaging: function (slider, i) {
+                        return $('<button type="button" />').text(i + 1);
+                    }
+                }
+            }
+        ]
+    });
+
+    $('.brand-slider').slick({
+        autoplay: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        fade: false,
+        useTransform: true,
+        arrows: false,
+        dots: false,
+        autoplaySpeed: 5000,
+        adaptiveHeight: false,
+        pauseOnHover: true,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    fade: false
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
+                    fade: false,
+                    arrows: false,
+                    dots: true,
+                    customPaging: function (slider, i) {
+                        return $('<button type="button" />').text(i + 1);
+                    }
+                }
+            }
+        ]
+    });
+
+
+
+    // Get the modal
+    var modal = document.getElementById("detailsModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("detailsModalBtn");
+    var btn1 = document.getElementById("detailsModalBtn1");
+    var btn2 = document.getElementById("detailsModalBtn2");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+    // When the user clicks on the button, open the modal
+    btn1.onclick = function () {
+        modal.style.display = "block";
+    }
+    // When the user clicks on the button, open the modal
+    btn2.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+
+</script>

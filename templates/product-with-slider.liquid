@@ -1,0 +1,431 @@
+{% assign add_to_cart = 'Add to cart' %}
+{% assign sold_out = 'Sold Out' %}
+{% assign unavailable = 'Unavailable' %}
+
+
+<meta itemprop="url" content="{{ shop.url }}{{ product.url }}" />
+<meta itemprop="image" content="{{ product | img_url: 'grande' }}" />
+<div class="modal hidden" id="download-modal"></div>
+<div class="modal--overlay hidden"></div>
+<div class="productView">
+  <div itemscope itemtype="http://schema.org/Product">
+
+    <div data-event-type="product" data-entity-id="{{product.id}}"
+    data-name="{{product.title}}">
+
+
+    {% assign variant = product.selected_or_first_available_variant  %}
+    {% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
+
+    <div class="pr hero">
+      <form action="/cart/add" data-productid="{{ product.id }}" method="post" class="product-form" id="add-to-cart" enctype="multipart/form-data">
+
+        {% if product.available %}{% include 'subscription-product-dream' %}{% endif %} 
+
+
+
+        <div class="row gutter--none direction--rev--md">
+            <div class="col c6--md c7--lg">
+
+                <div class="pr hero__product-image of--hidden" data-image-gallery>
+      
+                  <div class="pdp-images hero__cover product-photo-container">
+                    {% for image in product.images%}
+                    {% if forloop.index != 6 %}
+                    {% if image != featured_image %}
+                    {% if image != product.images[0] %}
+                      <div class="slide slide-{{ forloop.index }}">
+                        <img src="{{ image.src | product_img_url: '200x200' }}" >
+                      </div>
+                    {% endif %}
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                  </div>
+
+                </div>
+
+
+            </div>
+            <div class="col c6--md c5--lg">
+                <div class="pr hero">
+                    <div class="reveal__container active">
+                        <div class="hero media media--vertical gutter--none media--forward">
+                            <div class="media__fluid pt0 pt10--md reveal__component__0--move">
+                                <div class="grid-container contained pt5 pt8--lg">
+                                    <div class="mb1">
+                                        <p class="tc sans--small fw--600 color--gray">{{ product.type }}</p>
+                                    </div>
+                                    <div class="mb2 tc">
+                                        <h1 class="tc sans--medium-large fw--600" temprop="name">{{product.title}}</h1>
+                                        <div style="text-align: center !important; display:inline-block" class="mt2 tc yotpo bottomLine"
+     data-appkey="0LI40gxVW5vb3SeTiECCcNOkg5eUiKEve1G2gfM8"
+     data-domain="{{shop.permanent_domain | escape }}"
+     data-product-id="{{ product.id }}"
+     data-product-models="{{ product.id }}"
+     data-name="{{ product.title | escape }}"
+     data-url="{{ shop.url }}{{ product.url }}"
+     data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
+     data-description="{{ product.description | escape }}"
+     data-bread-crumbs="{% for tag in product.tags %}{{ tag | escape }};{% endfor %}">
+  {%- assign yotpo_offload_content = shop.metafields.yotpo.yotpo_offload_content %}
+  {%- assign time_now = 'now' | date: '%s' %}
+  {%- assign yotpo_live_time = shop.metafields.yotpo.yotpo_live | date: '%s' %}
+  {%- assign diff_seconds_from_live = time_now | minus: yotpo_live_time %}
+  {%- assign yotpo_bottomline_last_updated = product.metafields.yotpo.bottomline_update_time | date: '%s' %}
+  {%- assign diff_seconds_from_last_bottomline_update = time_now | minus: yotpo_bottomline_last_updated %}
+  {%- if yotpo_live_time and diff_seconds_from_live < 86400 or yotpo_bottomline_last_updated and diff_seconds_from_last_bottomline_update < 86400 -%}
+    {%- assign yotpo_bottomline_obsolete = false %}
+  {%- else %}
+    {%- assign yotpo_bottomline_obsolete = true %}
+  {%- endif %}
+  {%- if yotpo_offload_content == 'yes' and yotpo_bottomline_obsolete != true -%}
+    {{ product.metafields.yotpo.bottomline }}
+  {%- endif %}
+</div>
+
+                                    </div>
+                                    <div class="mb2">
+                                        <div class="hero__product-description m--auto rich-text tc" itemprop="description">
+                                            {{ product.description }}                                          
+                                        </div>
+                                        <p><br></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="media__fixed">
+
+                                <div class="mb2"><ul class="list list--horizontal gutter--vertical gutter--small list--forward tc align--top"><li class="list__item mb1 reveal__component__2--move"><div class="mb1"><picture class="product-tag__image m--auto"><img class="product-tag__image m--auto" alt="helps find your sense of calm" src="https://beam.imgix.net/beam-filters-calm@2x.png?mtime=20190725140646&amp;auto=format&amp;h=120&amp;q=50&amp;w=120"></picture></div><p class="product-tag sans--small fw--600 color--gray">helps find your sense of calm</p></li><li class="list__item mb1 reveal__component__3--move"><div class="mb1"><picture class="product-tag__image m--auto"><img class="product-tag__image m--auto" alt="promotes better rest" src="https://beam.imgix.net/beam-filters-rest@2x.png?mtime=20190725140718&amp;auto=format&amp;h=120&amp;q=50&amp;w=120"></picture></div><p class="product-tag sans--small fw--600 color--gray">promotes better rest</p></li></ul></div>
+
+
+                                <div class="tc sans--small pb2">
+                                  <div id="product-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="delta">
+                                    <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+                                    {% if product.available %}
+                                    <link itemprop="availability" href="http://schema.org/InStock" />
+                                    {% else %}
+                                    <link itemprop="availability" href="http://schema.org/OutOfStock" />
+                                    {% endif %}
+                                    <p>
+                                      {% assign variant = product.selected_or_first_available_variant %}
+                                      {% if product.compare_at_price > product.price %}
+                                      <span class="product-price on-sale" itemprop="price">{{ variant.price | money }}</span>
+                                      <s class="product-compare-price">{{ variant.compare_at_price | money }}</s>
+                                      {% else %}
+                                      <span class="product-price" itemprop="price">{{ variant.price | money }}</span>
+                                      {% endif %}
+                                    </p>
+                                  </div>
+                                  <div class="sans--small fw--600 ellipsis pt0 pb0">
+                                    qty: <input min="1" type="number" id="quantity" name="quantity" value="1" />
+                                  </div>                                  
+                                </div>
+
+
+                                {% assign hide_default_title = false %}
+                                {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+                                  {% assign hide_default_title = true %}
+                                {% endif %}       
+                                <div id="product-variants" class="select--product-option{% if hide_default_title %} hidden{% endif %}">
+                                  <select id="product-select" class="form-select" name="id" data-productid="{{ product.id }}">
+                                  {% for variant in product.variants %}
+                                    <option class="form-select" {% if variant == product.selected_or_first_available_variant %} selected{% endif %} value="{{ variant.id }}">
+                                    {{ variant.title }} - {{ variant.price | money }}
+                                    </option>
+                                  {% endfor %}
+                                  </select>
+                                </div>  
+
+                                       
+                                <div id="backorder" class="hidden tc">
+                                  <p>{{ '%s is back-ordered. We will ship it separately in 10 to 15 days.' | replace: '%s', '<span id="selected-variant"></span>' }}</p>
+                                </div>
+                                  
+                                <div id="product-add" class="form-action">
+                                  <input type="submit" name="add" id="add" class="button button--primary" value="{{ add_to_cart | escape }}">
+                                </div>
+
+                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+  </div>
+</form>
+</div>
+<div class="mt8 mb8 mt10--md mb10--md">
+    <div class="grid-container contained pt2--md pb2--md">
+        <div class="row">
+            <div class="col c1 show--xl"></div>
+
+            <div class="col c4--md mb3 mb0--md">
+                <div class="b--blue">
+                    <div class="pr">
+                        <div class="box-shadow align--right"></div>
+                        <div class="push-up">
+                            <picture class="full-">
+                                <source
+                                    srcset="https://cdn.shopify.com/s/files/1/0264/4076/1399/files/Schmaling-BeamPowder11042019597265.jpg?v=1596244068"
+                                    media="(min-width: 800px)"><img class="full-width" alt="beam - sleep"
+                                    src="https://cdn.shopify.com/s/files/1/0264/4076/1399/files/Schmaling-BeamPowder11042019596948.jpg?v=1596244170">
+                            </picture>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col c1 show--xl"></div>
+            <div class="col c6--md c4--xl pt4--lg pt8--xl">
+                <div class="tc tl--md">
+                    <h2 class="sans--medium-large fw--600 mb0">Ingredients</h2>
+                    <div class="rich-text mb2 mb4--lg">
+                        <h4 class="sans--small fw--400 mb2"></h4>
+                        <ul>
+                            <li><strong>melatonin:</strong> a hormone the body naturally produces to help trigger the evening rest cycle*.</li><br />
+                            <li><strong>magnesium:</strong> a mineral shown to help with stress reduction and mood regulation*.</li><br />
+                            <li><strong>reishi:</strong> a mushroom superfood that can help lower cortisol levels (stress) to ward off restlessness*.</li><br />
+                            <li><strong>l-theanine:</strong> an amino acid thatand has been found to promote alpha waves in the brain, which areis associated with wakeful relaxation*.</li><br />
+                            <li><strong>nano hemp:</strong> our nano hemp powder is packed with lots of (microscopic) particles for better absorption.</li><br />
+                            <li><strong>Other ingredients for flavor:</strong> cacao powder, cinnamon, monk fruit.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col c1 show--xl"></div>
+        </div>
+    </div>
+</div>
+
+<div class="mt8 mb4 mt10--md mb8--md">
+    <div class="grid-container contained pt2--md pb2--md">
+        <div class="row direction--rev--md">
+
+            <div class="col c4--md mb3 mb0--md">
+                <div class="b--blue promo__pull-flush--right">
+                    <div class="pr">
+                        <div class="box-shadow align--left"></div>
+                        <div class="push-up">
+                            <picture class="full-width">
+                                <source
+                                    srcset="https://cdn.shopify.com/s/files/1/0264/4076/1399/files/Schmaling-BeamPowder11042019596794_1.jpg?v=1596244152"
+                                    media="(min-width: 800px)"><img class="full-width" alt="Beam Blends for Sleep"
+                                    src="https://cdn.shopify.com/s/files/1/0264/4076/1399/files/Schmaling-BeamPowder11042019596794_1.jpg?v=1596244152">
+                            </picture>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col c1 show--xl"></div>
+            <div class="col c6--md c4--xl pt4--lg pt8--xl">
+                <div class="tc tl--md">
+                    <h2 class="sans--large fw--600 mb0">How to use:</h2>
+                    <h4 class="sans--small fw--400 mb2"></h4>
+                    <div class="rich-text mb2 mb4--lg">
+                        <p>
+                            Our dream blend tastes like cozy nights and a healthy hot chocolate. We recommend enjoying one serving scoop mixed into 8oz of hot water or your favorite nut milk warmed. Drink approximately 30 minutes before bedtime.
+                            </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col c1 show--xl"></div>
+        </div>
+    </div>
+</div>
+
+<div class="yotpo yotpo-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" data-description="{{ product.description | escape }}"></div>
+
+{% include 'klaviyo' %}
+
+<style type="text/css">
+  .slick-slide {
+      height: 100%;
+      min-height: 1px;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+  }
+  /*
+  {% for image in product.images %}
+      .pdp-images .slide.slide-{{ forloop.index }} {
+        background-image: url({{ image.src | product_img_url: 'master' }});
+        
+      }
+  {% endfor %}
+*/
+  .pdp-images.slideshow .slick-list .slick-slide img {display: none !important;}
+  
+  .pdp-images.slideshow .slick-slide {
+    height: 100vh;
+  
+  }
+  
+  .slick-dots {
+    position: absolute;
+    top: 140px; 
+    left: 20px;
+  }
+  
+  .productView-thumbnails {
+    max-width: 100%;
+    min-width: 100px;
+    position: absolute;
+    bottom: 40px;
+    top: auto;
+    display: none
+  }
+  .productView-thumbnails li , .slick-dots li {
+    width: 100px;
+  }
+  .productView-thumbnails img , .slick-dots img{
+    width: 100px;
+    height: auto;
+    border: 1px solid #2F358E; 
+  }
+  .modal {
+     max-width: 575px;
+     background: white;
+     border: 5px solid #111;
+     padding: 50px 65px;
+     position: fixed;
+     z-index: 1000;
+  }
+  .modal .close {
+     position: absolute;
+     top: 10px;
+     right: 20px;
+     font-size: 20px;
+     cursor: pointer;
+  }
+  .modal--overlay {
+     position: fixed;
+     top: 0;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     z-index: 100;
+     background-color: rgba(0, 0, 0, 0.4);
+  }
+  .hidden {
+     display: none;
+  }
+
+
+</style>
+  
+  
+      
+  {% comment %}
+    Adding support for product options. See here for details:  
+    http://docs.shopify.com/support/your-website/themes/can-i-make-my-theme-use-products-with-multiple-options
+  {% endcomment %}
+  <script src="https://widget.sezzle.com/v1/javascript/price-widget?uuid=e60e7d5f-8b5c-4c2c-ae89-8f6f3099dbba"></script>
+  
+  <script>
+    $('.pdp-images.slideshow').slick({
+    autoplay: true,
+    slidesToShow: 1,
+     slidesToScroll: 1,
+    fade: true,
+    useTransform: true,
+    arrows: true,
+    dots: true,
+    autoplaySpeed: 5000,
+    adaptiveHeight: false,
+    pauseOnHover: true,
+    customPaging: function(slick,index) {
+                      var targetImage = slick.$slides.eq(index).find('img').attr('src');
+                      return '<img src=" ' + targetImage + ' "/>';
+                  },
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          fade: false
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          fade: false,
+          arrows: false,
+          dots: true,
+          lazyLoad: $(this).find('[data-lazy]').length > 0 ? 'progressive' : null
+        }
+      }
+    ]
+  });
+  
+  
+  
+  
+  var selectCallback = function(variant, selector) {
+  
+    if (variant) {
+      // Swap image.
+      if (variant.featured_image) {
+        var newImage = variant.featured_image; // New image object.
+        var mainImageDomEl = jQuery('.product-photo-container img')[0]; // DOM element of main image we need to swap.
+        Shopify.Image.switchImage(newImage, mainImageDomEl, switchImage); // Define switchImage (the callback) in your theme's JavaScript file.
+      }
+      
+      // Selected a valid variant that is available.
+      if (variant.available) {
+            
+        // Enabling add to cart button.
+        jQuery('#add').removeClass('disabled').prop('disabled', false).val({{ add_to_cart | json }});
+      
+        // If item is backordered yet can still be ordered, we'll show special message.
+        if (variant.inventory_management && variant.inventory_quantity <= 0) {
+          jQuery('#selected-variant').html({{ product.title | json }}{% unless hide_default_title %} + ' - ' + variant.title{% endunless %});
+          jQuery('#backorder').removeClass("hidden");
+        } else {
+          jQuery('#backorder').addClass("hidden");
+        }
+        
+      } else {
+        // Variant is sold out.
+        jQuery('#backorder').addClass('hidden');
+        jQuery('#add').val({{ sold_out | json }}).addClass('disabled').prop('disabled', true);       
+      }
+      
+      // Whether the variant is in stock or not, we can update the price and compare at price.
+      if ( variant.compare_at_price > variant.price ) {
+        jQuery('#product-price').html('<span class="product-price on-sale">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") +'</span>'+'&nbsp;<s class="product-compare-price">'+Shopify.formatMoney(variant.compare_at_price, "{{ shop.money_format }}")+ '</s>');
+      } else {
+        jQuery('#product-price').html('<span class="product-price">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") + '</span>' );
+      }        
+  
+    } else {
+      // variant doesn't exist.
+      jQuery('#product-price').empty();
+      jQuery('#backorder').addClass('hidden');
+      jQuery('#add').val({{ unavailable | json }}).addClass('disabled').prop('disabled', true);
+    }
+  
+  };
+    
+  jQuery(function($) {
+  
+    new Shopify.OptionSelectors('product-select', { product: {{ product | json }}, onVariantSelected: selectCallback, enableHistoryState: true });
+    
+    // Add label if only one product option and it isn't 'Title'.
+    {% if product.options.size == 1 and product.options.first != 'Title' %}
+      $('.selector-wrapper:eq(0)').prepend('<label class="form-label form-label--alternate form-label--inlineSmall">{{ product.options.first }}</label>');
+    {% endif %}
+  
+  });
+  
+  Shopify.Image.preload({{ product.images | json }}, 'grande');
+  Shopify.Image.preload({{ product.images | json }}, '1024x1024');
+  
+  </script>

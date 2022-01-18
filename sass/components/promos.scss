@@ -1,0 +1,145 @@
+//
+// === Promo Blocks ===
+//
+
+.promo__pull-flush--left {
+	@include breakpoint(md) {
+		margin-left: -$grid-padding-desktop - 1px;
+	}
+}
+
+.promo__pull-flush--right {
+	@include breakpoint(md) {
+		margin-right: -$grid-padding-desktop - 1px;
+	}
+}
+
+.promo__bottom-cta {
+	&:hover,
+	&:focus {
+		.button--wave-primary-top {
+			height: $wave-button-height;
+		}
+	}
+}
+
+//
+// === Staggered Illustration Carousel ===
+//
+
+$staggered-components: 5;
+
+.promo__staggered-illo-container .promo__staggered-illo__text > * {
+	opacity: 0;
+	transition: opacity 500ms;
+}
+
+.promo__staggered-illo-container.active .promo__staggered-illo__text > * {
+	opacity: 1;
+
+	@for $i from 0 through $staggered-components {
+		&:nth-child(#{$i}) {
+			transition: opacity 600ms ease-out #{$i * 500ms};
+		}
+	}
+}
+
+.promo__staggered-illo__img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 120px;
+	height: 120px;
+}
+
+.promo__value-illo {
+	width: 120px;
+	height: 120px;
+}
+
+.promo__tile-icon {
+	width: 180px;
+	height: 180px;
+}
+
+.promo__tile {
+	min-height: 500px;
+}
+
+.promo__press-slider .flickity-viewport {
+	height: 60px !important;
+}
+
+.promo__press-logo {
+	max-width: 200px;
+	width: 100%;
+	height: auto;
+}
+
+.col.promo__press-col {
+	@include breakpoint(md) {
+		width: (100% / 5);
+	}
+}
+
+.promo__quiz__container {
+	position: relative;
+	border: $grid-padding-desktop solid;
+	border-image: linear-gradient(45deg, #F2D3AA, #A7C1E4, #F2D3AA);
+	border-image-slice: 1;
+}
+
+.promo__scrolling__container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+
+	&.fixed {
+		position: fixed;
+	}
+}
+
+//
+// === Carousels ===
+//
+
+.carousel__col--card {
+	width: 75vw;
+	margin-right: $grid-gutter-mobile;
+
+	@include breakpoint(lg) {
+		width: 25vw;
+		margin-right: $grid-gutter-desktop;
+	}
+}
+
+.carousel__col--full-width {
+	margin-right: $grid-gutter-mobile;
+
+	@include breakpoint(lg) {
+		margin-right: $grid-gutter-desktop;
+	}
+}
+
+.carousel--visible-overflow .flickity-viewport {
+	overflow: visible;
+}
+
+.carousel__container--product .flickity-viewport {
+	position: relative;
+
+	@include breakpoint(lg) {
+		&:after {
+			content: '';
+			display: block;
+			left: 0;
+			width: 100vw;
+			height: calc(100% + 20px);
+			pointer-events: none;
+			background: linear-gradient(to right, color(tan), color(tan) calc(100vw - 100px), rgba(color(tan), 0));
+			transform: translateX(-100%);
+		}
+	}
+}

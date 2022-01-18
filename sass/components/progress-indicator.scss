@@ -1,0 +1,49 @@
+.progress {
+	height: 2px;
+	background: rgba(color(blue), 0.2);
+	overflow: hidden;
+}
+
+.progress__indicator {
+	height: 2px;
+	transform: translate3d(-100%, 0, 0);
+	background: color(blue);
+}
+
+.progress.active .progress__indicator {
+	transform: translate3d(0, 0, 0);
+}
+
+.progress.active.pause .progress__indicator {
+	transition: none !important;
+}
+
+.progress.reviews.active .progress__indicator {
+	transition: transform 5000ms linear;
+}
+
+.progress__row {
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+	margin-left: -5px;
+	margin-right: -5px;
+
+	.progress__col {
+		display: table-cell;
+		padding: 0 5px;
+
+		&:last-child {
+			border-right: none;
+		}
+	}
+
+	@include breakpoint(md) {
+		margin-left: -10px;
+		margin-right: -10px;
+
+		.progress__col {
+			padding: 0 10px;
+		}
+	}
+}

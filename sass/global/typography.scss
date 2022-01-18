@@ -1,0 +1,641 @@
+/*
+// === Reset ===
+*/
+
+body {
+	@include font-smoothing;
+	@include body-font-size;
+	font-family: $font-family-austin;
+}
+
+//
+// === Utilities ===
+//
+
+.line-through {
+	text-decoration: line-through;
+}
+
+.ellipsis {
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 100%;
+}
+
+.line-break p {
+	margin-bottom: $line-height-body-mobile;
+
+	@include breakpoint(md) {
+		margin-bottom: $line-height-body-desktop;
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+.lowercase {
+	text-transform: lowercase;
+}
+
+.underline {
+	text-decoration: underline;
+}
+
+.underline--no-hover {
+	text-decoration: underline;
+
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+//
+// === Rich Text ===
+//
+
+.rich-text {
+	a {
+		text-decoration: underline;
+
+		&:hover,
+		&:focus {
+			text-decoration: none;
+		}
+	}
+
+	p {
+		margin-bottom: $line-height-body-mobile;
+	
+		@include breakpoint(md) {
+			margin-bottom: $line-height-body-desktop;
+		}
+	
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.rich-text--content {
+	b, strong {
+		font-weight: 800;
+	}
+
+	em, i {
+		font-style: italic;
+	}
+
+	p, ol, ul, 
+	h1, h2, h3, h4, h5, h6,
+	figure,
+	blockquote {
+		margin-bottom: $line-height-body-mobile;
+	
+		@include breakpoint(md) {
+			margin-bottom: $line-height-body-desktop;
+		}
+	
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-family: $font-family-poppins;
+		font-size: 20px;
+		line-height: 30px;
+		font-weight: 600;
+		margin-top: 80px;
+
+		&:first-child {
+			margin-top: 0;
+		}
+	
+		@include breakpoint(md) {
+			font-size: 22px;
+		}
+	}
+
+	h1 {
+		@include breakpoint(md) {
+			font-size: 34px;
+			line-height: 40px;
+		}
+	}
+
+	h6 {
+		margin: 0;
+		font-family: $font-family-poppins;
+		font-size: 12px;
+		line-height: 18px;
+
+		@include breakpoint(md) {
+			font-size: 13px;
+		}
+
+		+ h1 {
+			margin-top: 20px;
+		}
+	}
+
+	ol {
+		list-style-type: decimal;
+		margin-left: 1em;
+
+		ol {
+			list-style-type: lower-alpha;
+		}
+	}
+
+	ul {
+		list-style: circle;
+		margin-left: 1em;
+
+		ul {
+			list-style-type: square;
+		}
+	}
+
+	blockquote {
+		font-family: $font-family-poppins;
+		font-size: 24px;
+		line-height: 32px;
+		margin: 100px 0;
+		position: relative;
+		text-align: center;
+
+		&:first-child {
+			margin-top: 0;
+		}
+	
+		@include breakpoint(md) {
+			font-size: 26px;
+			line-height: 36px;
+			padding-left: 40px;
+			text-align: left;
+		}
+
+		@include breakpoint(xl) {
+			padding-left: 120px;
+		}
+
+		&:before {
+			content: '';
+			display: block;
+			height: 4px;
+			width: 170px;
+			position: absolute;
+			left: calc(50% - 85px);
+			right: 0;
+			bottom: calc(100% + 30px);
+			background: url('../assets/images/icon-link-stroke.svg');
+			background-repeat: repeat-x;
+			background-size: 17px 4px;
+			background-position: 0%;
+
+			@include breakpoint(md) {
+				display: none;
+			}
+		}
+
+		&:after {
+			content: '';
+			display: block;
+			height: 4px;
+			width: 170px;
+			position: absolute;
+			left: calc(50% - 85px);
+			right: 0;
+			top: calc(100% + 30px);
+			background: url('../assets/images/icon-link-stroke.svg');
+			background-repeat: repeat-x;
+			background-size: 17px 4px;
+			background-position: 0%;
+
+			@include breakpoint(md) {
+				height: 100%;
+				width: 4px;
+				position: absolute;
+				left: 0;
+				right: initial;
+				top: 0;
+				bottom: 0;
+				background: url('../assets/images/icon-stroke-vertical.svg');
+				background-repeat: repeat-y;
+				background-size: 4px 17px;
+				background-position: 0%;
+			}
+		}
+	}
+}
+
+//
+// === Rich Text Addonts ===
+//
+
+.rich-text__gradient {
+	font-family: $font-family-poppins;
+	font-weight: 600;
+	background-image: linear-gradient(45deg, #3D7CC9, #4CA585, #F4BE7D, #8B8CEF);
+	background-size: 300%;
+	background-clip: text;
+	/* autoprefixer: ignore next */
+	-webkit-text-fill-color: transparent;
+	animation: 6000ms ease infinite animateGradient;
+}
+
+@keyframes animateGradient {
+	0% {
+		background-position: 20% 0%;
+	}
+	50% {
+		background-position: 100% 0%;
+	}
+	100% {
+		background-position: 20% 0%;
+	}
+}
+
+.rich-text__education-yellow,
+.rich-text__education-sky-blue,
+.rich-text__education-peach,
+.rich-text__education-blue {
+	@include body-font-size;
+	font-family: $font-family-poppins;
+	margin-top: 0;
+	margin-bottom: 5px;
+	font-weight: 600;
+	padding-left: 32px;
+
+	@include breakpoint(lg) {
+		padding-left: 0;
+	}
+
+	&:before {
+		content: '';
+		display: inline-block;
+		width: 12px;
+		height: 12px;
+		border-radius: 12px;
+		background-color: color(blue);
+		margin-left: -32px;
+		margin-right: 20px;
+		vertical-align: -1px;
+	}
+}
+
+.rich-text__education-yellow:before {
+	background-color: #DCAE46;
+}
+
+.rich-text__education-sky-blue:before {
+	background-color: #A6C1E4;
+}
+
+.rich-text__education-peach:before {
+	background-color: #F1CD9D;
+}
+
+.rich-text__education-blue:before {
+	background-color: color(blue);
+}
+
+.rich-text__logo {
+	&:after {
+		content: '';
+		display: inline-block;
+		width: 3em;
+		height: 0.9em;
+		background-image: url('../assets/images/inline-logo.svg');
+		background-size: 100%;
+		background-position: center;
+		background-repeat: no-repeat;
+		vertical-align: -0.05em;
+	}
+}
+
+//
+// === Links ===
+//
+
+.link--opacity {
+	transition: opacity 300ms ease-out;
+
+	&:hover,
+	&:focus {
+		opacity: 0.5;
+	}
+}
+
+.link--overlay {
+	position: relative;
+
+	&:after {
+		display: block;
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		pointer-events: none;
+		background-color: color(blue);
+		transition: opacity 300ms ease-out;
+		opacity: 0;
+		mix-blend-mode: multiply;
+	}
+
+	&:hover,
+	&:focus {
+		&:after {
+			opacity: 0.25;
+		}
+	}
+}
+
+.link--underline {
+	&:hover,
+	&:focus {
+		text-decoration: underline;
+	}
+}
+
+.link--opacity-target {
+	.link__target {
+		transition: opacity 300ms ease-out;
+	}
+
+	&:hover,
+	&:focus {
+		.link__target {
+			opacity: 0.5;
+		}
+	}
+}
+
+//
+// === Styles ===
+//
+
+.serif--xsmall {
+	font-family: $font-family-austin;
+	font-size: 12px;
+	line-height: 18px;
+
+	@include breakpoint(md) {
+		font-size: 14px;
+		line-height: 22px;
+	}
+}
+
+.serif--small {
+	font-family: $font-family-austin;
+	font-size: 16px;
+	line-height: 26px;
+}
+
+
+.serif--menu {
+	font-family: $font-family-austin;
+	font-size: 16px;
+	line-height: 30px;
+}
+.sans--xsmall {
+	font-family: $font-family-poppins;
+	font-size: 9px;
+	line-height: 18px;
+
+	@include breakpoint(md) {
+		font-size: 13px;
+	}
+}
+.sans--small {
+	font-family: $font-family-poppins;
+	font-size: 12px;
+	line-height: 18px;
+
+	@include breakpoint(md) {
+		font-size: 13px;
+	}
+}
+
+.sans--small--wide {
+	font-family: $font-family-poppins;
+	font-size: 12px;
+	line-height: 22px;
+
+	@include breakpoint(md) {
+		font-size: 13px;
+	}
+}
+
+.sans--body {
+	@include body-font-size;
+	font-family: $font-family-poppins;
+}
+
+.sans--medium {
+	font-family: $font-family-poppins;
+	font-size: 20px;
+	line-height: 30px;
+
+	@include breakpoint(md) {
+		font-size: 22px;
+	}
+}
+
+.sans--mid-medium {
+	font-family: $font-family-poppins;
+	font-size: 16px;
+	line-height: 22px;
+
+	@include breakpoint(md) {
+		font-size: 18px;
+	}
+}
+.sans--medium-large {
+	font-family: $font-family-poppins;
+	font-size: 28px;
+	line-height: 42px;
+
+	@include breakpoint(md) {
+		font-size: 25px;
+		line-height: 38px;
+	}
+}
+.sans--large-medium {
+	font-family: $font-family-poppins;
+	font-size: 22px;
+	line-height: 28px;
+
+	@include breakpoint(md) {
+		font-size: 32px;
+		line-height: 38px;
+	}
+}
+
+.sans--large {
+	font-family: $font-family-poppins;
+	font-size: 28px;
+	line-height: 34px;
+
+	@include breakpoint(md) {
+		font-size: 40px;
+		line-height: 44px;
+	}
+}
+
+.sans--xl {
+	font-family: $font-family-poppins;
+	font-size: 36px;
+	line-height: 44px;
+	@include breakpoint(md) {
+		font-size: 40px;
+		line-height: 46px;
+	}
+	@include breakpoint(lg) {
+		font-size: 42px;
+		line-height: 50px;
+	}
+	@include breakpoint(xl) {
+		font-size: 46px;
+		line-height: 50px;
+	}
+}
+.sans--xxl {
+	font-family: $font-family-poppins;
+	font-size: 36px;
+	line-height: 36px;
+
+	@include breakpoint(md) {
+		font-size: 70px;
+		line-height: 70px;
+		p.hero-main-title {
+			margin-bottom: 0 !important;
+		}
+	}
+}
+.hero-sub-title {
+	font-size: 20px;
+	line-height: 26px;
+	@include breakpoint(md) {
+				font-size: 24px;
+				line-height: 30px;
+	}
+}
+.sans--stagger {
+	p {
+		margin-bottom: 10px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	@include breakpoint(md) {
+		p {
+			margin-bottom: 30px;
+	
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+.sans--stagger--xl {
+	p {
+		margin-bottom: 60px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+//
+// === Links ===
+//
+
+.active .link--wave,
+.active .link--wave--blue,
+.active .link--wave--yellow,
+.active .link--wave--white {
+	position: relative;
+
+	&:after {
+		content: '';
+		display: block;
+		height: 4px;
+		width: 100%;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 100%;
+		background: url('../assets/icon-link-stroke.svg');
+		background-repeat: repeat-x;
+		background-size: 17px 4px;
+		background-position: 0%;
+		animation: moveWave 1000ms linear infinite;
+		animation-play-state: paused;
+	}
+
+	&:hover:after,
+	&:focus:after {
+		animation-play-state: running;
+	}
+
+	&:focus {
+		outline: none;
+	}
+}
+
+.active .link--wave--yellow {
+	color: color(yellow);
+
+	&:after {
+		background: url('../assets/icon-link-stroke-yellow.svg');
+		background-repeat: repeat-x;
+		background-size: 17px 4px;
+		background-position: 0%;
+	}
+}
+
+.active .link--wave--white {
+	color: color(white);
+
+	&:after {
+		background: url('../assets/icon-link-stroke-white.svg');
+		background-repeat: repeat-x;
+		background-size: 17px 4px;
+		background-position: 0%;
+	}
+}
+
+.active .color--white .link--wave {
+	color: color(white);
+
+	&:after {
+		background: url('../assets/icon-link-stroke-white.svg');
+		background-repeat: repeat-x;
+		background-size: 17px 4px;
+		background-position: 0%;
+	}
+}
+
+@keyframes moveWave {
+	from {
+		background-position: 0;
+	}
+
+	to { 
+		background-position: -17px 0;
+	}
+ }

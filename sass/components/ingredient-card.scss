@@ -1,0 +1,9 @@
+.ingredient-card {
+	min-height: 160px;
+	padding: $grid-padding-mobile;
+
+	@include breakpoint(md) {
+		min-height: 180px;
+		padding: 20px;
+	}
+}

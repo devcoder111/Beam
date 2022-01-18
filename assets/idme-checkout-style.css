@@ -1,0 +1,26 @@
+.idme-shopify {
+  margin: 10px 0;
+}
+
+.idme-btn-unify,
+.idme-btn-affinity,
+.idme-btn-verification,
+.idme-shopify {
+  vertical-align: middle;
+}
+
+.idme-ajax {
+  z-index: 1;
+  bottom: 75px;
+}
+
+.idme-btn-unify {
+	float: none !important;
+	display: block !important;
+  margin-bottom: 30px !important;
+}
+
+.idme-btn-affinity {
+    font-size: 15px !important;
+	margin-bottom: 12px !important;
+}

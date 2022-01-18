@@ -1,0 +1,153 @@
+<div class="reveal__container active">
+    <div class="hero--navigation pr color--white of--hidden vertical-align-container">
+        <picture class="hero__cover hero__reveal--bg">
+            <source srcset="{{ 'dream-subs-CROPPED.jpeg' | asset_url }}" media="(min-width: 800px)"><img
+                class="hero__cover" alt="Hero image" src="{{ 'dream-subs-CROPPED.jpeg' | asset_url }}">
+        </picture>
+        <div class="full-width push-up">
+            <div class="grid-container contained">
+                <div class="row">
+                    <div class="col c8--sm c5--md c4--xl">
+                        <div class="sans--xxl sans--stagger hero__reveal--staggered pl2">
+                            <p>subscribe</p>
+                            <p style="text-align: right">to</p>
+                            <p style="text-align: center">better</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="mt8 mb8 mt10--md mb10--md">
+    <div class="reveal__container active">
+        <div class="reveal__component__0--fade-fast grid-container contained pt2--md pb2--md">
+            <div class="row align--center">
+                <div class="col c8--md c7--lg">
+                    <div class="rich-text rich-text--content color--blue">
+                        <h1 style="text-align: center">Ready for 20% off
+                            products, free shipping, monthly beam deliveries, and more?</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="pb6 pt1 mb6">
+    <div class="col">
+        <div class="reveal__container active">
+            <div class="reveal__component__1--fade-fast grid-container contained">
+                <div class="row align--center">
+                    <div class="col c9--lg">
+                        <div class="row gutter--vertical align--center">
+
+                            {% for product in collections.subscription-program.products %}
+                            <div class="col c6--sm c4--md">
+                                <div class="b--blue product-card pb1">
+                                    {% include 'product-grid-item' with 'three-per-row' %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Subscriptions Powered by ReCharge Payments: Begin Liquid Code -->
+    <!--
+	Subscription login assistant
+	http://rechargepayments.com: v0.1
+-->
+    <style>
+        div#rc_login {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin: 120px auto 0 auto;
+            max-width: 460px;
+        }
+    </style>
+    <div id="rc_login" class="bg--purple p2 rounded color--white">
+        <h5 class="sans--medium">having trouble logging into your account?</h5>
+
+        <p>
+            <a class="underline pt2 pb1" href="/tools/recurring/get-subscription-access">click here!</a>
+        </p>
+    </div>
+    <!-- Subscriptions Powered by ReCharge Payments: End Liquid Code -->
+
+
+
+    <div class="hidden">
+        <div class="mt8 mb8 mt10--md mb10--md">
+            <div class="grid-container contained pt2--md pb2--md">
+                <div class="row align--center mb6">
+                    <div class="col c8--sm c8--md c8--xl">
+                        <div class="tc">
+                            <h2 class="sans--large fw--600 mb1">here's what you get:</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align--center">
+                    <div class="col c6 c3--md">
+                        <div class="pl4--md pr4--md pl6--xl pr6--xl">
+                            <div class="tc">
+                                <div class="db m--auto promo__value-illo mb4">
+                                    <picture class="full-width"><img class="full-width"
+                                            alt="farm bill compliant facilities"
+                                            src="{{ 'bs-twenty.png' | asset_img_url: 'master' }}">
+                                    </picture>
+                                </div>
+                                <h3 class="sans--medium fw--600 mb1">20% off selected products</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col c6 c3--md">
+                        <div class="pl4--md pr4--md pl6--xl pr6--xl">
+                            <div class="tc">
+                                <div class="db m--auto promo__value-illo mb4">
+                                    <picture class="full-width"><img class="full-width" alt="highest quality extraction"
+                                            src="{{ 'bs-voting.png' | asset_img_url: 'master' }}">
+                                    </picture>
+                                </div>
+                                <h3 class="sans--medium fw--600 mb1">voting on new products</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col c6 c3--md">
+                        <div class="pt4 pt0--md pl4--md pr4--md pl6--xl pr6--xl">
+                            <div class="tc">
+                                <div class="db m--auto promo__value-illo mb4">
+                                    <picture class="full-width"><img class="full-width" alt="phytocompound-rich"
+                                            src="{{ 'bs-testing.png' | asset_img_url: 'master' }}">
+                                    </picture>
+                                </div>
+                                <h3 class="sans--medium fw--600 mb1">testing new products</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col c6 c3--md">
+                        <div class="pt4 pt0--md pl4--md pr4--md pl6--xl pr6--xl">
+                            <div class="tc">
+                                <div class="db m--auto promo__value-illo mb4">
+                                    <picture class="full-width"><img class="full-width" alt="phytocompound-rich"
+                                            src="{{ 'bs-shipping.png' | asset_img_url: 'master' }}">
+                                    </picture>
+                                </div>
+                                <h3 class="sans--medium fw--600 mb1">free shipping</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>

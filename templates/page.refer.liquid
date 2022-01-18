@@ -1,0 +1,60 @@
+<div class="mt6 mt10--md">
+
+<div class="swell-reward-beam">
+  <img src="{{ 'rewards-image-hero-MDW-mobile-new.jpg' | asset_img_url: 'master' }}" class="refer-image hide--md">
+
+  <!-- Referral Section Code Start -->
+    <div class="referral-section {% if customer %}logged-in{% endif %}">
+      <div class="referral-section-holder">
+        <div class="referral-sidebar-image swell-mobile">
+        </div>
+        <div class="swell-referral-holder">
+          <div class="swell-referral">
+            <div class="swell-referral-loader">
+              <div class="lds-dual-ring"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% if customer %}
+      <div class="referral-section-content">
+
+        <div class="referral-content-holder mt3 mt6--md">
+          <div class="referral-content">
+            <a href="/pages/rewards" class="check-reward-balance">Check Rewards Balance</a>
+            <div class="swell-referral-heading">
+              <h2 class="swell-heading">your referrals</h2>
+            </div>
+            <div class="table-classes">
+              <div class="swell-table-responsive">
+                <table class="swell-referral-table">
+                  <thead>
+                    <tr>
+                      <th>Email</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-data">
+                </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="redeem-point">
+              <div class="swell-referral-heading">
+                <h2 class="swell-heading">how do I redeem my points?</h2>
+                <p class="swell-detail">Now, the fun part! Simply redeem any rewards credit you've earned directly in the cart.</p>
+                <ul class="swell-link-list">
+                  <li class="swell-link">
+                    <a href="/" class="shop-btn">shop now</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  <!-- Referral Section Code End -->
+</div>
+</div>

@@ -1,0 +1,507 @@
+$sides: (
+	t : top,
+	b : bottom,
+	l : left,
+	r : right,
+	j : justify,
+);
+
+$alignments: (
+	l : left,
+	r : right,
+	c : center,
+);
+
+@each $color-name, $color-value in $all-colors {
+	.color--#{inspect($color-name)} {
+		color: $color-value;
+	}
+}
+
+@each $color-name, $color-value in $all-colors {
+	.bg--#{inspect($color-name)} {
+		background-color: $color-value;
+	}
+}
+
+@each $color-name, $color-value in $all-colors {
+	.b--#{inspect($color-name)} {
+		border: 1px solid $color-value;
+	}
+}
+
+@each $color-name, $color-value in $all-colors {
+	@each $side-name, $side-direction in $sides {
+		.b#{inspect($side-name)}--#{inspect($color-name)} {
+			border-#{$side-direction}: 1px solid $color-value;
+		}
+	}
+}
+
+@each $alignment-name, $alignment-direction in $alignments {
+	.t#{$alignment-name} {
+		text-align: #{$alignment-direction};
+	}
+}
+
+@each $alignment-name, $alignment-direction in $alignments {
+	@each $breakpoint-name, $breakpoint-size in $breakpoints {
+		@media (min-width: #{$breakpoint-size}) {
+			.t#{$alignment-name}--#{$breakpoint-name} {
+				text-align: #{$alignment-direction};
+			}
+		}
+	}
+}
+
+.db  { display: block !important; }
+.dn  { display: none !important; }
+.di  { display: inline !important; }
+.dib { display: inline-block !important; }
+
+.pr  { position: relative; }
+.pa  { position: absolute; }
+.ps  { position: static; }
+
+.full-width {
+	display: block;
+	width: 100%;
+}
+
+.full-height {
+	height: 100%;
+}
+
+.small-width {
+	display: block;
+	width: 90%;
+	max-width: 520px;
+}
+
+.medium-width {
+	display: block;
+	width: 90%;
+	max-width: 820px;
+}
+
+
+
+
+  
+table.full-width {
+border-collapse: collapse;
+margin: 0 0 50px 0;
+padding: 0;
+width: 100%;
+table-layout: fixed;
+}
+
+table.full-width caption {
+font-size: 1.5em;
+margin: .5em 0 .75em;
+}
+
+table.full-width tr {
+background-color: #f8f8f8;
+border: 1px solid #2F358E;
+padding: .35em;
+}
+
+table.full-width th,
+table.full-width td {
+padding: .625em;
+text-align: left;
+}
+
+table.full-width th {
+font-size: .85em;
+letter-spacing: .1em;
+text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+	table.full-width {
+	border: 0;
+}
+
+table.full-width caption {
+	font-size: 1.3em;
+}
+
+table.full-width thead {
+	border: none;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+table.full-width tr {
+	border-bottom: 3px solid #ddd;
+	display: block;
+	margin-bottom: .625em;
+}
+
+table.full-width td {
+	border-bottom: 1px solid #ddd;
+	display: block;
+	font-size: .8em;
+	text-align: right;
+}
+
+table.full-width td::before {
+	/*
+	* aria-label has no advantage, it won't be read inside a table
+	content: attr(aria-label);
+	*/
+	content: attr(data-label);
+	float: left;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+table.full-width td:last-child {
+	border-bottom: 0;
+}
+}
+
+
+@each $breakpoint-name, $breakpoint-size in $breakpoints {
+	@media (min-width: #{$breakpoint-size}) {
+		.full-width--#{$breakpoint-name} {
+			display: block;
+			width: 100%;
+		}
+	}
+}
+
+
+.contain-width {
+	max-width: 100%;
+	height: auto;
+}
+
+$opacities: (
+	0   : 0,
+	10  : 0.1,
+	20  : 0.2,
+	30  : 0.3,
+	40  : 0.4,
+	50  : 0.5,
+	60  : 0.6,
+	70  : 0.7,
+	80  : 0.8,
+	90  : 0.9,
+	100 : 1,
+);
+
+@each $opacity-name, $opacity-value in $opacities {
+	.o#{inspect($opacity-name)} {
+		opacity: $opacity-value;
+	}
+}
+
+.vam {
+	vertical-align: middle;
+}
+
+.vertical-align-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.cover-background {
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.ws--pre {
+	white-space: pre;
+}
+
+.ws--pre-line {
+	white-space: pre-line;
+}
+
+.ws--nowrap {
+	white-space: nowrap;
+}
+
+.wb--break-word {
+	word-break: break-word;
+}
+
+.pe--none {
+	pointer-events: none;
+}
+
+.pe--auto {
+	pointer-events: auto;
+}
+.pointer {
+	cursor: pointer;;
+}
+.of--hidden {
+	overflow: hidden;
+}
+.m--auto {
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+
+.ml--auto {
+	margin-left: auto !important;
+}
+
+.mr--auto {
+	margin-right: auto !important;
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+.disable-focus-ring {
+	&:focus {
+		outline: none;
+	}
+}
+
+//
+// === Font Weight ===
+//
+.fw--100 {
+	font-weight: 100;
+}
+
+.fw--400 {
+	font-weight: 400;
+}
+
+.fw--600 {
+	font-weight: 600;
+}
+
+.fw--800 {
+	font-weight: 800;
+}
+
+//
+// === Z-Index Utilities ===
+//
+
+.push-up {
+	position: relative;
+	z-index: 1;
+}
+
+//
+// === Pixel Fixes ===
+//
+
+.pixel--pull-top {
+	margin-top: -1px;
+}
+
+.pixel--pull-bottom {
+	margin-bottom: -1px;
+}
+
+.pixel--pull-left {
+	margin-left: -1px;
+}
+
+.pixel--pull-right {
+	margin-right: -1px;
+}
+
+
+//
+// === Transitions ===
+//
+
+.disable-transitions {
+	transition: none !important;
+	* { transition: none !important; }
+}
+
+//
+// === Transforms ===
+//
+
+.flip {
+	transform-origin: center;
+	transform: rotate(180deg);
+}
+
+//
+// === Cursors ===
+//
+
+.cursor--loading {
+	cursor: wait;
+}
+
+.hidden {
+	display: none !important
+}
+
+* {outline: none;}
+
+
+.form-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    border-color: #ccc;
+    color: #666;
+    font-size: 1rem;
+    font-smoothing: antialiased;
+    height: 3rem;
+    padding: .75rem 1rem;
+    transition: border-color .1s ease-out;
+	width: 100%;
+	border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: inherit;
+    margin: 0;
+}
+
+.form-label {
+    color: #666;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: .5rem;
+}
+
+
+#challenge .shopify-challenge__container {
+	margin-top: 160px;
+	margin-bottom: 120px;
+}
+
+#challenge .shopify-challenge__button {
+    border-radius: 10px;
+    height: 46px;
+    line-height: 46px;
+    background-color: #2F358E;
+    color: #FFFFFF;
+    padding: 0 20px;
+    font-family: "Poppins", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    min-width: 160px;
+	transition: 200ms background-color ease-out;
+	text-align: center;
+}
+#challenge .shopify-challenge__button:hover {
+    cursor: pointer;
+    opacity: .8;
+}
+
+#create_customer .errors {
+	margin-bottom: 24px;
+}
+#create_customer .errors a {
+	text-decoration: underline;
+}
+.template-customers-account {padding-top:30px}
+
+b {font-weight: 800 !important;}
+.template-article a {text-decoration: underline;}
+
+@media screen and (max-width: 600px) {
+	.slick-dots {
+		top: auto !important;
+		bottom: 26px;
+		left: 20px !important;
+	}
+
+	.slick-dots li {
+		display: inline;
+		margin-right: 8px;
+	}
+
+	.slick-dots li button {
+		text-indent: -1000px;
+		border-radius: 100%;
+		border: solid rgba(255, 255, 255, 0.781) 1px;
+		background-color: transparent;
+		width: 14px;
+		height: 14px;
+	}
+	.slick-dots li.slick-active button  {
+		background-color: rgba(255, 255, 255, 0.527);
+	}
+
+	.pdp-images.hero__cover {
+		padding-top: 60px !important;
+		top: 60px !important;
+	}
+	.pdp-images.slideshow .slick-slide {
+		height: auto;
+	}
+}
+.af_heading_holder {
+	display: none !important;
+}
+
+#quantity {
+    padding: 0 0 0 5px;
+    width: 35px;
+    border: 1px solid rgb(194, 194, 194);
+    background: #fff;
+  }
+
+
+.template-page span, .template-page p, .template-page h1, .template-page h2, .template-page h3 {
+	text-transform: lowercase !important;
+}
+
+.template-index span, .template-index p, .template-index h1, .template-index h2, .template-index h3 {
+	text-transform: lowercase !important;
+}
+
+.product-tag-overlay {
+	font-size: 11px;
+    font-weight: 600;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background-color: #ffffffcf;
+    padding: 4px 8px 4px 8px;
+    border-radius: 4px;
+	z-index: 1;
+}
+.product-tag-overlay-2 {
+	position: absolute;
+	top: 16px;
+	left: 0;
+	background-color: #2F358E;
+	padding: 6px 10px 4px 8px;
+	border-top-right-radius: 16px;
+	border-bottom-right-radius: 16px;
+	z-index: 1;
+}
+.benefits-grid img {
+	transition: ease-in-out 220ms;
+}
+.benefits-grid .col:hover img {
+	opacity: .7;
+}
+
+a {
+	outline: none !important; 
+}

@@ -1,0 +1,30 @@
+{% comment %}
+Re-use the 'rte' class wherever you output content that was added by a merchant using
+the Rich Text Editor ( 'rte' stands for rich text editor ).
+Style all HTML elements in that content the same way across the board.
+Use the 'rte' class in your CSS to help maintain that consistency.
+Example: the h2 element should have the same size and color in:
+- product descriptions
+- collection descriptions
+- 'page' pages' content
+- blog post
+{% endcomment %}
+
+<style>
+    * {
+        text-transform: lowercase !important;
+    }
+</style>
+
+<div class="mt1 mt5--md pt7 mb0 mb4--md pb0 tc" style="min-height: 360px;">
+
+<h1 class="sans--large pt3 mt2 mb2 mb4--md fw--600 ws--pre-line color--blue">{{ page.title }}</h1>
+<div class="grid-container contained">
+    <div class="row align--center">
+        <div class="col c9--lg">
+  {{ page.content }}
+</div>
+</div>
+</div>
+
+</div>

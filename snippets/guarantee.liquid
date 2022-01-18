@@ -1,0 +1,65 @@
+<div id="detailsModalBtnGuarantee" class="sans--body tc lowercase mt2"><i class="far fa-thumbs-up pr1"></i>30 Day Money Back Guarantee</div>
+
+
+<!-- The Modal -->
+<div id="detailsModalGuarantee" class="details-modal">
+
+  <!-- Modal content -->
+  <div class="details-modal-content pr" style="max-width: 480px;">
+        <span class="spanGuarantee color--blue">&times;</span>
+    <div class="inner">
+        <h1 class="sans--large color--blue fw--600 lowercase pb2" temprop="name">if you don’t love it, we’ll take it back.</h1>
+        <p class="sans--body color--blue fw--400 pb2">we stand behind our satisfaction guarantee. if you’re unhappy with the results, we’ll refund your first order, minus shipping and handling. to request a refund, please send an email to hello@beamtlc.com with your name, order confirmation number, and reason for the request, within 30 days of receiving your shipment.</p>
+    </div>
+  </div>
+
+</div>
+
+<style>
+    .spanGuarantee {
+    float: right;
+    font-size: 58px;
+    position: absolute;
+    top: 24px;
+    font-weight: 200;
+    right: 20px;
+    cursor: pointer;
+    }
+
+    #detailsModalBtnGuarantee:hover {
+        cursor: pointer;
+    }
+</style>
+
+<script>
+
+// Get the modal
+var modalGuarantee = document.getElementById("detailsModalGuarantee");
+
+// Get the button that opens the modal
+var btnGuarantee = document.getElementById("detailsModalBtnGuarantee");
+
+// Get the <span> element that closes the modal
+var spanGuarantee = document.getElementsByClassName("spanGuarantee")[0];
+
+// When the user clicks on the button, open the modal
+btnGuarantee.onclick = function() {
+  modalGuarantee.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+spanGuarantee.onclick = function() {
+  modalGuarantee.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modalGuarantee) {
+    modalGuarantee.style.display = "none";
+  }
+}
+
+  
+  
+    </script>
+  

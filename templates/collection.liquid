@@ -1,0 +1,74 @@
+{% comment %}
+  Important notes about pagination:
+  - Never access collection.products before the opening paginate tag.
+  - Never paginate by more than 50.
+{% endcomment %}
+
+
+{% assign products_per_page = settings.products_per_row | times: settings.number_of_rows %}
+{% assign numbers = 'zero, one, two, three, four, five, six' | split: ',' %}
+{% assign products_per_row = settings.products_per_row | times: 1 %}
+{% assign products_per_row = numbers[products_per_row] | strip | append: '-per-row' %}
+
+{% paginate collection.products by products_per_page %}
+
+
+<img height="1" width="1" style="border-style:none;" alt="" src="https://insight.adsrvr.org/track/pxl/?adv=iv5xfdn&ct=0:kjn7dmf&fmt=3"/>
+
+<div class="pt2 pb6--md pt3--md bg--blue-light">
+</div>
+
+
+
+  <div class="pb6 pt1 pt0--md bg--blue-light">
+
+
+
+  <div class="col pt4">
+    <div class="">
+        <div class="grid-container contained">
+            <div class="row align--center">
+                <div class="col c9--lg">
+
+                    <div class="row gutter--vertical align--center">
+                      {% for product in collection.products %}
+   <div class="col c6--sm c4--md id-{{ product.id }}">
+    <div class="product-card pb1">
+      {% include 'product-grid-item' with products_per_row %}
+    </div>
+    </div>
+    {% else %}
+      <p>There are no products in this view.</p>
+    {% endfor %}
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+
+{% if paginate.pages > 1 %}
+<div class="pagination centered">
+  {{ paginate | default_pagination }}
+</div>
+{% endif %}
+
+{% endpaginate %}
+
+{% comment %}
+  JavaScript for collection sorting.
+{% endcomment %}
+
+
+
+<script>
+jQuery('.sort-by')
+  .val('{{ collection.sort_by | default: collection.default_sort_by }}')
+  .on('change', function() {
+    Shopify.queryParams.sort_by = jQuery(this).val();
+    location.search = jQuery.param(Shopify.queryParams).replace(/\+/g, '%20');
+  });
+</script>

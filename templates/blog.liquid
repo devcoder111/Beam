@@ -1,0 +1,92 @@
+
+
+{% paginate blog.articles by 12 %}
+
+
+<div class="reveal__container active">
+  <div class="pt5 mt4 pr color--white">
+    <img style="max-width: 100%;" alt="Hero image"
+    src="{{ 'beau-the-fixer-1.jpg' | asset_url }}">
+  </div>
+</div>
+
+
+<div class="reveal__container active">
+
+  <div class="mt4 mb4 mt5--md mb6--md">
+    <div class="row align--center mb5">
+      <div class="col c6--md c5--lg tc">
+        <h1 class="sans--large tc mb2 mb3--md color--blue w600">beam blog</h1>
+          <div class="tc rich-text color--black">
+              <p>What’s the ECS system? How does hemp work? What’s hemp? What are terpenes
+                  and what do they do? What’s with all the acronyms? You’ve got questions, we’ve got
+                  answers.</p>
+          </div>
+      </div>
+  </div>
+      <div class="reveal__component__0--fade-fast grid-container">
+  <div class="articles row mt3 mb8 mb5--md">
+  {% for article in blog.articles %}
+  
+  {% comment %}
+    Let's extract a blog image.
+    We will look for an image in the excerpt first, and in the blog post itself second.
+    We will remove the image suffix to grab as big an image as we can.
+  {% endcomment %}
+    
+  {% assign article_has_image = false %}
+  {% assign img_tag = '<' | append: 'img' %}
+  {% if article.excerpt_or_content contains img_tag %}
+    {% assign src = article.excerpt_or_content | split: 'src="' %}
+    {% assign src = src[1] | split: '"' | first %}
+    {% if src %}
+      {% assign article_has_image = true %}
+      {% assign image_src = src | replace: '_small', '' | replace: '_compact', '' | replace: '_medium', '' | replace: '_large', '' | replace: '_grande', '' %}
+    {% endif %}
+  {% endif %}  
+  <div class="col c12 c6--md c6--lg mb2 mb3--md">
+
+  <div class="article{% if forloop.first %} first{% endif %}{% if forloop.last %} last{% endif %} clear ml1 mr1 mb4">
+
+  <a href="{{ article.url }}">
+  <img id="{{ img_id }}"
+  class="article__grid-image lazyload"
+  src="{{ article.image | img_url: '600x360', crop: 'center' }}"
+  data-src="{{ img_url }}"
+  data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+  data-aspectratio="{{ article.image.aspect_ratio }}"
+  data-sizes="auto"
+  alt="">  
+  </a>
+    <h2 class="sans--medium fw--600 mb1">
+      <a href="{{ article.url }}">{{ article.title }}</a>
+    </h2>
+    {% if article.excerpt.size > 0 %}
+    <div class="color--black mb2 mb4--md">{{ article.excerpt }}</div>
+    {% else %}
+    <p class="color--black mb2 mb4--md">{{ article.content | strip_html | truncatewords: 60 }}</p>
+    {% endif %}
+    <a class="dib link--wave--blue sans--small fw--600" href="{{ article.url }}">Read more →</a>
+
+  </div>    
+</div>
+  
+{% endfor %}
+</div>
+</div>
+  
+</div>
+</div>
+</div>
+
+{% if paginate.pages > 1 %}
+<div class="pagination">
+{% comment %}
+  When paginating blog articles, a previous article is actually a newer article, not an older one,
+  because blog articles are shown and paginated in a reversed chronological order.
+  The word 'previous' can be confusing, hence we'll change it.
+{% endcomment %}
+{{ paginate | default_pagination | replace: 'Previous', 'Newer articles' | replace: 'Next', 'Older articles' }}
+{% endif %}
+
+{% endpaginate %}

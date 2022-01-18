@@ -1,0 +1,15 @@
+{% if settings.tealium_enabled %}
+
+<script type="text/javascript">
+  var utag_data = {
+    "country_code"      : "us",        //Suggested
+    "language_code"     : "en",        //Suggested
+    "site_section"      : "Pages",     
+    "tealium_event": "page_view",
+    {% include 'global_udo_vars' %}
+  }
+</script>
+
+{% include 'utag' %}
+
+{% endif %}

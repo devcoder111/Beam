@@ -1,0 +1,893 @@
+{% assign add_to_cart = 'Add to cart' %}
+{% assign sold_out = 'Sold Out' %}
+{% assign unavailable = 'Unavailable' %}
+
+
+<img class="pa wave-overlay show--lg" src="{{ 'wave-overlay.png' | asset_url }}"/>
+<meta itemprop="url" content="{{ shop.url }}{{ product.url }}" />
+<meta itemprop="image" content="{{ product | img_url: 'grande' }}" />
+<div class="modal hidden" id="download-modal"></div>
+<div class="modal--overlay hidden"></div>
+
+<!-- The Modal -->
+<div id="detailsModal" class="details-modal">
+
+  <!-- Modal content -->
+  <div class="details-modal-content" style="max-width: 900px;">
+    <div class="details-header tl color--white orange-header">
+      <h1 class="sans--large fw--300 lowercase" temprop="name">{{product.title}}</h1>
+      <p class="sans--small fw--600">{{ product.type }}</p>
+      <span class="close">&times;</span>
+    </div>
+    <div class="inner">
+            <img style="width: 100%;height: auto;" src="{{ 'elevate-recovery_lightbox-nutrition-facts1.jpg' | asset_url }}" >
+    
+    </div>
+  </div>
+
+</div>
+
+
+<div class="productView container mt4 mt4--md">
+  <div itemscope itemtype="http://schema.org/Product">
+
+    <div data-event-type="product" data-entity-id="{{product.id}}"
+    data-name="{{product.title}}">
+
+
+    <div class="mt0 mt2--md pt4">
+      <form action="/cart/add" data-productid="{{ product.id }}" method="post" class="product-form" id="add-to-cart" enctype="multipart/form-data">
+
+        <div class="container hide--lg">
+
+        <div class="row">
+          <div class="col">
+
+            <div class="mb1">
+              <h1 class="sans--medium-large fw--300 lowercase" temprop="name">{{product.title}}</h1>
+              <p class="sans--small fw--600 color--gray">{{ product.type }}</p>
+            </div>
+
+          </div>
+
+    </div>
+  </div>
+        <div class="row">
+
+
+            <div class="col c5--md c6--lg c7--xl">
+
+              <div class="of--hidden" data-image-gallery>
+      
+                <div class="pdp-images slideshow product-photo-container">
+                  {% for image in product.images%}
+                  {% if forloop.index != 7 %}
+                  {% if image != featured_image %}
+                  {% if image != product.images[0] %}
+                    <div class="slide slide-{{ forloop.index }}">
+                      <img src="{{ image.src | product_img_url: '800x600', crop: 'center' }}" >
+                    </div>
+                  {% endif %}
+                  {% endif %}
+                  {% endif %}
+                  {% endfor %}
+                </div>
+
+              </div>
+
+
+            </div>
+            <div class="col c7--md c6--lg c5--xl">
+                <div class="pl1--md">
+                    <div class="container-mobile">
+                        <div class="">
+                            <div class="">
+                                <div class="pt0 pt3--lg">
+
+                                    <div class="mb1 show--lg">
+                                        <h1 class="sans--large fw--300 lowercase" temprop="name">{{product.title}}</h1>
+                                      
+
+                                        <p class="sans--small fw--600 color--gray">{{ product.type }}</p>
+
+                                        {% include 'stars' %}
+
+                                    </div>
+                                
+
+
+                                        <div class="hero__product-description rich-text" itemprop="description">
+                                                  
+                                            <!-- Tab links -->
+                                                <div class="description-tab">
+                                                    <span class="tablinks fw--600 mr2 sans--body color--blue" id="defaultOpen" onclick="openCity(event, 'Details')">details</span>
+                                                    <span class="tablinks fw--600 sans--body color--blue" onclick="openCity(event, 'HowTo')">how to use</span>
+                                                </div>
+                                                
+                                                <!-- Tab content -->
+                                                <div id="Details" class="tabcontent">
+                                                    {{ product.description }}
+                                                </div>
+                                                
+                                                <div id="HowTo" class="tabcontent">
+                                                    <p>
+                                                      elevate recovery dissolves in water. we recommend mixing one packet in 12-16oz of water. enjoy when your body needs a recovery reboot.                                                     </p>
+                                                </div>
+                                                <div class="mb3">
+                                                <p id="detailsModalBtn" class="mt0 mb4 fw--600 color--blue pointer underline"><span class="hide--md">tap</span><span class="show--md">click</span> for nutrition info</p>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="media__fixed">
+
+
+                                {% if product.available and product.variants.size > 1 %}
+                                {% render 'swatch' for product.options as swatch %}
+                                {% endif %}
+
+                                {% assign hide_default_title = false %}
+                                {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+                                  {% assign hide_default_title = true %}
+                                {% endif %}       
+                                <div id="product-variants" class="select--product-option{% if hide_default_title %} hidden{% endif %}">
+                                  <select id="product-select" class="form-select" name="id" data-productid="{{ product.id }}">
+                                  {% for variant in product.variants %}
+                                    <option class="form-select" {% if variant == product.selected_or_first_available_variant %} selected{% endif %} value="{{ variant.id }}">
+                                    {{ variant.title }} - {{ variant.price | money }}
+                                    </option>
+                                  {% endfor %}
+                                  </select>
+                                </div>  
+<!-- Begin ReCharge code -->
+{% if product.available %}{% include 'subscription-product-dream' %}{% endif %}
+<!-- End ReCharge code -->
+                                <div class="sans--small pb2 hidden">
+                                  <div id="product-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="delta">
+                                    <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+                                    {% if product.available %}
+                                    <link itemprop="availability" href="http://schema.org/InStock" />
+                                    {% else %}
+                                    <link itemprop="availability" href="http://schema.org/OutOfStock" />
+                                    {% endif %}
+                                    <p>
+
+                                      
+                                      {% assign variant = product.selected_or_first_available_variant %}
+                                      {% if product.compare_at_price > product.price %}
+                                      <span class="product-price on-sale fw--600" itemprop="price">{{ variant.price | money }}</span>
+                                      <s class="product-compare-price">{{ variant.compare_at_price | money }}</s>
+                                      {% else %}
+                                      <span class="product-price sans--medium fw--600" itemprop="price">{{ variant.price | money }}</span>
+                                      {% endif %}
+                                    </p>
+                                  </div>
+                               
+                                </div>
+
+                                <div id="backorder" class="hidden tc">
+                                  <p>{{ '%s is back-ordered. We will ship it separately in 10 to 15 days.' | replace: '%s', '<span id="selected-variant"></span>' }}</p>
+                                </div>
+                                  
+                                <div id="product-add" class="form-action">
+                                  <div class="qtydiv">
+                                    <div class="qtybox">
+                                      <span class="btnqty qtyminus icon-minus">-</span>
+                                      <input type="text" id="productQuantity" name="quantity" value="1" min="1" class="quantity-selector quantity-input" readonly="">
+                                      <span class="btnqty qtyplus icon-plus">+</span>
+                                    </div>
+                            </div>
+                                  <input type="submit" name="add" id="add" class="button button--primary" value="{{ add_to_cart | escape }}">
+                                  <div class="mt2 hidden">{% include 'swymSnippet' %}</div>
+                                </div>
+                                {% include 'guarantee' %}
+
+                            </div>
+                            
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+  </div>
+</form>
+</div>
+
+
+<div class="mt3">
+  
+  </div>
+  
+
+<div class="mt7 mt3--md mb4 mb8--md">
+  <div class="container pt2 pb2--md">
+
+  <div class="row tc">
+    <div class="col c4--md mb2">
+      <img class="" style="max-width: 80px;" src="{{ 'recovery-electrolytes.png' | asset_url }}"/>
+      <p class="sans--medium pt1--md fw--600">electrolyte <br/>blend</p>
+    </div>
+    <div class="col c4--md mb2">
+        <img class="" style="max-width: 80px;" src="{{ 'recovery-BCAA.png' | asset_url }}"/>
+        <p class="sans--medium pt1--md fw--600">branched-chain<br>amino acids (BCAA)</p>
+      </div>
+      <div class="col c4--md mb2">
+        <img class="" style="max-width: 80px;" src="{{ 'recovery-collagenpeptides.png' | asset_url }}"/>
+        <p class="sans--medium pt1--md fw--600">non-gmo<br>collagen peptides</p>
+      </div>
+
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="mb6 mt2 pt4 pb4 pt6--md pb8--md tc bg--blue-light">
+  <h2 class="fw--600 sans--large mb4 color--blue pr1 pl1">explore other elevate hydration powders</h2>
+
+        <div class="grid-container contained">
+            <div class="row align--center">
+                <div class="col c9--lg">
+                    <div class="row gutter--vertical align--center">
+
+                              {% for product in collections.hydration-powders.products %}
+                              <div class="col c6--sm c4--md hide-{{product.handle}}">
+                                  <div class="product-card pb1">
+                                      {% include 'product-grid-hydration' with 'three-per-row' %}
+                                  </div>
+                              </div>
+                              {% endfor %}
+
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<style>
+  .hide-collagen-hydration-powder{display: none !important;}
+  .hide-elevate-variety-pack {display: none !important;}
+
+</style>
+
+<div class="mt7 mb4 mt8--md mb10--md">
+  <div class="container pt2--md pb2--md">
+    <div class="row align--center">
+        <div class="col c11--md c10--lg">
+            <img style="max-width: 40px;text-align:center;margin-right: auto;margin-left: auto;display:block" class="mb5" src="{{ 'drop.png' | asset_url }}">
+
+    <h2 class="fw--600 sans--large mb3 color--blue tc mb6--md">the electrolyte pick-me-up<br class="show--md"/> you can take anywhere </h2>
+
+      <div class="row">
+
+          <div class="col c4--md c4--lg pt1--md mb1 mb3--md tc tl--md">
+                <div class="description-tab">
+                    <div class="sans--medium fw--600 valueprops mb1" id="valuepropsDefaultOpen" onclick="openVP(event, 'vpHydration')">why hydration?<span class="link--wave db"></span></div>
+                    <div class="sans--medium fw--600 valueprops mb1" onclick="openVP(event, 'vpPower')">a recharging recovery supplement <span class="link--wave db"></span></div>
+                    <div class="sans--medium fw--600 valueprops mb1" onclick="openVP(event, 'vpSidekick')">mindfully-sourced<br> ingredients <span class="link--wave db"></span></div>
+                </div>
+              </div>
+              <div class="col c1 hide--md"></div>
+          <div class="col c10 c8--md c8--lg mb2 mb0--md">
+            <div id="vpHydration" class="valuepropscontent">
+                <p>
+                    believe it or not, 75% of americans are chronically dehydrated. and while water is essential, H2O alone won’t always do the trick. that’s why we created clean electrolyte powders that deliver effective and fast hydration thanks to supercharged and super-hydrating ingredients like coconut water and himalyan sea salt. so whether you’re looking for everyday balance, energy or recovery support, our powders are here to give your body the hydration it craves. 
+                </p>
+            </div>
+            <div id="vpPower" class="valuepropscontent">
+                <p>
+                  made for active recovery, this hydrating powder brings your body non-gmo collagen peptides to support healthy joints, skin and hair*. at the same time, branched-chain amino acids restore tired muscles and help your body fight fatigue*. these supportive compounds, alongside our signature electrolyte stack, will leave you feeling like new.  
+                  </p>
+            </div>
+            <div id="vpSidekick" class="valuepropscontent">
+                <p>
+                    our electrolyte powders are not just a hydration solution, but elevated supplements to support hydration for each moment of your day. that’s why our ingredients are sourced responsibly and you’ll never find any added sugars, GMOs, or artificial sweeteners.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+      </div>
+  </div>
+</div>
+</div>
+
+
+<div class="pt6 pb4 pb10--md" style="background-color: #E6F1FF;">
+    <div class="row align--center">
+        <div class="col c6--md c8--lg">
+    <img style="max-width: 40px;text-align:center;margin-right: auto;margin-left: auto;display:block" class="mb5" src="{{ 'bolt.png' | asset_url }}">
+
+    <h2 class="fw--600 sans--large mb3 color--blue tc pr3 pl3">meet the essential electrolytes and supportive ingredients behind energy  
+    </h2>
+</div>  
+</div>  
+    <div class="container">    
+        <div class="row align--center">
+       
+            <div class="col c6--md">
+                <div class="ingredients-accordion">
+                    <div class="ingredients-item">
+                      <a href="#acc1Desk" class="acc-heading-ingredients sans--medium mt1 mb1 disable-focus-ring">coconut water <i class="fa fa-angle-down fr" aria-hidden="true"></i></a>
+                  
+                      <section id="acc1Desk" class="acc-content-ingredients">
+                        <div class="inner">
+                            a true hydration hero, coconut water is fortified with natural electrolytes like potassium, sodium and magnesium. it’s also the all-natural source of the single gram of sugar you’ll find in our powders. 
+                        </div><!-- / .inner -->
+                      </section>
+                    </div><!-- / .item -->
+                    <div class="ingredients-item">
+                        <a href="#acc2Desk" class="acc-heading-ingredients sans--medium mt1 mb1 disable-focus-ring">himalayan salt <i class="fa fa-angle-down fr" aria-hidden="true"></i></a>
+                    
+                        <section id="acc2Desk" class="acc-content-ingredients">
+                          <div class="inner">
+                            loaded with minerals, himalayan salt provides the body with a much-needed sodium boost. plus, himalayan salt is completely free of impurities like microplastics.
+                          </div><!-- / .inner -->
+                        </section>
+                      </div><!-- / .item --> 
+                      <div class="ingredients-item">
+                        <a href="#acc3Desk" class="acc-heading-ingredients sans--medium mt1 mb1 disable-focus-ring">potassium bicarbonate <i class="fa fa-angle-down fr" aria-hidden="true"></i></a>
+                    
+                        <section id="acc3Desk" class="acc-content-ingredients">
+                          <div class="inner">
+                            despite its fancy name, potassium bicarbonate is simply the water-soluble cousin of the popular electrolyte potassium. it plays an important role in maintaining the health of bones and muscles, and can increase the alkalinity compared to other potassium sources.
+                          </div><!-- / .inner -->
+                        </section>
+                      </div><!-- / .item --> 
+                      <div class="ingredients-item">
+                        <a href="#acc4Desk" class="acc-heading-ingredients sans--medium mt1 mb1 disable-focus-ring">magnesium glycinate <i class="fa fa-angle-down fr" aria-hidden="true"></i></a>
+                    
+                        <section id="acc4Desk" class="acc-content-ingredients">
+                          <div class="inner">
+                            shown to have a calming effect on the brain, magnesium glycinate is the water-friendly form of one of our favorite compounds, magnesium. It’s also a critical electrolyte to replenish in your body
+                          </div><!-- / .inner -->
+                        </section>
+                      </div><!-- / .item --> 
+                 
+                </div>
+
+
+
+            </div>
+
+            <div class="col c6--md">
+              <div class="ingredients-item">
+                <a href="#acc5Desk" class="acc-heading-ingredients sans--medium mt1 mb1 disable-focus-ring">sodium hyaluronate <i class="fa fa-angle-down fr" aria-hidden="true"></i></a>
+            
+                <section id="acc5Desk" class="acc-content-ingredients">
+                  <div class="inner">
+                    thanks to its water-soluble nature, sodium hyaluronate aids in super-charged hydration so you can feel your best. It’s lower molecular weight makes for better absorption and electrolyte replenishment.
+                  </div><!-- / .inner -->
+                </section>
+              </div><!-- / .item -->   
+                <div class="ingredients-item">
+                  
+                    <a href="#acc6Desk" class="acc-heading-ingredients sans--medium mt1 mb1 disable-focus-ring">zinc citrate <i class="fa fa-angle-down fr" aria-hidden="true"></i></a>
+                
+                    <section id="acc6Desk" class="acc-content-ingredients">
+                      <div class="inner">
+                        an electrolyte all-star, zinc citrate plays a major role in improving the body’s metabolism and immune response*.
+                      </div><!-- / .inner -->
+                    </section>
+                  </div><!-- / .item -->
+                  <div class="ingredients-item">
+                      <a href="#acc7Desk" class="acc-heading-ingredients sans--medium mt1 mb1 disable-focus-ring">non-gmo collagen peptides<i class="fa fa-angle-down fr" aria-hidden="true"></i></a>
+                  
+                      <section id="acc7Desk" class="acc-content-ingredients">
+                        <div class="inner">
+                          unlike other collagen products, these peptides are hydrolyzed, giving your body the best chance of absorption to reap all the benefits including healthier joints, skin and hair.* non gmo mean you’re getting the cleanest source possible
+                        </div><!-- / .inner -->
+                      </section>
+                    </div><!-- / .item --> 
+
+                    <div class="ingredients-item">
+                        <a href="#acc8Desk" class="acc-heading-ingredients sans--medium mt1 mb1 disable-focus-ring">branched-chain amino acids (BCAA) <i class="fa fa-angle-down fr" aria-hidden="true"></i></a>
+                    
+                        <section id="acc8Desk" class="acc-content-ingredients">
+                          <div class="inner">
+                            consisting of three essential acids your body doesn't produce, BCAA’s are integral to muscle building and muscle repair. they’ve also been shown to reduce fatigue so you can feel less tired and more like yourself again.* 
+                          </div><!-- / .inner -->
+                        </section>
+                      </div><!-- / .item --> 
+
+        
+            </div>
+        </div>  
+
+    </div>
+</div>
+
+
+<div class="pt6 pb6 pt8--md pb10--md">
+    <img style="max-width: 40px;text-align:center;margin-right: auto;margin-left: auto;display:block" class="mb5" src="{{ 'up-arrows.png' | asset_url }}">
+
+    <h2 class="fw--600 sans--large mb2 color--blue tc pr1 pl1">recovery levels up any routine.<br>here’s how:</h2>
+  
+    <div class="container">    
+        <div class="row">
+            <div class="col c1"></div>  
+            <div class="col c3--md show--md">
+                <img style="max-height: 360px;" src="{{ 'Recovery-solo.png' | asset_url }}">
+            </div>
+
+            <div class="col c11 mt2 mt0--md c7--md">
+                <ul class="elevate-list">
+                    <li>you’re looking for athletic recovery support</li>
+                    <li>you need a hydrating, post-workout supplement</li>
+                    <li>you’re looking to restore and repair sore, tired muscles</li>
+                    <li>you want to fortify your immune system </li>
+                    <li>you’re mindful of diet and don’t want to worry about any added sugars</li>
+                </ul>
+            </div>
+            <div class="col c1 show--md"></div>  
+
+        </div>  
+    </div>
+</div>
+
+<div class="pt6 pb2 pt10--md pb5--md" style="background-color: #E6F1FF;">
+  <h2 class="fw--600 sans--large mb2 mb0--md color--blue tc pr1 pl1">you’ve got questions,<br /> we’ve got answers</h2>
+
+  <div class="container">    
+    <div class="row align--center">
+     
+      <div class="col c11 c9--md c8--lg mb4 pb3 tc tl--md">
+        <div class="accordion">
+    <div class="item">
+      <a href="#faq1" class="acc-heading-desktop sans--medium mt1 mb1 disable-focus-ring">how do i take this product? <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+  
+      <section id="faq1" class="acc-content-desktop">
+        <div class="inner">
+            we recommend mixing recovery in 12-16oz of water.
+        </div><!-- / .inner -->
+      </section>
+    </div><!-- / .item -->
+  
+    <div class="item">
+      <a href="#faq2" class="acc-heading-desktop sans--medium mt1 mb1 disable-focus-ring">when do i take this product? <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+  
+      <section id="faq2" class="acc-content-desktop">
+        <div class="inner">
+          while it can be enjoyed anytime throughout the day, we recommend sipping post-workout for added recovery support.
+            </div><!-- / .inner -->
+      </section>
+    </div><!-- / .item -->
+    <div class="item">
+      <a href="#faq3" class="acc-heading-desktop sans--medium mt1 mb1 disable-focus-ring">what does recovery taste like? <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+  
+      <section id="faq3" class="acc-content-desktop">
+        <div class="inner">
+          recovery tastes like slightly sweet lemon.
+        </div><!-- / .inner -->
+      </section>
+    </div><!-- / .item -->
+    <div class="item">
+      <a href="#faq4" class="acc-heading-desktop sans--medium mt1 mb1 disable-focus-ring">how is elevate different from other hydration products? <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+  
+      <section id="faq4" class="acc-content-desktop">
+        <div class="inner">
+            unlike other hydrating powders, elevate goes above and beyond. not only will these powders deliver the hydrating properties of our unique ingredient stack, but they can target specific needs: digestive balance, enhanced energy and supportive recovery. 
+        </div><!-- / .inner -->
+      </section>
+    </div><!-- / .item -->
+    <div class="item">
+        <a href="#faq5" class="acc-heading-desktop sans--medium mt1 mb1 disable-focus-ring">does it contain hemp? <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+    
+        <section id="faq5" class="acc-content-desktop">
+          <div class="inner">
+            nope. none of our hydration powders contain hemp, just a blend of nourishing, hydrating ingredients. 
+          </div><!-- / .inner -->
+        </section>
+      </div><!-- / .item -->
+      <div class="item">
+        <a href="#faq6" class="acc-heading-desktop sans--medium mt1 mb1 disable-focus-ring">is this product vegan? <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+    
+        <section id="faq6" class="acc-content-desktop">
+          <div class="inner">
+            no, we use hydrolyzed collagen peptides from non-gmo, grass-fed bovine. 
+          </div><!-- / .inner -->
+        </section>
+      </div><!-- / .item -->
+
+  </div><!-- / .accordion -->
+<div class="mt3 tc">
+  <a href="/pages/support" class="mr2 button--wave-primary-bottom">visit faq’s</a>
+  <a href="" class="hidden mr2 button--wave-primary-bottom">need help?</a>
+</div>
+
+</div>
+
+
+    </div>
+
+
+    </div>
+
+</div>
+
+
+<div class="pt8 pb8">
+  <div class="quote-container lowercase tc">
+      <h3 class="sans--medium fw--200 color--blue">As an endurance runner, proper hydration is something I’m constantly working on. beam's elevate line meets my body’s hydration needs throughout the day. I drink Elevate Balance first thing in the morning, Elevate energy while working out and Elevate Recovery post workout! I've tried a lot of hydration powders, and I love how clean and effective beam’s elevate is.</h3>
+      <div class="sans--medium fw--600 color--blue mt3">–Dominique Scott, Olympic track athlete</div>
+  </div>
+</div>
+
+
+<style>
+  .swatch .header {display: none !important;}
+</style>
+<div class="yotpo yotpo-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" data-description="{{ product.description | escape }}"></div>
+
+{% include 'klaviyo' %}
+    
+        
+    {% comment %}
+      Adding support for product options. See here for details:  
+      http://docs.shopify.com/support/your-website/themes/can-i-make-my-theme-use-products-with-multiple-options
+    {% endcomment %}
+    <script src="https://widget.sezzle.com/v1/javascript/price-widget?uuid=e60e7d5f-8b5c-4c2c-ae89-8f6f3099dbba"></script>
+
+    
+    <script>
+
+
+function openVP(evt, cityName) {
+  // Declare all variables
+  var i, valuepropscontent, valueprops;
+
+  valuepropscontent = document.getElementsByClassName("valuepropscontent");
+  for (i = 0; i < valuepropscontent.length; i++) {
+    valuepropscontent[i].style.display = "none";
+  }
+
+  valueprops = document.getElementsByClassName("valueprops");
+  for (i = 0; i < valueprops.length; i++) {
+    valueprops[i].className = valueprops[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+document.getElementById("valuepropsDefaultOpen").click();
+
+
+function openCity(evt, cityName) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+document.getElementById("defaultOpen").click();
+
+
+
+let accTitleIngredients = document.getElementsByClassName("acc-heading-ingredients");
+		let accContentIngredients = document.getElementsByClassName("acc-content-ingredients");
+		let singleModeIngredients = true;
+		
+		for( let j=0; j<accContentIngredients.length; j++ ){
+			let realHeightIngredients = accContentIngredients[j].offsetHeight;
+			accContentIngredients[j].setAttribute("data-height", realHeightIngredients + "px");
+			accContentIngredients[j].style.height = 0;
+		}
+		
+		for( let i=0; i<accTitleIngredients.length; i++ ){
+			accTitleIngredients[i].onclick = function(){
+				let openedAccIngredients = this.getAttribute('href').replace('#', '');
+
+				if( this.classList.contains("active") ){
+					this.classList.remove("active");
+					document.getElementById(openedAccIngredients).style.height = 0;
+					
+					return false;
+				}
+				
+				if( singleModeIngredients ){						
+					for(let k=0; k<accTitleIngredients.length; k++) {
+						accTitleIngredients[k].classList.remove("active");
+					}
+
+					for(let j=0; j<accContentIngredients.length; j++) {
+						accContentIngredients[j].style.height = 0;
+					}
+				}
+				
+				this.classList.add("active");
+				
+				document.getElementById(openedAccIngredients).style.height = accContentIngredients[i].getAttribute("data-height");
+				
+				return false;
+			}
+    }
+    
+
+
+
+let accTitleDesktop = document.getElementsByClassName("acc-heading-desktop");
+		let accContentDesktop = document.getElementsByClassName("acc-content-desktop");
+		let singleModeDesktop = true;
+		
+		for( let j=0; j<accContentDesktop.length; j++ ){
+			let realHeightDesktop = accContentDesktop[j].offsetHeight;
+			accContentDesktop[j].setAttribute("data-height", realHeightDesktop + "px");
+			accContentDesktop[j].style.height = 0;
+		}
+		
+		for( let i=0; i<accTitleDesktop.length; i++ ){
+			accTitleDesktop[i].onclick = function(){
+				let openedAccDesktop = this.getAttribute('href').replace('#', '');
+
+				if( this.classList.contains("active") ){
+					this.classList.remove("active");
+					document.getElementById(openedAccDesktop).style.height = 0;
+					
+					return false;
+				}
+				
+				if( singleModeDesktop ){						
+					for(let k=0; k<accTitleDesktop.length; k++) {
+						accTitleDesktop[k].classList.remove("active");
+					}
+
+					for(let j=0; j<accContentDesktop.length; j++) {
+						accContentDesktop[j].style.height = 0;
+					}
+				}
+				
+				this.classList.add("active");
+				
+				document.getElementById(openedAccDesktop).style.height = accContentDesktop[i].getAttribute("data-height");
+				
+				return false;
+			}
+    }
+    
+
+    let accTitle = document.getElementsByClassName("acc-heading");
+		let accContent = document.getElementsByClassName("acc-content");
+		let singleMode = true;
+		
+		for( let j=0; j<accContent.length; j++ ){
+			let realHeight = accContent[j].offsetHeight;
+			accContent[j].setAttribute("data-height", realHeight + "px");
+			accContent[j].style.height = 0;
+		}
+		
+		for( let i=0; i<accTitle.length; i++ ){
+			accTitle[i].onclick = function(){
+				let openedAcc = this.getAttribute('href').replace('#', '');
+
+				if( this.classList.contains("active") ){
+					this.classList.remove("active");
+					document.getElementById(openedAcc).style.height = 0;
+					
+					return false;
+				}
+				
+				if( singleMode ){						
+					for(let k=0; k<accTitle.length; k++) {
+						accTitle[k].classList.remove("active");
+					}
+
+					for(let j=0; j<accContent.length; j++) {
+						accContent[j].style.height = 0;
+					}
+				}
+				
+				this.classList.add("active");
+				
+				document.getElementById(openedAcc).style.height = accContent[i].getAttribute("data-height");
+				
+				return false;
+			}
+    }
+    
+
+
+$('.qtybox .btnqty').on('click', function(){
+          var qty = parseInt($(this).parent('.qtybox').find('.quantity-input').val());
+          if($(this).hasClass('qtyplus')) {
+            qty++;
+          }else {
+            if(qty > 1) {
+              qty--;
+            }
+          }
+          qty = (isNaN(qty))?1:qty;
+          $(this).parent('.qtybox').find('.quantity-input').val(qty);
+        }); 
+
+        $('.pdp-images.slideshow').slick({
+      autoplay: true,
+      slidesToShow: 1,
+       slidesToScroll: 1,
+      fade: true,
+      useTransform: true,
+      arrows: true,
+      dots: true,
+      autoplaySpeed: 5000,
+      adaptiveHeight: false,
+      pauseOnHover: true,
+      customPaging: function(slick,index) {
+                        var targetImage = slick.$slides.eq(index).find('img').attr('src');
+                        return '<img src=" ' + targetImage + ' "/>';
+                    },
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            fade: false
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            fade: false,
+            arrows: false,
+            dots: true,
+            customPaging: function (slider, i) {
+          return $('<button type="button" />').text(i + 1);
+        },
+            lazyLoad: $(this).find('[data-lazy]').length > 0 ? 'progressive' : null
+          }
+        }
+      ]
+    });
+        
+        
+    
+    var selectCallback = function(variant, selector) {
+    
+  
+  // BEGIN SWATCHES
+  if (variant) {
+    var form = jQuery('#' + selector.domIdPrefix).closest('form');
+    for (var i=0,length=variant.options.length; i<length; i++) {
+      var radioButton = form.find('.swatch[data-option-index="' + i + '"] :radio[value="' + variant.options[i] +'"]');
+      if (radioButton.size()) {
+        radioButton.get(0).checked = true;
+      }
+    }
+  }
+  // END SWATCHES
+  
+  
+      if (variant) {
+        // Swap image.
+        if (variant.featured_image) {
+          var newImage = variant.featured_image; // New image object.
+          var mainImageDomEl = jQuery('.product-photo-container img')[0]; // DOM element of main image we need to swap.
+          Shopify.Image.switchImage(newImage, mainImageDomEl, switchImage); // Define switchImage (the callback) in your theme's JavaScript file.
+        }
+        
+        // Selected a valid variant that is available.
+        if (variant.available) {
+              
+          // Enabling add to cart button.
+          jQuery('#add').removeClass('disabled').prop('disabled', false).val({{ add_to_cart | json }});
+        
+          // If item is backordered yet can still be ordered, we'll show special message.
+          if (variant.inventory_management && variant.inventory_quantity <= 0) {
+            jQuery('#selected-variant').html({{ product.title | json }}{% unless hide_default_title %} + ' - ' + variant.title{% endunless %});
+            jQuery('#backorder').removeClass("hidden");
+          } else {
+            jQuery('#backorder').addClass("hidden");
+          }
+          
+        } else {
+          // Variant is sold out.
+          jQuery('#backorder').addClass('hidden');
+          jQuery('#add').val({{ sold_out | json }}).addClass('disabled').prop('disabled', true);       
+        }
+        
+        // Whether the variant is in stock or not, we can update the price and compare at price.
+        if ( variant.compare_at_price > variant.price ) {
+          jQuery('#product-price').html('<span class="product-price sans--medium on-sale fw--600">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") +'</span>'+'&nbsp;<s class="product-compare-price">'+Shopify.formatMoney(variant.compare_at_price, "{{ shop.money_format }}")+ '</s>');
+          jQuery('#mobileProductPrice').html('<span class="topProductPrice on-sale">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") +'</span>'+'&nbsp;<s class="product-compare-price">'+Shopify.formatMoney(variant.compare_at_price, "{{ shop.money_format }}")+ '</s>');
+
+        } else {
+          jQuery('#mobileProductPrice').html('<span class="topProductPrice fw--600">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") + '</span>' );
+          jQuery('#product-price').html('<span class="product-price sans--medium fw--600">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") + '</span>' );
+        }         
+      } else {
+        // variant doesn't exist.
+        jQuery('#product-price, mobileProductPrice').empty();
+        jQuery('#backorder').addClass('hidden');
+        jQuery('#add').val({{ unavailable | json }}).addClass('disabled').prop('disabled', true);
+      }      
+    
+     
+    };
+      
+    jQuery(function($) {
+    
+      new Shopify.OptionSelectors('product-select', { product: {{ product | json }}, onVariantSelected: selectCallback, enableHistoryState: true });
+      
+      // Add label if only one product option and it isn't 'Title'.
+      {% if product.options.size == 1 and product.options.first != 'Title' %}
+        $('.selector-wrapper:eq(0)').prepend('<label class="form-label form-label--alternate form-label--inlineSmall">{{ product.options.first }}</label>');
+      {% endif %}
+    
+    });
+    
+    Shopify.Image.preload({{ product.images | json }}, 'grande');
+    Shopify.Image.preload({{ product.images | json }}, '1024x1024');
+    
+  
+  
+  jQuery(function() {
+    jQuery('.swatch :radio').change(function() {
+      var optionIndex = jQuery(this).closest('.swatch').attr('data-option-index');
+      var optionValue = jQuery(this).val();
+      jQuery(this)
+        .closest('form')
+        .find('.single-option-selector')
+        .eq(optionIndex)
+        .val(optionValue)
+        .trigger('change');
+    });
+  });
+  
+  // Get the modal
+var modal = document.getElementById("detailsModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("detailsModalBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+  
+    </script>
+  
+  

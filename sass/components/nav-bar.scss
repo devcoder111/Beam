@@ -1,0 +1,10 @@
+.nav-bar {
+	min-height: $button-height-mobile;
+	background: color(white);
+	border-top: 1px solid currentColor;
+	border-bottom: 1px solid currentColor;
+	
+	@include breakpoint(md) {
+		min-height: $button-height-desktop;
+	}
+}

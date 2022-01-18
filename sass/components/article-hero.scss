@@ -1,0 +1,10 @@
+.article__product-image {
+	min-height: 60vh;
+	border-bottom: 1px solid color(blue);
+
+	@include breakpoint(md) {
+		border-left: 1px solid color(blue);
+		border-bottom: none;
+		min-height: 100vh;
+	}
+}

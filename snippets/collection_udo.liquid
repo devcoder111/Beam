@@ -1,0 +1,22 @@
+{% if settings.tealium_enabled %}
+
+<script type="text/javascript">
+  var utag_data = {
+    "site_section": "Shop All",
+    "tealium_event": "page_view",
+    {% include 'global_udo_vars' %}
+    "page_type": "collection",
+    "tealium_event"  : "product_list_view",      //Required
+    "category_id" : "{{ collection.id }}",                   //Required
+    "category_name" : "{{ collection.handle }}",          //Required
+    "page_name"                    : "Shop All",              //Required
+    "product_on_page"              : [{% for product in collection.products %}"{{ product.title }}",{% endfor %}]  //Required
+  }
+</script>
+
+{% include 'utag' %}
+
+{% endif %}
+
+
+

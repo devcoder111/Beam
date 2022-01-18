@@ -1,0 +1,35 @@
+<!-- /templates/customers/activate_account.liquid -->
+
+<div class="small-width m--auto login p4 pt10--md clearfix mt8 mb8 pb3 mt10--md mb10--md">
+
+<div class="grid">
+    <div class="grid__item large--one-third push--large--one-third text-center">
+  
+        <h1 class="tc sans--large fw--600 mb2 mb3--md ws--pre-line m--auto">{{ 'customer.activate_account.title' | t }}</h1>
+      <p class="pt1 pb1">{{ 'customer.activate_account.subtext' | t }}</p>
+  
+      {% comment %}
+        This form must use 'activate_customer_password'
+      {% endcomment %}
+      <div class="form-vertical">
+        {% form 'activate_customer_password' %}
+  
+          {{ form.errors | default_errors }}
+          <div class="form-field">
+            <p class="pb1">
+          <label for="CustomerPassword" class="form-label hidden-label">{{ 'customer.activate_account.password' | t }}</label>
+          <input type="password" value="" name="customer[password]" id="CustomerPassword" class="form-input input-full" placeholder="{{ 'customer.activate_account.password' | t }}">
+  </p>
+          <label for="CustomerPasswordConfirmation" class="form-label hidden-label">{{ 'customer.activate_account.password_confirm' | t }}</label>
+          <input type="password" value="" name="customer[password_confirmation]" id="CustomerPasswordConfirmation" class="form-input input-full" placeholder="{{ 'customer.activate_account.password_confirm' | t }}">
+          <p class="pt2 pb1">
+          <input type="submit" class="button button--primary rounded" value="{{ 'customer.activate_account.submit' | t }}">
+          <input type="submit" class="pl2 btn--secondary btn--full" name="decline" value="{{ 'customer.activate_account.cancel' | t }}">
+          </p>
+        </div>
+        {% endform %}
+      </div>
+  
+    </div>
+  </div>
+</div>

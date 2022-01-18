@@ -1,0 +1,338 @@
+<!-- Dream Powder Product ID for reviews at the bottom of the page -->
+{% assign product_id = 4528614113335 %}
+
+<div class="header-lp bg--blue p1 p2--md pl3--md pr3--md">
+    <div class="lp-container tc">
+
+    <a title="beam" href="/">
+        <img class="show--md" style="margin-top: 4px; height: 32px;" width="auto" src="{{ 'beam-logo-white.png' | asset_url }}">
+        <img class="hide--md" style="margin-top: 4px; height: 20px;" width="auto" src="{{ 'beam-logo-white.png' | asset_url }}">
+    </a>
+
+    </div>
+</div>
+
+<div class="modal hidden" id="download-modal"></div>
+<div class="modal--overlay hidden"></div>
+<!-- The Modal -->
+<div id="detailsModal" class="details-modal">
+
+    <!-- Modal content -->
+    <div class="details-modal-content" style="max-width: 700px;">
+      <div class="details-header tl color--white purple-header">
+        <h1 class="sans--large fw--300 lowercase" temprop="name">{{product.title}}</h1>
+        <p class="sans--small fw--600">{{ product.type }}</p>
+        <span class="close">&times;</span>
+      </div>
+      <div class="inner">
+              <img style="width: 100%;height: auto;" src="{{ 'hemp-nutritionfacts-dream-powder-1.jpg' | asset_url }}" >
+      
+      </div>
+    </div>
+  
+  </div>
+  
+
+<div class="hide--md">
+    <img src="{{ 'MB-mobile-image.jpg' | asset_url }}" style="max-width: 100%;" alt="dream hero image">
+</div>
+
+<div class="grid-container contained">
+    <!-- Section 1 -->
+    <div class="row mt1 mt3--md pt1--md align--center">
+
+        <div class="col c4--md c4--lg pb2">
+                <h2 class="pt2 pt6--md sans--large fw--600 color--blue">
+                    wake up with <strong>morning brew</strong>. wind down with dream.
+                </h2>
+                {% include 'stars' %}
+                <p class="sans--medium color--black fw--400 pt2 pt3--md">
+                    try <span class="color--blue fw--600">three free nights</span>
+                    of the best-selling dream powder.</p>
+                    <p class="sans--body color--black fw--400 pt2">
+                        dream is a delicious take on healthy hot chocolate with sleep-enhancing vitamins, minerals, nano hemp and more.
+                    </p>
+
+                    <div class="fw--600 bg--light-gray color--blue p3 tc mt3 sans--medium">this pormotion has ended. check out the dream starter pack!</div>
+                <div class="pt1 pt1--md pt1--lg pt3--xl pb3 pb0--md">
+ 
+                <a class="dib custom-button--wave-primary-top link--opacity pill"
+                style="color: #fff !important; line-height: 2; background-color: #2f358e !important"
+                title="redeem offer"
+                href="https://beamtlc.com/pages/morningbrewstarter">
+                    dream starter pack
+                    <span>
+                        →
+                    </span>
+                </a>
+            </div>
+
+        </div>
+        <div class="col c1 show--md"></div>
+        <div class="col c5--md c5--lg pb4 pr show--md">
+            <img src="{{ 'dream-subs-hero.jpg' | asset_url }}" style="max-width: 100%;border-radius: 20px;" alt="dream hero image">
+        </div>
+    </div>
+</div>
+    <!-- Section 2 -->
+    <div class="pt1 pb1 tc mb1 mb2--md color--white" style="background-color: #8c8cf0;">
+        <div class="marquee">
+            <div class="track">
+              <div class="content">
+                "beam does exactly what you want, magic." –danica patrick  <span class="pl4 pr4">•</span>   "i fell in love with it [beam]. i use it every day.” -baker mayfield  <span class="pl4 pr4">•</span>   "beam is going to be the nike of the wellness world." –billy horschel<span class="pl4 pr4">•</span> 
+                     "beam does exactly what you want, magic." –danica patrick  <span class="pl4 pr4">•</span>   "i fell in love with it [beam]. i use it every day.” -baker mayfield  <span class="pl4 pr4">•</span>   "beam is going to be the nike of the wellness world." –billy horschel<span class="pl4 pr4">•</span> 
+                     "beam does exactly what you want, magic." –danica patrick  <span class="pl4 pr4">•</span>   "i fell in love with it [beam]. i use it every day.” -baker mayfield  <span class="pl4 pr4">•</span>   "beam is going to be the nike of the wellness world." –billy horschel<span class="pl4 pr4">•</span> 
+                     "beam does exactly what you want, magic." –danica patrick  <span class="pl4 pr4">•</span>   "i fell in love with it [beam]. i use it every day.” -baker mayfield  <span class="pl4 pr4">•</span>   "beam is going to be the nike of the wellness world." –billy horschel<span class="pl4 pr4">•</span> 
+    
+            
+            </div>
+            </div>
+          </div>
+    
+        </div>
+
+
+<style>
+    #main {padding-top: 0;}
+    .header__nav {
+        display: none !important;
+    }
+    .pill {
+        border-radius: 32px;
+        display: inline-block;
+        border: #2F358E;
+        transition: 200ms ease-in-out;
+        min-width: 220px;
+        width: auto !important;
+        padding-right: 32px;
+        padding-left: 32px;
+
+    }
+    .pill:hover {
+        background-color: #E9F2FF;
+    }
+    .marquee {
+  position: relative;
+  width: 100vw;
+  max-width: 100%;
+  height: 26px;
+  overflow-x: hidden;
+}
+.marquee .content {
+    font-size: 18px;
+    line-height: 26px;
+}
+
+.track {
+  position: absolute;
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee 74s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media screen and (max-width: 600px) {
+    .pill {
+        border-radius: 32px;
+        display: inline-block;
+        border: #2F358E;
+        transition: 200ms ease-in-out;
+        min-width: 100%;
+        width: 100% !important;
+        padding-right: 32px;
+        padding-left: 32px;
+
+    }
+    .marquee {
+  position: relative;
+  width: 100vw;
+  max-width: 100%;
+  height: 22px;
+  overflow-x: hidden;
+}
+.marquee .content {
+    font-size: 16px;
+    line-height: 22px;
+}
+
+.track {
+  position: absolute;
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee 124s linear infinite;
+}
+}
+@media screen and (max-width: 1424px) {
+   .slick-dots {
+        top: auto !important;
+        bottom: -20px !important;
+        left: auto !important;
+        right: auto;
+        text-align: center;
+    }
+    .slick-dots li {
+    display: inline;
+    margin-right: 8px;
+}
+.slick-dots li button {
+        background-color: #C2C2C2;
+    }
+    .slick-dots li button {
+    text-indent: -100000px;
+    border-radius: 100%;
+    border: solid rgba(255, 255, 255, 0.781) 1px;
+    background-color: #C2C2C2;
+    width: 14px;
+    height: 14px;
+}
+  .slick-dots li.slick-active button {
+        background-color: #8c8cf0;
+    }
+    }
+
+</style>
+
+<script>
+
+
+$('.ingredient-slider').slick({
+    autoplay: true,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    fade: false,
+    useTransform: true,
+    arrows: false,
+    dots: false,
+    autoplaySpeed: 5000,
+    adaptiveHeight: false,
+    pauseOnHover: true,
+    responsive: [
+      {
+        breakpoint: 1424,
+        settings: {
+          fade: false,
+          slidesToShow: 3,
+          fade: false,
+          arrows: false,
+          dots: true,
+          customPaging: function (slider, i) {
+        return $('<button type="button" />').text(i + 1);
+          }  
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          fade: false,
+          arrows: false,
+          dots: true,
+          customPaging: function (slider, i) {
+        return $('<button type="button" />').text(i + 1);
+          }        
+        }
+      }
+    ]
+  });
+
+  $('.brand-slider').slick({
+    autoplay: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    fade: false,
+    useTransform: true,
+    arrows: false,
+    dots: false,
+    autoplaySpeed: 5000,
+    adaptiveHeight: false,
+    pauseOnHover: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          fade: false
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          fade: false,
+          arrows: false,
+          dots: true,
+          customPaging: function (slider, i) {
+        return $('<button type="button" />').text(i + 1);
+          }        
+        }
+      }
+    ]
+  });
+     let accTitleDesktop = document.getElementsByClassName("acc-heading-desktop");
+            let accContentDesktop = document.getElementsByClassName("acc-content-desktop");
+            let singleModeDesktop = true;
+            
+            for( let j=0; j<accContentDesktop.length; j++ ){
+                let realHeightDesktop = accContentDesktop[j].offsetHeight;
+                accContentDesktop[j].setAttribute("data-height", realHeightDesktop + "px");
+                accContentDesktop[j].style.height = 0;
+            }
+            
+            for( let i=0; i<accTitleDesktop.length; i++ ){
+                accTitleDesktop[i].onclick = function(){
+                    let openedAccDesktop = this.getAttribute('href').replace('#', '');
+    
+                    if( this.classList.contains("active") ){
+                        this.classList.remove("active");
+                        document.getElementById(openedAccDesktop).style.height = 0;
+                        
+                        return false;
+                    }
+                    
+                    if( singleModeDesktop ){						
+                        for(let k=0; k<accTitleDesktop.length; k++) {
+                            accTitleDesktop[k].classList.remove("active");
+                        }
+    
+                        for(let j=0; j<accContentDesktop.length; j++) {
+                            accContentDesktop[j].style.height = 0;
+                        }
+                    }
+                    
+                    this.classList.add("active");
+                    
+                    document.getElementById(openedAccDesktop).style.height = accContentDesktop[i].getAttribute("data-height");
+                    
+                    return false;
+                }
+        }
+
+        // Get the modal
+var modal = document.getElementById("detailsModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("detailsModalBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>

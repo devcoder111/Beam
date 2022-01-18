@@ -1,0 +1,474 @@
+
+
+
+{% assign hide_freeship = false %}
+
+{% for item in cart.items %}
+
+{% if item.product.id == 4528614113335 %}
+
+{% assign upsells = 'upsells-sleep' %}
+{% else %}
+{% assign upsells = 'upsells' %}
+
+{% endif %}
+{% assign giftincart = false %}
+
+{% if item.product.id == 4670936121399 %}
+{% assign upsells = 'upsells-elevate' %}
+{% endif %}
+{% if item.product.id == 4670890573879 %}
+{% assign upsells = 'upsells-elevate' %}
+{% endif %}
+{% if item.product.id == 4671087673399 %}
+{% assign upsells = 'upsells-elevate' %}
+{% endif %}
+{% if item.product.id == 4671120670775 %}
+{% assign upsells = 'upsells-elevate' %}
+{% endif %}
+{% if item.variant.id == 39452644343863 %}
+{% assign giftincart = true %}
+{% endif %}
+
+{% if item.product.title contains "subscription" %}
+{% assign hide_freeship = true %}
+{% endif %}
+
+{% endfor %}
+
+<!-- Begin ReCharge code -->
+{% include 'subscription-cart-footer' %}
+<!-- End ReCharge code -->
+
+<!-- Begin Superfiliate code -->
+<script>
+  try {
+    // Superfiliate - ReCharge discount auto apply v1.0.4
+
+    function getSuperfiliateDiscountCookie() {
+      try {
+        var discountCookieRegex = /^discount_code/;
+
+        var cookiesList = document.cookie.split(";").map(function(s){
+          return s.trim();
+        });
+
+        var discount;
+
+        cookiesList.forEach(function(cookieEntry){
+          if (discountCookieRegex.test(cookieEntry)) {
+            discount = cookieEntry.split("=")[1];
+
+            return;
+          }
+        });
+
+        return discount;
+      } catch (e) {
+        return;
+      }
+    }
+
+    function getSuperfiliateDiscountParam() {
+      try {
+        var cookie_discount_code = getSuperfiliateDiscountCookie();
+        if (cookie_discount_code) {
+          return ['discount=' + cookie_discount_code];
+        }
+
+        var utm_attrs = window.getUTMAttributes && getUTMAttributes();
+        var utm_source = utm_attrs && utm_attrs['utm_source'];
+        if (utm_source !== 'superfiliate') { return []; }
+
+        var utm_campaign = utm_attrs['utm_campaign'];
+        if (!utm_campaign) { return []; }
+
+        return ['discount=' + utm_campaign];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function overrideReChargeScript() {
+      window.originalReChargeBuildCheckoutUrlString = buildCheckoutUrl.toString();
+
+      function reChargeBuildCheckoutUrl(options) {
+        return eval("(" + window.originalReChargeBuildCheckoutUrlString + ")(options)");
+      };
+
+      window.originalReChargeBuildCheckoutUrl = reChargeBuildCheckoutUrl;
+
+      function superfiliateBuildCheckoutUrl(options) {
+        const originalReChargeUrl = window.originalReChargeBuildCheckoutUrl(options);
+
+        try {
+          console.log('Superfiliate rewriting ReCharge checkout URL');
+          // URL and URLSearchParams are not supported on some older browsers;
+          // Use string concatenation for full support.
+          const newUrlParts = [originalReChargeUrl].concat(getSuperfiliateDiscountParam());
+          const newUrl = newUrlParts.join('&')
+          return newUrl;
+        } catch (e) {
+          // TODO: Make a request to our backend telling us about it.
+          console.error('Error setting up Superfiliate', e);
+        }
+
+        return originalReChargeUrl;
+      }
+
+      // Overwrite method defined on "snippets/subscription-cart-footer.liquid"
+      window.buildCheckoutUrl = superfiliateBuildCheckoutUrl;
+    }
+
+    if (!window.originalReChargeBuildCheckoutUrl) {
+      const waitReChargeScriptIntervalId = setInterval(function (){
+        if (!window.buildCheckoutUrl) {
+          return;
+        }
+
+        clearInterval(waitReChargeScriptIntervalId);
+        overrideReChargeScript();
+      }, 300)
+    }
+  } catch (e) {
+    // TODO: Make a request to our backend telling us about it.
+    console.error('Error setting up Superfiliate', e);
+  }
+</script>
+<!-- End Superfiliate code -->
+
+
+<img height="1" width="1" style="border-style:none;" alt=""
+  src="https://insight.adsrvr.org/track/pxl/?adv=iv5xfdn&ct=0:ydqbmcz&fmt=3" />
+<div class="container mt3--md pt6--md" style="max-width: 1240px;">
+
+  <div class="page mt0 pt0 mt5--md pt2--md">
+
+    <main class="page-content pt4 pt0--md">
+      {% if cart.item_count > 0 %}
+      <div class="row">
+
+        <div class="col c8--xl mb3">
+          <h1 class="mt4 mb4 tc tl--lg hide--md">
+            <div class="sans--large fw--300">my cart </div>
+            <div class="">({{ cart.item_count }} items)</div>
+          </h1>
+
+          <div class="hide--md mt4 mb3">
+
+            <form class="cart" action="/cart" method="post">
+
+              <input id="checkoutBtn" class="button button--checkout full-width" type="submit" name="checkout"
+                value="secure checkout" />
+
+              {% comment %}Paypal and Google checkout buttons{% endcomment %}
+              {% if additional_checkout_buttons %}
+              <span class="additional-checkout-buttons">
+
+                <p class="additional-checkout-buttons">
+                  {{ content_for_additional_checkout_buttons }}
+                </p>
+              </span>
+              {% endif %}
+            </form>
+
+          </div>
+
+
+
+          <div class="row mb0--md pb3 bg--blue-light">
+
+            {% if cart.total_price <= 7000 and hide_freeship == false%}
+            <div class="row db mt3 tc pt3 pb1 pb1--md">
+              <div class="db mb0 tc fw--600 pl1 pr1 pl2--md pr2--md">
+                <div class="sans--medium color--blue mb1 pl3 pr3 pl2--md pr2--md" style="font-size: 21px;">
+                  you're only {{ 7000 | minus: cart.total_price | money }} away from <strong class="color--blue">free shipping</strong>
+                </div>
+                <div class="sans--body db pl1 pr1 pl5--md pr5--md">add some favorites to your order</div>
+              </div>
+            </div>
+              {% else %}
+              <div class="row db mt3 tc pt3 pb1 pb1--md">
+                <div class="db mb0 tc fw--600 pl1 pr1 pl2--md pr2--md">
+                  <div class="sans--medium color--blue mb1 pl3 pr3 pl2--md pr2--md" style="font-size: 21px;">
+                    you get <strong class="color--blue">free</strong> shipping
+                  </div>
+                  <div class="sans--body db pl1 pr1 pl5--md pr5--md">add some favorites to your order</div>
+                </div>
+            </div>
+              {% endif %}
+
+
+
+              {% for product in collections.[upsells].products %}
+
+              <div class="col c4 mt2 mb2 tc clearfix {% if hide_upsellOLD %} hidden{% endif %}">
+
+
+                <form method="post" action="/cart/add">
+                  <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                  <img class="addon-image"
+                    src="{{ product.featured_image | product_img_url: '220x220', crop: 'center' }}"
+                    alt="{{ product.title | escape  }}" />
+                  <h5 class="sans--small fw--600 mt1">{{ product.title | escape }}</h5>
+                  <h6 class="mb1 sans--small fw--300">{{ product.vendor | escape }}</h6>
+                  <h6 class="mb1 sans--small fw--600">{{ product.price | money_without_trailing_zeros }}</h6>
+                  <input type="submit" id="add-{{ forloop.index }}" value="add" class="button-pill hide--md" />
+                  <input type="submit" id="add-{{ forloop.index }}" value="add to cart" class="button-pill show--md" />
+                </form>
+
+
+                <div class="clearfix"></div>
+              </div>
+
+
+
+              {% endfor %}
+
+
+          </div>
+
+
+        
+
+          <form class="cart" action="/cart" method="post">
+            {% assign hide_default_title = false %}
+
+
+            <div class="cart">
+
+              <div class="cart-list">
+                {% for item in cart.items %}
+                {% if item.variant.title contains 'Default Title' %}
+                {% assign hide_default_title = true %}
+                {% endif %}
+                {% if item.product.id == 4528627089463 %}
+                {% assign hide_upsell = true %}
+                {% endif %}
+                {% if item.product.title contains "subscription" %}
+                {% assign hide_upsell = true %}
+                <style>
+                  
+                  .fs-notice {
+                    display: none !important;
+                  }
+
+                  .sub-notice {
+                    display: block !important;
+                  }
+                </style>
+                {% endif %}
+                {% if item.product.title contains "free trial" %}
+                <style>
+
+                </style>
+                {% endif %}
+                {% assign skimm_promo = false %}
+                {% if item.product.title contains "dream powder" %}
+                {% assign skimm_promo = true %}
+                {% endif %}
+                {% if item.variant.id == 39450230652983 %}
+                {% assign foundGWP_title = true %}
+              {% endif %}
+                <div class="cart-item bg--white color--black product-{{ item.product.id }}">
+
+                  <div class="cart-item-block cart-item-figure">
+                    <a href="{{ collection_url }}{{ item.url }}">
+                      <img class="cart-item-image" src="{{ item | img_url: '500x340', crop: 'center' }}"
+                        alt="{{ item.title | escape }}" />
+                    </a>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="cart-item-block">
+
+                    <div class="sans--medium fw--300"><a href="{{ collection_url }}{{ item.url }}">{{ item.product.title
+                        }}</a></div>
+
+                    {% if item.variant.title %} <div
+                      class="sans--small fw--300 {% if hide_default_title %} hidden{% endif %}"><a
+                        href="{{ collection_url }}{{ item.url }}">{{ item.variant.title }}</a></div>{% endif %}
+                        {% if item.variant.id == 39450230652983 %}
+                        <div class="sans--small fw--300">exclusive offer</div>
+                        {% endif %}
+                        {% if item.variant.id == 39452644343863 %}
+                        <div class="sans--small fw--300">exclusive offer</div>
+                        {% endif %}
+                    {% if item.product.id == 4573939040311 %}
+                    <div class="sans--small fw--300">promotion not valid for this item</div>
+                    {% endif %}
+                    {% if item.product.id == 4608551452727 %}
+                    <div class="sans--small fw--300">promotion not valid for this item</div>
+                    {% endif %}
+                    {% if item.product.id == 4573926326327 %}
+                    <div class="sans--small fw--300">promotion not valid for this item</div>
+                    {% endif %}
+                    {% if item.product.id == 4528628760631 %}
+                    <div class="sans--small fw--300">promotion not valid for this item</div>
+                    {% endif %}
+                    {% if item.product.id == 4639858524215 %}
+                    <div class="sans--small fw--300">promotion not valid for this item</div>
+                    {% endif %}
+
+
+                    <div class="cart-item-price mt1 mb1">
+                      {{ item.line_price | money }}
+
+                      <del class="cart__item-total">{{ item.variant.compare_at_price | money }}</del>
+
+                      {% if item.total_discount > 0 %}
+                      <s>{{ item.original_line_price | money }}</s><br />
+                      <div class="sans--small fw--600">({{ item.message }})</div>
+                      {% endif %}
+                    </div>
+                    <div class="sans--small fw--300 ellipsis pt0 pb0 mb2">
+                      qty: <input type="number" name="updates[]" id="updates_{{ item.id }}" class="quantity"
+                        value="{{ item.quantity }}" />
+                    </div>
+                    <a class="remove-item remove-main sans--small color--gray"
+                      href="/cart/change?line={{ forloop.index }}&quantity=0">remove</a>
+
+                  </div>
+
+                  <div class="clearfix"></div>
+
+                </div>
+
+
+
+                {% endfor %}
+              </div>
+            </div>
+            <input class="button button--index full-width rounded mb2" type="submit" name="update"
+              value="update cart" />
+
+            {% if skimm_promo == false %}
+            {% if foundGWP_title == true %}
+
+            <script>
+
+            $(document).ready(function() {
+            var variantId2 = 39450230652983;
+            jQuery.post('/cart/update.js', 'updates['+variantId2+']=0');
+            setTimeout( 
+            function() {
+              window.location.reload(true);
+            }, 500);
+            });
+            </script>
+            {% endif %}
+            {% endif %}
+
+
+            {% if skimm_promo == true %}
+
+              <script>
+
+                if (document.cookie.indexOf('PromoSkimmSleep') > -1 ) {
+                  $(document).ready(function() {
+                      jQuery.post('/cart/add.js', {
+                                  quantity: 1,
+                                  id: 39450230652983
+                      });
+                      setTimeout( 
+                        function() {
+                          window.location.reload(true);
+                        }, 500);
+                        document.cookie = "PromoSkimmSleep=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    });
+                }
+                  </script>
+
+               {% endif %}
+
+  
+          </form>
+
+        </div>
+
+        <div class="pt0 col c4--lg c4--xl pt4--lg tl">
+          <div class="pl3--md">
+            <h2 class="sans--medium fw--300 mb1 show--lg">summary</h2>
+            <hr class="mb2 mb3--lg" />
+            {% if cart.total_discount > 1 %}
+            <div class="sans--small fw--300 pt1">
+              you save <strong>{{ cart.total_discount | money }}!</strong>
+            </div>
+            {% endif %}
+
+            <div class="sans--medium fw--300 pt1">
+              subtotal: <em>{{ cart.total_price | money }}</em>
+            </div>
+            <div id="bfvip-wrap" class="hidden mt2 mb2 p1 tc bg--light-gray color--blue">
+              <p>30% off will be applied at checkout</p>
+            </div>
+
+            <form class="cart mt2" action="/cart" method="post">
+
+              <input id="checkoutBtn" class="button button--checkout full-width" type="submit" name="checkout"
+                value="check out" />
+
+              {% comment %}Paypal and Google checkout buttons{% endcomment %}
+              {% if additional_checkout_buttons %}
+              <span class="additional-checkout-buttons">
+
+                <p class="additional-checkout-buttons">
+                  {{ content_for_additional_checkout_buttons }}
+                </p>
+              </span>
+              {% endif %}
+
+
+
+            </form>
+            {% include 'guarantee' %}
+
+            <a class="cs-button db fw--400 mt2 mb3 button button--checkout-secondary full-width hide--md"
+              href="/collections/all-products-collection-page-products-collection-page">← continue shopping</a>
+
+            <hr class="mb2 mb3--lg" />
+
+            <p class="db mt3 mb1 sans--small fw--300">rewards + discounts can be applied at checkout.</p>
+            {% if customer.id == null %}
+
+            <p class="db mt2 mb2 sans--small fw--300">earn your rewards by creating an account or signing in at
+              checkout.</p>
+
+            {% endif %}
+          </div>
+
+        </div>
+      </div>
+      {% else %}
+
+      <div class="mt7 pt4 mb6 tc" style="min-height:300px;">
+        <h2 class="gamma">It appears that your cart is currently empty!</h2>
+        <h3 class="delta">You can continue browsing <a href="/collections/all-products-collection-page-products-collection-page">here</a>.</h3>
+      </div>
+
+      {% endif %}
+    </main>
+  </div>
+</div>
+
+  <style>
+    .cart-list {
+      margin-top: 10px !important;
+    }
+
+    .cart-list>.cart-item {
+      border: none;
+    }
+
+    .cart-list>.cart-item~.cart-item {
+      border-top: 1px solid rgb(194, 194, 194);
+    }
+
+    .addon-image {
+      max-width: 140px;
+      width: 90%;
+      border-radius: 18px;
+    }
+  </style>
+
+  <script src="https://widget.sezzle.com/v1/javascript/price-widget?uuid=e60e7d5f-8b5c-4c2c-ae89-8f6f3099dbba"></script>

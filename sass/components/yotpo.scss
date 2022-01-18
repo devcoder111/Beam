@@ -1,0 +1,83 @@
+.yotpo__container {
+	.yotpo .yotpo-small-box {
+		border-color: color(gray);
+	}
+
+	.yotpo div, .yotpo span, .yotpo p, .yotpo a, .yotpo img, .yotpo i, .yotpo strong, .yotpo sup, .yotpo ul, .yotpo li, .yotpo form, .yotpo label {
+		@include font-smoothing;
+		@include body-font-size;
+		font-family: $font-family-poppins;
+		color: color(blue);
+	}
+
+	.yotpo label {
+		font-family: $font-family-poppins;
+		font-size: 12px;
+		line-height: 18px;
+		font-weight: 600;
+		color: color(gray);
+		text-transform: lowercase;
+
+		@include breakpoint(md) {
+			font-size: 13px;
+		}
+	}
+
+	.yotpo .text-box, .yotpo .yotpo-text-box, .yotpo input, .yotpo .y-input {
+		@include font-smoothing;
+		@include body-font-size;
+		border-color: color(blue);
+		font-family: $font-family-poppins;
+		color: color(blue);
+		background: color(white);
+	}
+
+	.yotpo .yotpo-default-button, .yotpo input[type="button"].yotpo-default-button,
+	.yotpo__container .yotpo .yotpo-default-button {
+		@extend %button;
+		height: $button-height-mobile !important;
+		line-height: $button-height-mobile !important;
+		background-color: color(blue);
+		color: color(white);
+		padding: 0 20px !important;
+		font-family: $font-family-poppins;
+		font-size: 12px;
+		font-weight: 600;
+
+		@include breakpoint(md) {
+			height: $button-height-desktop !important;
+			line-height: $button-height-desktop !important;
+			font-size: 13px;
+		}
+
+		.yotpo-icon.yotpo-icon-write {
+			display: none;
+		}
+
+		span {
+			display: block;
+			height: $button-height-mobile !important;
+			line-height: $button-height-mobile !important;
+
+			@include breakpoint(md) {
+				height: $button-height-desktop !important;
+				line-height: $button-height-desktop !important;
+			}
+		}
+	}
+
+	.yotpo.yotpo-main-widget .yotpo-icon-btn .yotpo-icon-button-text {
+		line-height: $button-height-mobile;
+		font-family: $font-family-poppins;
+		font-size: 12px;
+		font-weight: 600;
+	}
+
+	.yotpo.yotpo-main-widget .yotpo-bottomline.yotpo-bottomline-2-boxes .yotpo-default-button {
+		z-index: 100;
+	}
+
+	.yotpo-messages {
+		z-index: 200;
+	}
+}

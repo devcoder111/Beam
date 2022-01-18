@@ -1,0 +1,404 @@
+{% assign add_to_cart = 'Add to cart' %}
+{% assign sold_out = 'Sold Out' %}
+{% assign unavailable = 'Unavailable' %}
+
+<meta itemprop="url" content="{{ shop.url }}{{ product.url }}" />
+<meta itemprop="image" content="{{ product | img_url: 'grande' }}" />
+<div class="modal hidden" id="download-modal"></div>
+<div class="modal--overlay hidden"></div>
+<div class="productView">
+  <div itemscope itemtype="http://schema.org/Product">
+      
+
+
+    <div {{#if settings.data_tag_enabled}} data-event-type="product" data-entity-id="{{product.id}}"
+    data-name="{{product.title}}"
+    data-product-category="{{#each product.category}}{{#if @last}}{{this}}{{else}}{{this}}, {{/if}}{{/each}}"
+    data-product-brand="{{product.brand.name}}"
+    data-product-price="{{#if product.price.with_tax}}{{product.price.with_tax.value}}{{else}}{{product.price.without_tax.value}}{{/if}}"
+    data-product-variant="single-product-option" {{/if}}>
+    {{#each product.reviews.messages}}
+    {{#if error}}
+    {{> components/common/alert-error error}}
+    {{/if}}
+    {{#if success}}
+    {{> components/common/alert-success success}}
+    {{/if}}
+    {{/each}}
+
+
+
+    <div class="pr hero">
+      <form action="/cart/add" data-productid="{{ product.id }}" method="post" class="product-form" id="add-to-cart" enctype="multipart/form-data">
+<!-- Begin ReCharge code -->
+{% if product.available %}{% include 'subscription-product-dream' %}{% endif %}
+<!-- End ReCharge code -->
+
+        <div class="row gutter--none direction--rev--md">
+            <div class="col c6--md c7--lg">
+
+                <div class="pr hero__product-image of--hidden" data-image-gallery>
+
+
+
+                  {% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
+
+                    <picture class="hero__cover product-photo-container"
+                            data-image-gallery-main
+                            >
+            
+                            <img class="productView-image--default image__flush"
+                                 data-sizes="auto"
+                                 src="{{ featured_image | img_url: 'master' }}"
+                                 data-src="{{ featured_image | img_url: 'master' }}"
+                                 alt="{{product.main_image.alt}}" title="{{image.alt}}" data-main-image>
+      
+                    </picture>
+
+
+
+                    {% if product.images.size > 1 %}
+                    <ul class="productView-thumbnails">
+                      {% for image in product.images %}
+                      <li class="productView-thumbnail">
+                            <li class="productView-thumbnail">
+                                <a
+                                    class="productView-thumbnail-link"
+                                    href="{{ product.image | img_url: 'master' }}"
+                                    data-image-gallery-item
+                                    data-image-gallery-new-image-url="{{ product.image  | img_url: 'master' }}">
+                                    <img class="b--blue" data-sizes="auto" src="" data-src="{{ product.image | img_url: 'master' }}" alt="{{image.alt}}" title="{{image.alt}}">
+                                </a>
+                            </li>
+                      {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                       
+                    </ul>
+                </div>
+
+
+
+
+
+
+            </div>
+            <div class="col c6--md c5--lg">
+                <div class="pr hero">
+                    <div class="reveal__container active">
+                        <div class="hero media media--vertical gutter--none media--forward">
+                            <div class="media__fluid pt0 pt10--md reveal__component__0--move">
+                                <div class="grid-container contained pt5 pt8--lg">
+                                    <div class="mb1">
+                                        <p class="tc sans--small fw--600 color--gray">{{ product.type }}</p>
+                                    </div>
+                                    <div class="mb2">
+                                        <h1 class="tc sans--medium-large fw--600" temprop="name">{{product.title}}</h1>
+                                    </div>
+                                    <div class="mb2">
+                                        <div class="hero__product-description m--auto rich-text tc" itemprop="description">
+                                            {{ product.description }}                                          
+                                        </div>
+                                        <p><br></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="media__fixed">
+                                <div class="tc sans--small pb2">
+                                  <div id="product-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="delta">
+                                    <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+                                    {% if product.available %}
+                                    <link itemprop="availability" href="http://schema.org/InStock" />
+                                    {% else %}
+                                    <link itemprop="availability" href="http://schema.org/OutOfStock" />
+                                    {% endif %}
+                                    <p>
+                                      {% assign variant = product.selected_or_first_available_variant %}
+                                      {% if product.compare_at_price > product.price %}
+                                      <span class="product-price on-sale" itemprop="price">{{ variant.price | money }}</span>
+                                      <s class="product-compare-price">{{ variant.compare_at_price | money }}</s>
+                                      {% else %}
+                                      <span class="product-price" itemprop="price">{{ variant.price | money }}</span>
+                                      {% endif %}
+                                    </p>
+                                  </div>
+                                </div>
+
+
+                                {% assign hide_default_title = false %}
+                                {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+                                  {% assign hide_default_title = true %}
+                                {% endif %}       
+                                <div id="product-variants" class="select--product-option{% if hide_default_title %} hidden{% endif %}">
+                                  <select id="product-select" class="form-select" name="id" data-productid="{{ product.id }}">
+                                  {% for variant in product.variants %}
+                                    <option class="form-select" {% if variant == product.selected_or_first_available_variant %} selected{% endif %} value="{{ variant.id }}">
+                                    {{ variant.title }} - {{ variant.price | money }}
+                                    </option>
+                                  {% endfor %}
+                                  </select>
+                                </div>  
+
+                                       
+                                <div id="backorder" class="hidden tc">
+                                  <p>{{ '%s is back-ordered. We will ship it separately in 10 to 15 days.' | replace: '%s', '<span id="selected-variant"></span>' }}</p>
+                                </div>
+                                  
+                                <div id="product-add" class="form-action">
+                                  <input type="submit" name="add" id="add" class="button button--primary" value="{{ add_to_cart | escape }}" onclick="addItem('add-to-cart'); return false; ">
+                                </div>
+
+                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+  </div>
+</form>
+</div>
+
+
+<div class="mt8 mb8 mt10--md mb10--md">
+    <div class="grid-container contained pt2--md pb2--md">
+        <div class="row direction--rev--md">
+            <div class="col c6--md c5--lg mb2 mb0--md">
+                <div class="">
+                    <div class="pr">
+                        <div class="box-shadow align--right"></div>
+                        <div class="push-up">
+                            <div class="b--blue">
+                                <picture class="full-width">
+                                    <source
+                                        srcset="https://beam.imgix.net/beam-products-theone-benefits-application@2x_190725_190856.jpg?mtime=20190725120857&amp;auto=format&amp;q=50&amp;w=1000"
+                                        media="(min-width: 800px)"><img class="full-width"
+                                        alt="an all-natural alternative"
+                                        src="https://beam.imgix.net/beam-products-theone-benefits-application@2x_190725_190856.jpg?mtime=20190725120857&amp;auto=format&amp;q=50&amp;w=600">
+                                </picture>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col c1 show--lg"></div>
+            <div class="col c6--md c4--lg pt10--md">
+                <div class="">
+                    <h2 class="sans--medium-large fw--600 mb2">an all-natural alternative</h2>
+                    <div class="rich-text mb2 mb4--lg">
+                        <p>Research suggests that hemp offers a myriad of wellness benefits, from having the
+                            potential to reduce anxiety and help you catch some Zs, to protecting against
+                            inflammation and serving as a natural remedy for pain relief. Whatever your reason, beam
+                            is here to help.</p>
+                    </div>
+                    <div class="show--md media media--forward media--horizontal gutter--none">
+                        <div class="media__fixed"><a title="learn more" class="button--wave-secondary-bottom"
+                                href="/education">learn more</a></div>
+                        <div class="media__fluid">
+                            <hr>
+                        </div>
+                    </div>
+                    <p class="hide--md tc"><a title="learn more" class="button--wave-secondary-bottom"
+                            href="/education">learn more</a></p>
+                </div>
+                <div class="mt10">
+                    <div class="row">
+                        <div class="col c8">
+                            <div class="pr">
+                                <div class="box-shadow align--left"></div>
+                                <div class="push-up">
+                                    <div class="b--blue">
+                                        <div class="pr of--hidden">
+                                            <picture class="full-width"><img class="full-width"
+                                                    alt="an all-natural alternative"
+                                                    src="https://beam.imgix.net/beam-products-theone-abstract-frame.jpg?mtime=20190721131144&amp;auto=format&amp;q=50&amp;w=600">
+                                            </picture><video class="image__flush reveal__component__0--fade"
+                                                preload="true"
+                                                src="//beamtlc.s3.amazonaws.com/beam-products-theone-abstract-video.mp4?mtime=20190721131155"
+                                                loop="" autoplay="" playsinline=""></video>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col c1 show--lg"></div>
+        </div>
+    </div>
+</div>
+</div>
+<style>
+
+.modal {
+   max-width: 575px;
+   background: white;
+   border: 5px solid #111;
+   padding: 50px 65px;
+   position: fixed;
+   z-index: 1000;
+}
+.modal .close {
+   position: absolute;
+   top: 10px;
+   right: 20px;
+   font-size: 20px;
+   cursor: pointer;
+}
+.modal--overlay {
+   position: fixed;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   z-index: 100;
+   background-color: rgba(0, 0, 0, 0.4);
+}
+.hidden {
+   display: none;
+}
+
+
+</style>
+
+  
+    
+{% comment %}
+  Adding support for product options. See here for details:  
+  http://docs.shopify.com/support/your-website/themes/can-i-make-my-theme-use-products-with-multiple-options
+{% endcomment %}
+
+<script>
+  
+  function centerModal(){
+   var modal = $('.modal.open');
+   var mWidth = modal.outerWidth()
+   var mHeight = modal.outerHeight();
+   var width = $(window).width();
+   var height = $(window).height();
+   if((width % 1) != 0){
+      width = Math.round(width)
+   }
+   if((height % 1) != 0){
+      height = Math.round(height)
+   }
+   var topPos = (height / 2) - (mHeight / 2);
+   var leftPos = (width / 2) - (mWidth / 2); 
+   modal.css({top: topPos, left:leftPos})
+}
+//open modal and overlay
+function openModal(){
+   $('.modal').removeClass('hidden').addClass('open');
+   $('.modal--overlay').removeClass('hidden').addClass('open');
+   $('body').css('overflow', 'hidden');
+   centerModal();
+}
+
+//close modal and overlay
+function closeModal(overlay){
+   $(overlay).addClass('hidden').removeClass('open');
+   $('.modal.open').addClass('hidden').removeClass('open');
+   $('body').css('overflow', 'auto');
+}
+
+function addItem(form_id) {
+   $.ajax({
+      type: 'POST', 
+      url: '/cart/add.js',
+      dataType: 'json', 
+      data: $('#'+form_id).serialize(),
+      success: addToCartOk,
+      error: addToCartFail
+   });
+}
+function addToCartOk(product) { 
+   cartCount++; 
+   var productTitle = "{{ product.title }}";
+   $('#cart-number span').removeClass('hidden').html(cartCount);
+   $('.modal').html(productTitle + ' was added to the cart!'); 
+   openModal();
+} 
+
+function addToCartFail(obj, status) { 
+   $('.modal').html('The product you are trying to add is out of stock.'); 
+   openModal()
+}
+
+
+$('.modal--overlay').on('click', function(){
+   var overlay = $('.modal--overlay')
+   closeModal(overlay)
+})
+
+var selectCallback = function(variant, selector) {
+
+  if (variant) {
+    // Swap image.
+    if (variant.featured_image) {
+      var newImage = variant.featured_image; // New image object.
+      var mainImageDomEl = jQuery('.product-photo-container img')[0]; // DOM element of main image we need to swap.
+      Shopify.Image.switchImage(newImage, mainImageDomEl, switchImage); // Define switchImage (the callback) in your theme's JavaScript file.
+    }
+    
+    // Selected a valid variant that is available.
+    if (variant.available) {
+          
+      // Enabling add to cart button.
+      jQuery('#add').removeClass('disabled').prop('disabled', false).val({{ add_to_cart | json }});
+    
+      // If item is backordered yet can still be ordered, we'll show special message.
+      if (variant.inventory_management && variant.inventory_quantity <= 0) {
+        jQuery('#selected-variant').html({{ product.title | json }}{% unless hide_default_title %} + ' - ' + variant.title{% endunless %});
+        jQuery('#backorder').removeClass("hidden");
+      } else {
+        jQuery('#backorder').addClass("hidden");
+      }
+      
+    } else {
+      // Variant is sold out.
+      jQuery('#backorder').addClass('hidden');
+      jQuery('#add').val({{ sold_out | json }}).addClass('disabled').prop('disabled', true);       
+    }
+    
+    // Whether the variant is in stock or not, we can update the price and compare at price.
+    if ( variant.compare_at_price > variant.price ) {
+      jQuery('#product-price').html('<span class="product-price on-sale">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") +'</span>'+'&nbsp;<s class="product-compare-price">'+Shopify.formatMoney(variant.compare_at_price, "{{ shop.money_format }}")+ '</s>');
+    } else {
+      jQuery('#product-price').html('<span class="product-price">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") + '</span>' );
+    }        
+
+  } else {
+    // variant doesn't exist.
+    jQuery('#product-price').empty();
+    jQuery('#backorder').addClass('hidden');
+    jQuery('#add').val({{ unavailable | json }}).addClass('disabled').prop('disabled', true);
+  }
+
+};
+  
+jQuery(function($) {
+
+  new Shopify.OptionSelectors('product-select', { product: {{ product | json }}, onVariantSelected: selectCallback, enableHistoryState: true });
+  
+  // Add label if only one product option and it isn't 'Title'.
+  {% if product.options.size == 1 and product.options.first != 'Title' %}
+    $('.selector-wrapper:eq(0)').prepend('<label class="form-label form-label--alternate form-label--inlineSmall">{{ product.options.first }}</label>');
+  {% endif %}
+
+});
+
+Shopify.Image.preload({{ product.images | json }}, 'grande');
+Shopify.Image.preload({{ product.images | json }}, '1024x1024');
+
+</script>

@@ -1,0 +1,190 @@
+
+<div class="">
+  <div class="">
+    <a title="get yours now" href="/collections/all-products-collection-page-products-collection-page">
+      <picture>
+        <source
+          srcset="
+            https://cdn11.bigcommerce.com/s-lijn59vba/product_images/uploaded_images/dreamblock1-desktop-1-.jpg" media="(min-width: 800px)"
+        />
+        <img
+          class="mt8"
+          style="display: inline-block; height: auto; max-width: 100%;"
+          alt="Hero image"
+          src="https://cdn11.bigcommerce.com/s-lijn59vba/product_images/uploaded_images/beam-barrys-mobile.jpg"
+        />
+      </picture>
+    </a>
+  </div>
+</div>
+
+<div class="mt4 mb1 mt6--md mb3--md">
+  <div class="reveal__container active">
+    <div
+      class="reveal__component__0--fade-fast grid-container contained pt2--md pb2--md"
+    >
+      <div class="row align--center tc">
+        <div class="col c8--md c7--lg">
+          <div class="mb4">
+            <h1 class="sans--medium fw--600" style="text-align: center;">
+              beam and Barry’s are partnering up to bring you the best workout,
+              wellness and recovery routine you’ve ever had. Get ready to push
+              your limits and find your better.
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mb2 mb2--md">
+  <div class="row align--center tc">
+    <div class="col c8--md c7--lg">
+      <h2 class="sans--large fw--600" style="text-align: center;">
+        Use code
+        <strong><span class="rich-text__gradient">BARRYS</span></strong> at
+        checkout for an exclusive 20% off.
+      </h2>
+    </div>
+  </div>
+</div>
+
+{% unless settings.homepage_collection == blank or collections[settings.homepage_collection].empty? %}
+{% assign collection = collections[settings.homepage_collection] %}
+<div class="pb6 pt6" >
+
+
+    <div class="col">
+      <div class="reveal__container active">
+          <div class="reveal__component__1--fade-fast grid-container contained">
+              <div class="row align--center">
+                  <div class="col c9--lg">
+                      <div class="row gutter--vertical align--center">
+
+{% for product in collection.products %}
+<div class="col c6--sm c4--md">
+    <div class="b--blue product-card pb1">
+  {% include 'product-grid-item' with 'three-per-row' %}
+</div>
+</div>
+{% endfor %}
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endunless %}
+
+<div class="db tc mt6">
+  <a
+    class="button--primary rounded"
+    title="get yours now"
+    href="/collections/all-products-collection-page-products-collection-page"
+    >shop all</a
+  >
+</div>
+<div class="reveal__container active">
+  <div class="mt8 mb8 mt10--md mb10--md">
+    <div class="pt2--md pb2--md">
+      <div class="pr">
+        <div class="grid-container contained pe--none">
+          <div class="row mb6 mb2--md">
+            <div class="col c1 show--lg"></div>
+            <div class="col c4--md c4--lg pb4--md pe--auto">
+              <div class="reveal__component__1--move">
+                <div class="pr">
+                  <div class="box-shadow align--right"></div>
+                  <div class="push-up">
+                    <div class="b--blue">
+                      <picture class="full-width">
+                        <source
+                          srcset="
+                            https://cdn11.bigcommerce.com/s-lijn59vba/product_images/uploaded_images/frame-3-2-.jpg
+                          "
+                          media="(min-width: 800px)"
+                        />
+                        <img
+                          class="full-width"
+                          alt="Beam + Barrys"
+                          src="https://cdn11.bigcommerce.com/s-lijn59vba/product_images/uploaded_images/frame-3-2-.jpg"
+                        />
+                      </picture>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col c2 c1--lg"></div>
+            <div class="col c9--md c5--lg pt2--md">
+              <h2 class="sans--large fw--600 mb4--md ws--pre-line">
+                about beam
+              </h2>
+              <div class="rich-text">
+                <p>
+                  After struggling to find a product that was high quality,
+                  transparent about ingredients, and effective, beam founders
+                  Matt & Kevin decided to create their own. And that’s what they
+                  did—all of beam’s products are made with natural ingredients
+                  and beam's organic hemp oil. Whether athlete or
+                  entrepreneur, busy parent, or weekend warrior, our team is
+                  constantly working to create better hemp products that meet
+                  your needs and expectations.
+                </p>
+              </div>
+            </div>
+            <div class="col c1 show--lg"></div>
+          </div>
+
+          <div class="row direction--rev--md">
+            <div class="col c1 show--lg"></div>
+            <div class="col c4--md c4--lg pb4--md pe--auto">
+              <div class="reveal__component__1--move">
+                <div class="pr">
+                  <div class="box-shadow align--right"></div>
+                  <div class="push-up">
+                    <div class="b--blue">
+                      <picture class="full-width">
+                        <source
+                          srcset="
+                            https://cdn11.bigcommerce.com/s-lijn59vba/product_images/uploaded_images/frame-2-4-.jpg
+                          "
+                          media="(min-width: 800px)"
+                        />
+                        <img
+                          class="full-width"
+                          alt="Beam + Barrys"
+                          src="https://cdn11.bigcommerce.com/s-lijn59vba/product_images/uploaded_images/frame-2-4-.jpg"
+                        />
+                      </picture>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col c2 c1--lg"></div>
+            <div class="col c9--md c5--lg pt2--md">
+              <h2 class="sans--large fw--600 mb4--md ws--pre-line">
+                about Barry’s
+              </h2>
+              <div class="rich-text">
+                <p>
+                  Barry's isn't just the best workout in the world, it's a
+                  lifestyle. Exclusive retail collections, top of the line Fuel
+                  Bar offerings, and a built-in community provide an
+                  unparalleled fitness experience. Barry’s At-Home is your
+                  chance to feel the magic of the signature Red Room from the
+                  comfort of your own living room. Work(out) with best-in-class
+                  instructors from across the United States as they guide you
+                  through an At-Home version of the Best Workout in the World.
+                </p>
+              </div>
+            </div>
+            <div class="col c1 show--lg"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

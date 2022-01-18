@@ -1,0 +1,72 @@
+//
+// === Austin ===
+//
+
+@font-face {
+	font-family: 'Austin News Text';
+	src: url('../assets/austinnewstext-roman.woff2') format('woff2'),
+		 url('../assets/austinnewstext-roman.woff') format('woff');
+	font-display: fallback;
+	font-style: normal;
+	font-weight: 400;
+}
+
+@font-face {
+	font-family: 'Austin News Text';
+	src: url('../assets/austinnewstext-italic.woff2') format('woff2'),
+		 url('../assets/austinnewstext-italic.woff') format('woff');
+	font-display: fallback;
+	font-style: italic;
+	font-weight: 400;
+}
+
+@font-face {
+	font-family: 'Austin News Text';
+	src: url('../assets/austinnewstext-bold.woff2') format('woff2'),
+		 url('../assets/austinnewstext-bold.woff') format('woff');
+	font-display: fallback;
+	font-style: normal;
+	font-weight: 800;
+}
+
+@font-face {
+	font-family: 'Austin News Text';
+	src: url('../assets/austinnewstext-bolditalic.woff2') format('woff2'),
+		 url('../assets/austinnewstext-bolditalic.woff') format('woff');
+	font-display: fallback;
+	font-style: italic;
+	font-weight: 800;
+}
+//
+// === Poppins ===
+//
+
+@font-face {
+	font-family: 'Poppins';
+	src: url('../assets/Poppins-ExtraLight.ttf') format('ttf');
+	font-display: fallback;
+	font-style: normal;
+	font-weight: 100;
+}
+@font-face {
+	font-family: 'Poppins';
+	src: url('../assets/poppins-regular.woff') format('woff');
+	font-display: fallback;
+	font-style: normal;
+	font-weight: 400;
+}
+@font-face {
+	font-family: 'Poppins';
+	src: url('../assets/poppins-medium.woff') format('woff');
+	font-display: fallback;
+	font-style: normal;
+	font-weight: 600;
+}
+
+@font-face {
+	font-family: 'Poppins';
+	src: url('../assets/poppins-semibold.woff') format('woff');
+	font-display: fallback;
+	font-style: normal;
+	font-weight: 800;
+}

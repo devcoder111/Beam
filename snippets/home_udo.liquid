@@ -1,0 +1,14 @@
+{% if settings.tealium_enabled %}
+
+<script type="text/javascript">
+  var utag_data = {
+    "site_section": "home",
+    {% include 'global_udo_vars' %}
+    "page_type": "home",
+    "tealium_event": "page_view"                                        
+  }
+</script>
+
+{% include 'utag' %}
+
+{% endif %}

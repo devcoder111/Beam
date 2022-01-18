@@ -1,0 +1,49 @@
+$reveal-components: 5;
+
+@for $i from 0 through $reveal-components {
+	.reveal__component__#{$i}--fade {
+		transition: opacity 1800ms ease-out #{$i * 400ms};
+		opacity: 0;
+	}
+
+	.reveal__component__#{$i}--fade-fast {
+		transition: opacity 600ms ease-out #{$i * 400ms};
+		opacity: 0;
+	}
+
+	.reveal__component__#{$i}--move {
+		transition: opacity 600ms ease-out #{$i * 400ms}, 600ms transform cubic-bezier(0, 0, 0, 1) #{$i * 400ms};
+		opacity: 0;
+		transform: translate3d(0, 10px, 0);
+	}
+}
+
+.reveal__staggered p {
+	opacity: 0;
+
+	@for $i from 0 through $reveal-components {
+		&:nth-child(#{$i}) {
+			transition: opacity 1800ms ease-out #{$i * 400ms};
+		}
+	}
+}
+
+.reveal__container.active {
+	.reveal__staggered p {
+		opacity: 1;
+	}
+
+	@for $i from 0 through $reveal-components {
+		.reveal__component__#{$i}--fade {
+			opacity: 1;
+		}
+		.reveal__component__#{$i}--fade-fast {
+			opacity: 1;
+		}
+
+		.reveal__component__#{$i}--move {
+			transform: translate3d(0, 0, 0);
+			opacity: 1;
+		}
+	}
+}

@@ -1,0 +1,90 @@
+{% comment %}
+  Important notes about pagination:
+  - Never access collection.products before the opening paginate tag.
+  - Never paginate by more than 50.
+{% endcomment %}
+
+{% assign products_per_page = settings.products_per_row | times: settings.number_of_rows %}
+{% assign numbers = 'zero, one, two, three, four, five, six' | split: ',' %}
+{% assign products_per_row = settings.products_per_row | times: 1 %}
+{% assign products_per_row = numbers[products_per_row] | strip | append: '-per-row' %}
+{% assign subColor = 'color--blue' %}
+
+{% paginate collection.products by products_per_page %}
+{% if collection.handle == 'recovery' %}
+    {% assign subColor = 'color--orange' %}
+{% elsif collection.handle == 'energy' %}
+{% assign subColor = 'color--green' %}
+{% elsif collection.handle == 'sleep' %}
+{% assign subColor = 'color--purple' %}
+{% else %}
+{% assign subColor = 'color--blue' %}
+{% endif %}
+
+<img height="1" width="1" style="border-style:none;" alt="" src="https://insight.adsrvr.org/track/pxl/?adv=iv5xfdn&ct=0:kjn7dmf&fmt=3"/>
+<div class="col mt3 mt6--md" style="background-color: #F6FAFF;">
+    <div class="reveal__container active">
+            <div class="grid-container contained pt10 pb2">
+                <div class="row align--center">
+                    <div class="col c6--md c5--lg">
+                        <div class="tc reveal__component__0--fade-fast">
+                            <h1 style="letter-spacing: 3px;" class="sans--large fw--400 mb1 {{ subColor }}">{{ collection.title }}{% if collection.image %}<img class="ml1" style="max-height: 40px; width: auto" src="{{ collection.image | img_url: 'medium' }}"/>{% endif %}</h1>
+                            <div class="tc rich-text serif--small color--blue">
+                                <p>{{ collection.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</div>
+<img class="pa wave-overlay" src="//cdn.shopify.com/s/files/1/0264/4076/1399/t/12/assets/wave-overlay.png?v=11608760819937612709">
+
+<div class="pb7 mb2 pt3" >
+
+  <div class="col">
+    <div class="reveal__container active">
+        <div class="reveal__component__1--fade-fast grid-container contained">
+            <div class="row align--center">
+                <div class="col c9--lg">
+                    <div class="row gutter--vertical align--center">
+                      {% for product in collection.products %}
+   <div class="col c6--sm c4--md id-{{ product.id }}">
+    <div class="product-card pb1">
+      {% include 'product-grid-item' with products_per_row %}
+    </div>
+    </div>
+    {% else %}
+      <p>There are no products in this view.</p>
+    {% endfor %}
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+</div>
+
+
+{% if paginate.pages > 1 %}
+<div class="pagination centered">
+  {{ paginate | default_pagination }}
+</div>
+{% endif %}
+
+{% endpaginate %}
+
+{% comment %}
+  JavaScript for collection sorting.
+{% endcomment %}
+<script>
+jQuery('.sort-by')
+  .val('{{ collection.sort_by | default: collection.default_sort_by }}')
+  .on('change', function() {
+    Shopify.queryParams.sort_by = jQuery(this).val();
+    location.search = jQuery.param(Shopify.queryParams).replace(/\+/g, '%20');
+  });
+</script>

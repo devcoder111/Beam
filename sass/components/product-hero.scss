@@ -1,0 +1,194 @@
+.hero__product-image {
+	height: 60vh;
+	border-bottom: 1px solid color(blue);
+
+	@include breakpoint(md) {
+		border-left: 1px solid color(blue);		
+		position: absolute;
+		left: 50%;
+		right: 0;
+		bottom: 0;
+		top: 0;
+		height: 100%;
+	}
+
+	@include breakpoint(lg) {
+		left: (100% / 12 * 5);
+	}
+}
+
+.hero__product-description {
+	max-width: 380px;
+	font-size: 18px;
+	line-height: 26px;
+	@include breakpoint(md) {
+		font-size: 14px;
+		line-height: 20px;
+	}
+	li {
+		margin-bottom: 12px;
+	}
+}
+
+.hero__ingredient-modal {
+	position: absolute;
+	top: 80px;
+	left: 0;
+	right: 0;
+	bottom: -1px;
+}
+
+.hero__ingredient-modal__scroll {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	min-height: 100%;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.hero__ingredient-modal__close {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.hero__ingredient-bg--mobile {
+	display: block;
+	height: 200px;
+	object-fit: cover;
+	object-position: center;
+	width: 100%;
+}
+
+
+
+
+/* Style the tab */
+.description-tab {
+	overflow: hidden;
+	.tablinks {
+		cursor: pointer;
+		opacity: .7;
+		transition: opacity 200ms ease-in-out;
+	}
+	.tablinks:hover {
+		opacity: 1;
+	}	
+  }
+  
+  /* Style the buttons that are used to open the tab content */
+  .description-tab button {
+	float: left;
+	outline: none;
+	cursor: pointer;
+	transition: 0.3s;
+  }
+  
+  /* Change background color of buttons on hover */
+  .description-tab button:hover {
+	  text-decoration: underline;
+  }
+  
+  /* Create an active/current tablink class */
+  .description-tab button.active {
+	text-decoration: underline;
+}
+  
+  /* Style the tab content */
+  .tabcontent {
+	display: none;
+	padding: 16px 0 16px 0;
+  }
+
+    /* Style the tab content */
+	.valuepropscontent {
+		display: none;
+		padding: 6px 0;
+	  }
+
+.hero__product-description .description-tab .active {
+	border-bottom: 1px solid #000;
+	opacity: 1;
+}
+
+
+.ingredients-item {
+    border: #2E368E solid 2px;
+    border-radius: 7px;
+    padding: 12px 20px;
+	background-color: #fff;	
+	margin-bottom: 16px;
+}
+.acc-content-ingredients .inner {
+	padding-bottom: 18px;
+}
+
+.valueprops {
+	cursor: pointer;
+	margin-bottom: 20px;
+	display: block;
+	opacity: .5;
+	transition: opacity 200ms ease-in-out;
+		@include breakpoint(md) {
+			display: inline-block;
+		}
+
+}
+.valueprops:hover, .valueprops.active {
+	opacity: 1;
+}
+.valueprops
+.link--wave:after {
+	animation-play-state: running;
+	opacity: 1;
+	margin-top: 6px;
+}
+
+.link--wave {
+	max-width: 100%;
+	margin: 0 auto;
+	@include breakpoint(md) {
+		max-width: 500px;
+		margin: 0;
+	}
+}
+.quote-container {
+	max-width: 760px;
+	min-width: 300px;
+	margin: 0 auto;
+	padding-right: 12px;
+	padding-left: 12px;
+}
+
+.elevate-list {
+	li {
+		margin-bottom: 30px;
+		padding-left: 10px;
+		font-size: 18px;
+		line-height: 1.3;
+		list-style: disc;
+		@include breakpoint(md) {
+			font-size: 22px;
+			line-height: 1.4;
+		}
+	}
+	
+}
+
+.tablinks {
+	font-size: 18px;
+	line-height: 40px;
+	@include breakpoint(md) {
+		font-size: 14px;
+		line-height: 24px;
+	}
+}
+.tabcontent ul {
+	margin-left: 24px;
+}
+.tabcontent li {
+	list-style: disc;
+}

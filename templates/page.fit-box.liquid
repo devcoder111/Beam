@@ -1,0 +1,404 @@
+
+<div class="mt4--md">
+  <div class="">
+      <picture>
+        <source
+          srcset="
+            {{ 'fitboxx-elevate-hero-2.jpg' | asset_url }}" media="(min-width: 800px)"
+        />
+        <img
+          class="mt4"
+          style="display: inline-block; height: auto; width: 100%;"
+          alt="Hero image"
+          src="{{ 'fitboxx-elevate-hero-mobile.jpg' | asset_url }}"
+        />
+      </picture>
+  </div>
+  <div class="bg--blue m0" style="margin-top: -20px;">
+      <div class="row p4 pb2 pb2--md">
+          <div class="col c4--md tc tl--md mb1 mb0--md">
+    <img style="max-height: 44px;" src="{{ 'beam-fitboxx-2.png' | asset_url }}">
+          </div>
+          <div class="col c8--md">
+            <h1 class="sans--large color--white fw--300 tc tr--md">
+                experience what better feels like.
+                </h1>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="mt2 mb0 mt3--md mb0--md">
+    <div
+      class="grid-container contained"
+    >
+      <div class="row align--center tc">
+        <div class="col c9--md c8--lg c7--xl c6--xxl">
+          <div class="mb0">
+            <h2 class="sans--medium color--blue fw--400 mt2 mt4--md mb2 tc hidden">
+                beam and fit boxx are partnering up to bring you better – better workouts, better wellness, better recovery. get ready to push your limits and find your better.
+
+            </h2>
+            <h1 class="sans--large color--blue mt2 mt4--md fw--400" style="text-align: center;">
+                enjoy <span class="fw--600">30% off</span> the first month of an elevate subscription with the code <span class="fw--600">FITBOXX</span>
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+<div class="mt7 mt3--md mb4 mb8--md">
+    <div class="container pt2 pb2--md">
+  
+    <div class="row tc">
+      <div class="col c4 c3--md mb2">
+          <img class="hide--md" style="width: 80%;" src="{{ 'veriety-1.png' | asset_url }}"/>
+          <img class="show--md" style="width: 40%;" src="{{ 'veriety-1.png' | asset_url }}"/>
+      </div>
+      <div class="col c4 c3--md mb2">
+          <img class="hide--md" style="width: 80%;" src="{{ 'veriety-2.png' | asset_url }}"/>
+          <img class="show--md" style="width: 40%;" src="{{ 'veriety-2.png' | asset_url }}"/>
+        </div>
+        <div class="col c4 c3--md mb2">
+          <img class="hide--md" style="width: 80%;" src="{{ 'veriety-3-1.png' | asset_url }}"/>
+          <img class="show--md" style="width: 40%;" src="{{ 'veriety-3-1.png' | asset_url }}"/>
+        </div>
+  
+  </div>
+  </div>
+  </div>
+  </div>
+  
+  
+  <div class="mb6 mt2 pt4 pb4 pt6--md pb8--md tc bg--blue-light">
+      <h2 class="fw--600 sans--large mb4 color--blue pr1 pl1">elevate hydration</h2>
+  
+            <div class="grid-container contained">
+                <div class="row align--center">
+                    <div class="col c9--lg">
+                        <div class="row gutter--vertical align--center">
+  
+                                  {% for product in collections.hydration-powders.products %}
+                                  <div class="col c6--sm c6--md hide-{{product.handle}}">
+                                      <div class="product-card pb1">
+                                          {% include 'product-grid-hydration' with 'two-per-row' %}
+                                      </div>
+                                  </div>
+                                  {% endfor %}
+  
+  
+  </div>
+  </div>
+  </div>
+  </div>
+  
+  </div>
+  
+ 
+  
+  
+  
+  <div class="mt5 mb4 mt6--md mb10--md">
+    <div class="container pt2--md pb2--md">
+      <div class="row align--center">
+          <div class="col c11--md c10--lg">
+              <img style="max-width: 40px;text-align:center;margin-right: auto;margin-left: auto;display:block" class="mb5" src="{{ 'drop.png' | asset_url }}">
+  
+      <h2 class="fw--600 sans--large mb3 color--blue tc mb6--md">the electrolyte pick-me-up<br class="show--md"/> you can take anywhere </h2>
+  
+        <div class="row">
+  
+            <div class="col c4--md c4--lg pt1--md mb1 mb3--md tc tl--md">
+                  <div class="description-tab">
+                      <div class="sans--medium fw--600 valueprops mb1" id="valuepropsDefaultOpen" onclick="openVP(event, 'vpHydration')">why hydration?<span class="link--wave db"></span></div>
+                      <div class="sans--medium fw--600 valueprops mb1" onclick="openVP(event, 'vpPower')">the power of three<span class="link--wave db"></span></div>
+                      <div class="sans--medium fw--600 valueprops mb1" onclick="openVP(event, 'vpSidekick')">mindfully-sourced<br> ingredients <span class="link--wave db"></span></div>
+                  </div>
+                </div>
+                <div class="col c1 hide--md"></div>
+  
+            <div class="col c10 c8--md c8--lg mb2 mb0--md">
+              <div id="vpHydration" class="valuepropscontent">
+                  <p>
+                      believe it or not, 75% of americans are chronically dehydrated. and while water is essential, H2O alone won’t always do the trick. that’s why we created clean electrolyte powders that deliver effective and fast hydration thanks to supercharged and super-hydrating ingredients like coconut water and himalyan sea salt. so whether you’re looking for everyday balance, energy or recovery support, our powders are here to give your body the hydration it craves. 
+                  </p>
+              </div>
+              <div id="vpPower" class="valuepropscontent">
+                  <p>
+                      with the variety pack, you’ll have a chance to experience all the benefits of our three unique electrolyte powders. balance has a potent blend of prebiotics and probiotics to support healthy digestion and immune function*. energy’s green coffee bean extract delivers an energizing boost while compounds like beetroot and vitamin b help your body convert dietary energy into physical energy. and last but not least, recovery restores collagen while branched-chain amino acids support tired muscles and help your body fight fatigue. 
+                  </p>
+              </div>
+              <div id="vpSidekick" class="valuepropscontent">
+                  <p>
+                      our electrolyte powders are not just a hydration solution, but elevated supplements to support hydration for each moment of your day. that’s why our ingredients are sourced responsibly and you’ll never find any added sugars, GMOs, or artificial sweeteners.
+                  </p>
+              </div>
+          </div>
+  
+      </div>
+  </div>
+  
+        </div>
+    </div>
+  </div>
+  </div>
+  
+
+
+<div class="mb0 mb0--md tc bg--blue p4 hidden" style="background-color: #B8CFEB;">
+    <h2 class="sans--medium color--blue fw--600" style="text-align: center;">
+        not ready? no worries! drop us your email and we’ll remind you later.
+    </h2>
+    <div style="max-width: 800px;margin: 0 auto;">
+        <div class="klaviyo-form-WQNZ8j"></div>
+  </div>
+</div>
+
+<style>
+  .eBCfRI.eBCfRI.eBCfRI.eBCfRI.eBCfRI.eBCfRI {padding-left: 18px !important;padding-right: 18px !important;}
+  @media only screen and (max-width: 600px) {
+  .kgtZbf.kgtZbf {display: block !important;}
+  .eBCfRI.eBCfRI.eBCfRI.eBCfRI.eBCfRI.eBCfRI {width: 100%;}
+  }
+</style>
+
+
+<div class="pb0 pb0--md" style="background-color:">
+    <div class="">
+    <div class="row align--middle tc mt2 mt0--md">
+        <div class="col hide--md c6--md c6--xl" style="padding: 0">
+            <img style="max-width: 100%; float: left;" class="" alt="Hero image - Sleep" src="{{ 'sweatcoin-secondary-2.jpg' | asset_url }}" />
+        </div>
+        <div class="col c6--md c6--xl">
+            <div class="pt5 pb3 pt2--md pt2--lg pr2 pl2">
+                <h3 class="sans--large color--blue tc fw--600 pb3" style="max-width: 600px; margin: 0 auto;">
+                text us to opt out or manage<br class="show--md">
+                your subscription at any time
+            </h3>
+            <h4 class="sans--medium tc" style="max-width: 600px; margin: 0 auto;">want to make changes to your subscription? no worries. you can text our dedicated subscription line to opt out after your trial, delay shipments, edit items, or manage your account! 
+            </h4>
+            </h4>
+            <div class="tc mt4 mb5 mt6--md"><a class="dib custom-button--wave-primary-top link--opacity pill add_to_cart_dream1" style="color: #fff !important; line-height: 2; background-color: #2f358e !important"  title="get yours now" href="/collections/hydration-powders">shop elevate</a></div>
+    
+        </div>
+        </div>
+        <div class="col show--md c6--md c6--xl" style="padding: 0">
+            <img style="max-width: 100%; float: left;" class="" alt="Hero image - Sleep" src="{{ 'sweatcoin-secondary-2.jpg' | asset_url }}" />
+    
+        </div>
+    </div>
+    </div>
+    </div>
+    
+    <div class="mb4 mb0--md mt0" style="background-color;">
+        <div class="">
+        <div class="row gutter--none align--middle tc">
+            <div class="col c6--md c6--xl">
+                <img class="" style="max-width: 100%; float: right;"  alt="Hero image - Sleep" src="{{ 'sweatcoin-dom.jpg' | asset_url }}" />
+            </div>
+            <div class="col c6--md c6--xl tc">
+                <div class="pt3 pt0--md pt0--lg mt0--md pr2 pl2">
+                    <h3 class="sans--medium color--blue mt6--lg tc fw--600 pb3" style="max-width: 500px; margin: 0 auto;">
+                        "as an endurance runner, proper hydration is something i’m constantly working on. beam's elevate line meets my body’s hydration needs throughout the day. i've tried a lot of hydration powders, and i love how clean and effective elevate is."
+                                </h3>
+                                <h4 class="sans--body tc"><span class="fw--600"> – dominique scott,<br> olympic runner and beam partner</span>
+    
+                </div>
+            </div>
+    
+        </div>
+        </div>
+        </div>
+
+        <div class="yotpo yotpo-main-widget" data-product-id="4671120670775" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" data-description="{{ product.description | escape }}"></div>
+
+
+
+<style>
+            .pill {
+        border-radius: 32px;
+        display: inline-block;
+        border: #2F358E;
+        transition: 200ms ease-in-out;
+        min-width: 230px
+    }
+    .pill:hover {
+        background-color: #E9F2FF;
+    }
+</style>
+
+<script>
+
+
+let accTitleIngredients = document.getElementsByClassName("acc-heading-ingredients");
+		let accContentIngredients = document.getElementsByClassName("acc-content-ingredients");
+		let singleModeIngredients = true;
+		
+		for( let j=0; j<accContentIngredients.length; j++ ){
+			let realHeightIngredients = accContentIngredients[j].offsetHeight;
+			accContentIngredients[j].setAttribute("data-height", realHeightIngredients + "px");
+			accContentIngredients[j].style.height = 0;
+		}
+		
+		for( let i=0; i<accTitleIngredients.length; i++ ){
+			accTitleIngredients[i].onclick = function(){
+				let openedAccIngredients = this.getAttribute('href').replace('#', '');
+
+				if( this.classList.contains("active") ){
+					this.classList.remove("active");
+					document.getElementById(openedAccIngredients).style.height = 0;
+					
+					return false;
+				}
+				
+				if( singleModeIngredients ){						
+					for(let k=0; k<accTitleIngredients.length; k++) {
+						accTitleIngredients[k].classList.remove("active");
+					}
+
+					for(let j=0; j<accContentIngredients.length; j++) {
+						accContentIngredients[j].style.height = 0;
+					}
+				}
+				
+				this.classList.add("active");
+				
+				document.getElementById(openedAccIngredients).style.height = accContentIngredients[i].getAttribute("data-height");
+				
+				return false;
+			}
+    }
+    
+
+
+
+let accTitleDesktop = document.getElementsByClassName("acc-heading-desktop");
+		let accContentDesktop = document.getElementsByClassName("acc-content-desktop");
+		let singleModeDesktop = true;
+		
+		for( let j=0; j<accContentDesktop.length; j++ ){
+			let realHeightDesktop = accContentDesktop[j].offsetHeight;
+			accContentDesktop[j].setAttribute("data-height", realHeightDesktop + "px");
+			accContentDesktop[j].style.height = 0;
+		}
+		
+		for( let i=0; i<accTitleDesktop.length; i++ ){
+			accTitleDesktop[i].onclick = function(){
+				let openedAccDesktop = this.getAttribute('href').replace('#', '');
+
+				if( this.classList.contains("active") ){
+					this.classList.remove("active");
+					document.getElementById(openedAccDesktop).style.height = 0;
+					
+					return false;
+				}
+				
+				if( singleModeDesktop ){						
+					for(let k=0; k<accTitleDesktop.length; k++) {
+						accTitleDesktop[k].classList.remove("active");
+					}
+
+					for(let j=0; j<accContentDesktop.length; j++) {
+						accContentDesktop[j].style.height = 0;
+					}
+				}
+				
+				this.classList.add("active");
+				
+				document.getElementById(openedAccDesktop).style.height = accContentDesktop[i].getAttribute("data-height");
+				
+				return false;
+			}
+    }
+    
+
+    let accTitle = document.getElementsByClassName("acc-heading");
+		let accContent = document.getElementsByClassName("acc-content");
+		let singleMode = true;
+		
+		for( let j=0; j<accContent.length; j++ ){
+			let realHeight = accContent[j].offsetHeight;
+			accContent[j].setAttribute("data-height", realHeight + "px");
+			accContent[j].style.height = 0;
+		}
+		
+		for( let i=0; i<accTitle.length; i++ ){
+			accTitle[i].onclick = function(){
+				let openedAcc = this.getAttribute('href').replace('#', '');
+
+				if( this.classList.contains("active") ){
+					this.classList.remove("active");
+					document.getElementById(openedAcc).style.height = 0;
+					
+					return false;
+				}
+				
+				if( singleMode ){						
+					for(let k=0; k<accTitle.length; k++) {
+						accTitle[k].classList.remove("active");
+					}
+
+					for(let j=0; j<accContent.length; j++) {
+						accContent[j].style.height = 0;
+					}
+				}
+				
+				this.classList.add("active");
+				
+				document.getElementById(openedAcc).style.height = accContent[i].getAttribute("data-height");
+				
+				return false;
+			}
+    }
+
+    function openVP(evt, cityName) {
+      // Declare all variables
+      var i, valuepropscontent, valueprops;
+    
+      valuepropscontent = document.getElementsByClassName("valuepropscontent");
+      for (i = 0; i < valuepropscontent.length; i++) {
+        valuepropscontent[i].style.display = "none";
+      }
+    
+      valueprops = document.getElementsByClassName("valueprops");
+      for (i = 0; i < valueprops.length; i++) {
+        valueprops[i].className = valueprops[i].className.replace(" active", "");
+      }
+    
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+    
+    document.getElementById("valuepropsDefaultOpen").click();
+    
+    
+    function openCity(evt, cityName) {
+      // Declare all variables
+      var i, tabcontent, tablinks;
+    
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+    
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+    
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+    
+    document.getElementById("defaultOpen").click();
+
+
+
+</script>

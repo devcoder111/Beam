@@ -1,0 +1,175 @@
+
+  <div class="swell-reward-beam mt6">
+    <!-- Banner Section Code Start -->
+      <div class="beam-banner">
+        <div class="banner-caption">
+          <span class="swell-icon-beam logo-icon"></span>
+          <img class="hide--md" style="max-width: 66%; margin: 40px auto 10px auto;" src="{{ 'rewards-logo-2.png' | asset_url }}">
+          <img class="show--md" style="max-width: 78%; margin: 0px auto 0px auto;" src="{{ 'rewards-logo-desktop.png' | asset_url }}">
+          <p class="caption-detail mt2--md fw--600">As a rewards member, you’ll get closer to earning exclusive rewards every time you shop.<br><br>
+          {% unless customer %}          <!-- Logout Section Sart -->
+            <ul class="swell-link-list">
+              <li class="swell-link">
+                <a href="/account" class="sign-up-btn">sign Up</a>
+              </li>
+              <li class="swell-link">
+                <a href="/account" class="sign-in-btn">sign In</a>
+              </li>
+            </ul>
+          <!-- Logout Section End -->
+          {% endunless %}
+        </div>
+      </div>
+    <!-- Banner Section Code End -->
+
+    {% if customer %}
+    <!-- Login Section Start -->
+      <div class="swell-login-section">
+        <div class="swell-container">
+          <div class="swell-heading-section">
+            <h3 class="swell-login-user">hi, {{ customer.first_name }}! <br> you have <span class="swell-point-balance">x</span> points.</h3>
+          </div>
+          <ul class="swell-link-list">
+            <li class="swell-link">
+              <a href="/cart" class="swell-redeem-now">Redeem Now</a>
+            </li>
+            <li class="swell-link">
+              <div class="swell-link-history swell-history-link">Rewards History</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    <!-- Login Section End -->
+    {% else %}
+    <!-- Work Section Code Start -->
+      <div class="how-it-work">
+        <div class="swell-container">
+          <div class="swell-heading-section">
+            <h2 class="swell-heading">how it works</h2>
+            <p class="swell-detail">Join rewards program today, earn points each time you shop and start saving by redeeming exclusive discount offers.</p>
+          </div>
+          <ul class="hiw-list">
+            <li class="list-items">
+              <div class="list-holder">
+                <div class="list-count">step 1:</div>
+                <h3 class="list-title">join</h3>
+              </div>
+            </li>
+            <li class="list-items">
+              <div class="list-holder">
+                <div class="list-count">step 2:</div>
+                <h3 class="list-title">earn</h3>
+              </div>
+            </li>
+            <li class="list-items">
+              <div class="list-holder">
+                <div class="list-count">step 3:</div>
+                <h3 class="list-title">redeem</h3>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    <!-- Work Section Code End -->
+
+    <!-- Campaign Section Code Start -->
+      <div class="swell-container">
+        <div class="campaign-section">
+          <div class="swell-heading-section">
+            <h2 class="swell-heading">ways to earn points</h2>
+          </div>
+          <div class="campaign-section-holder">
+            <div class="swell-campaign-sidebar-image">
+              <img src="{{ 'account-caps.jpg' | asset_img_url: 'master' }}" class="campaign-sidebar-img swell swell-desktop">
+              <img src="{{ 'account-caps.jpg' | asset_img_url: 'master' }}" class="campaign-sidebar-img swell swell-mobile">
+            </div>
+            <ul class="swell-campaign-list">
+              <div class="swell-referral-loader-campaigns">
+                <div class="lds-dual-ring"></div>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <!-- Campaign Section Code End -->
+    {% endif %}
+
+
+    <!-- Redeem Discount Section Code Start -->
+      <div class="redeem-discount">
+        <div class="swell-container">
+          <div class="redeem-discount-content">
+            <div class="tc" style="max-width: 700px; margin: 0 auto;">
+
+            <h2 class="sans--large fw--600 color--blue mb3">redeeming your hard-earned points is easy!</h2>
+
+
+
+<h5 class="sans--medium mb2">for one-time purchases, simply select your points via the dropdown to apply your discount at checkout. </h5> 
+
+
+<h5 class="sans--medium mb2">
+for new subscription purchases simply copy and paste the code below and apply at checkout. </h5> 
+
+
+<h5 class="sans--medium">
+for active subscriptions, copy the code below, select a current subscription product within your account and click "apply discount" and paste the code to apply the discount. 
+            </div>
+            <div class="yotpo-widget-instance" data-yotpo-instance-id="27857"></div>
+          </div>
+
+        </div>
+      </div>
+    <!-- Redeem Discount Section Code End -->
+    {% if customer %}
+    <!-- Campaign Section Code Start -->
+      <div class="swell-container">
+        <div class="campaign-section">
+          <div class="swell-heading-section">
+            <h2 class="swell-heading">ways to earn points</h2>
+          </div>
+          <div class="campaign-section-holder">
+            <div class="swell-campaign-sidebar-image">
+              <img src="{{ 'account-caps.jpg' | asset_img_url: 'master' }}" class="campaign-sidebar-img swell swell-desktop">
+              <img src="{{ 'account-caps.jpg' | asset_img_url: 'master' }}" class="campaign-sidebar-img swell swell-mobile">
+            </div>
+            <ul class="swell-campaign-list logged-in">
+              <div class="swell-referral-loader-campaigns">
+                <div class="lds-dual-ring"></div>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <!-- Campaign Section Code End -->
+    {% endif %}
+  </div>
+
+  {% include 'rewards_faqs' %}
+
+
+  <style>
+
+.swell-icon-follow-on-twitter .path1:before {
+    content: "\e904";
+    color: rgb(156, 192, 216);
+    -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  }
+  .swell-icon-follow-on-twitter .path2:before {
+    content: "\e918";
+    margin-left: -0.9228515625em;
+    color: rgb(48, 59, 137);
+  }
+
+  .swell-icon-follow-on-twitter-hover .path1:before {
+    content: "\e918";
+    color: rgb(156, 192, 216);
+  }
+  .swell-icon-follow-on-twitter-hover .path2:before {
+    content: "\e904";
+    margin-left: -0.9228515625em;
+    color: rgb(48, 59, 137);
+  }
+
+  </style>

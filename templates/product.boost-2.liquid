@@ -1,0 +1,559 @@
+{% assign add_to_cart = 'Add to cart' %}
+{% assign sold_out = 'Sold Out' %}
+{% assign unavailable = 'Unavailable' %}
+
+
+<img class="pa wave-overlay" src="{{ 'wave-overlay.png' | asset_url }}"/>
+<meta itemprop="url" content="{{ shop.url }}{{ product.url }}" />
+<meta itemprop="image" content="{{ product | img_url: 'grande' }}" />
+
+
+
+
+<div class="productView container mt7 mt4--md">
+  <div itemscope itemtype="http://schema.org/Product">
+
+    <div data-event-type="product" data-entity-id="{{product.id}}"
+    data-name="{{product.title}}">
+
+
+    {% assign variant = product.selected_or_first_available_variant  %}
+    {% assign featured_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image %}
+
+    <div class="mt2 pt4">
+      <form action="/cart/add" data-productid="{{ product.id }}" method="post" class="product-form" id="add-to-cart" enctype="multipart/form-data">
+
+        {% if product.available %}{% include 'subscription-product-dream' %}{% endif %} 
+        <div class="container hide--lg">
+
+        <div class="row">
+          <div class="col c5">
+
+            <div class="mb1">
+              <h1 class="sans--medium-large fw--300" style="line-height: 1" temprop="name">{{product.title}}</h1>
+              <p class="sans--small fw--600 color--gray">{{ product.type }}</p>
+            </div>
+
+          </div>
+          <div class="col c7">
+   
+      <div class="tr">
+          {% include 'stars' %}
+          <div class="sans--small">
+            <div id="mobileProductPrice" itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="delta tr">
+              <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+              {% if product.available %}
+              <link itemprop="availability" href="http://schema.org/InStock" />
+              {% else %}
+              <link itemprop="availability" href="http://schema.org/OutOfStock" />
+              {% endif %}
+              <p>
+                {% assign variant = product.selected_or_first_available_variant %}
+                {% if product.compare_at_price > product.price %}
+                <span class=" on-sale" itemprop="price">{{ variant.price | money }}</span>
+                <s class="product-compare-price">{{ variant.compare_at_price | money }}</s>
+                {% else %}
+                <span class="" itemprop="price">{{ variant.price | money }}</span>
+                {% endif %}
+              </p>
+            </div>
+         
+          </div>       
+        </div>
+      </div>
+    </div>
+  </div>
+        <div class="row">
+
+ 
+
+
+            <div class="col c6--md c7--lg">
+
+              <div class="of--hidden" data-image-gallery>
+      
+                <div class="pdp-images slideshow product-photo-container">
+                  {% for image in product.images%}
+                  {% if forloop.index != 6 %}
+                  {% if image != featured_image %}
+                  {% if image != product.images[0] %}
+                    <div class="slide slide-{{ forloop.index }}">
+                      <img src="{{ image.src | product_img_url: '800x600', crop: 'center' }}" >
+                    </div>
+                  {% endif %}
+                  {% endif %}
+                  {% endif %}
+                  {% endfor %}
+                </div>
+
+              </div>
+
+
+            </div>
+            <div class="col c6--md c5--lg">
+                <div class="pl1--md">
+                    <div class="container-mobile">
+                        <div class="">
+                            <div class="">
+                                <div class="pt0 pt3--lg">
+
+                                    <div class="mb1 show--lg">
+                                        <h1 class="sans--large fw--300" temprop="name">{{product.title}}</h1>
+
+                                        <p class="sans--small fw--600 color--gray">{{ product.type }}</p>
+
+                                        {% include 'stars' %}
+
+                                    </div>
+                                    <div class="mb2">
+
+        
+
+                                        <div class="hero__product-description rich-text" itemprop="description">
+                                            {{ product.description }}                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="media__fixed">
+
+                                {% if product.available and product.variants.size > 1 %}
+                                {% render 'swatch' for product.options as swatch %}
+                                {% endif %}
+
+                                {% assign hide_default_title = false %}
+                                {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+                                  {% assign hide_default_title = true %}
+                                {% endif %}       
+                                <div id="product-variants" class="select--product-option{% if hide_default_title %} hidden{% endif %}">
+                                  <select id="product-select" class="form-select" name="id" data-productid="{{ product.id }}">
+                                  {% for variant in product.variants %}
+                                    <option class="form-select" {% if variant == product.selected_or_first_available_variant %} selected{% endif %} value="{{ variant.id }}">
+                                    {{ variant.title }} - {{ variant.price | money }}
+                                    </option>
+                                  {% endfor %}
+                                  </select>
+                                </div>  
+
+                                <div class="sans--small pb2">
+                                  <div id="product-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="delta">
+                                    <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+                                    {% if product.available %}
+                                    <link itemprop="availability" href="http://schema.org/InStock" />
+                                    {% else %}
+                                    <link itemprop="availability" href="http://schema.org/OutOfStock" />
+                                    {% endif %}
+                                    <p>
+                                      {% assign variant = product.selected_or_first_available_variant %}
+                                      {% if product.compare_at_price > product.price %}
+                                      <span class="product-price on-sale" itemprop="price">{{ variant.price | money }}</span>
+                                      <s class="product-compare-price">{{ variant.compare_at_price | money }}</s>
+                                      {% else %}
+                                      <span class="product-price sans--medium fw--600" itemprop="price">{{ variant.price | money }}</span>
+                                      {% endif %}
+                                    </p>
+                                  </div>
+                               
+                                </div>
+
+                                
+
+
+                                <div id="backorder" class="hidden tc">
+                                  <p>{{ '%s is back-ordered. We will ship it separately in 10 to 15 days.' | replace: '%s', '<span id="selected-variant"></span>' }}</p>
+                                </div>
+                                  
+                                <div id="product-add" class="form-action">
+                                  <div class="qtydiv">
+                                    <div class="qtybox">
+                                      <span class="btnqty qtyminus icon-minus">-</span>
+                                      <input type="text" id="productQuantity" name="quantity" value="1" min="1" class="quantity-selector quantity-input" readonly="">
+                                      <span class="btnqty qtyplus icon-plus">+</span>
+                                    </div>
+                            </div>
+                                  <input type="submit" name="add" id="add" class="button button--primary" value="{{ add_to_cart | escape }}">
+                                </div>
+
+                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+  </div>
+</form>
+</div>
+
+<div class="container mt5 mb6 hide--md">
+  <h5 class="mb1"><strong>FAQs</strong></h5>
+  <div class="accordion bt--gray">
+    <div class="item">
+      <a href="#acc1" class="acc-heading disable-focus-ring">do you ship internationally?  <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+  
+      <section id="acc1" class="acc-content">
+        <div class="inner">
+          unfortunately, we are not able to ship outside of the united states at this time. 
+        </div><!-- / .inner -->
+      </section>
+    </div><!-- / .item -->
+  
+
+    <div class="item">
+      <a href="#acc3" class="acc-heading disable-focus-ring"> what kind of analysis is performed on your products? <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+  
+      <section id="acc3" class="acc-content">
+        <div class="inner">
+          all of beam’s products are tested in-house and by third-party labs to ensure that the right concentration of compounds is present.
+        </div><!-- / .inner -->
+      </section>
+    </div><!-- / .item -->
+
+  </div><!-- / .accordion -->
+
+  <div class="mt3 tc">
+    <a href="https://beamtlc.com/pages/sms-support" class="fw--600 underline color--primary">need help? text us!</a>
+  </div>
+
+
+</div>
+<div class="mt6 mb6"></div>
+
+
+<div class="show--md big-wave" style="background-color: #E6F1FF;">
+  <h2 class="fw--600 sans--large mb2 color--blue tc pr1 pl1">you’ve got questions,<br /> we’ve got answers</h2>
+
+  <div class="container">    
+    <div class="row align--center">
+    
+     
+      <div class="col c9--md c8--lg pt3--md mb4 pb3 tc tl--md">
+        <div class="accordion">
+    <div class="item">
+      <a href="#acc1Desk" class="acc-heading-desktop sans--medium mt1 mb1 disable-focus-ring">do you ship internationally?  <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+  
+      <section id="acc1Desk" class="acc-content-desktop">
+        <div class="inner">
+          unfortunately, we are not able to ship outside of the united states at this time. 
+        </div><!-- / .inner -->
+      </section>
+    </div><!-- / .item -->
+  
+  
+    <div class="item">
+      <a href="#acc3Desk" class="acc-heading-desktop sans--medium mt1 mb1 disable-focus-ring">what kind of analysis is performed on your products? <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+  
+      <section id="acc3Desk" class="acc-content-desktop">
+        <div class="inner">
+          all of beam’s products are tested in-house and by third-party labs to ensure that the right concentration of compounds is present.
+        </div><!-- / .inner -->
+      </section>
+    </div><!-- / .item -->
+
+
+
+  </div><!-- / .accordion -->
+<div class="mt3">
+  <a href="/pages/support" class="mr2 button--wave-primary-bottom">visit faq’s</a>
+  <a href="" class="mr2 button--wave-primary-bottom hidden">need help?</a>
+</div>
+
+</div>
+
+    </div>
+
+
+    </div>
+
+</div>
+
+
+
+{% include 'only-the-best' %}
+
+{% include 'brands' %}
+
+<div class="yotpo yotpo-main-widget" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" data-description="{{ product.description | escape }}"></div>
+
+{% include 'klaviyo' %}
+    
+        
+    {% comment %}
+      Adding support for product options. See here for details:  
+      http://docs.shopify.com/support/your-website/themes/can-i-make-my-theme-use-products-with-multiple-options
+    {% endcomment %}
+    <script src="https://widget.sezzle.com/v1/javascript/price-widget?uuid=e60e7d5f-8b5c-4c2c-ae89-8f6f3099dbba"></script>
+
+    
+    <script>
+
+
+
+
+// Get the modal
+var modal = document.getElementById("detailsModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("detailsModalBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+let accTitleDesktop = document.getElementsByClassName("acc-heading-desktop");
+		let accContentDesktop = document.getElementsByClassName("acc-content-desktop");
+		let singleModeDesktop = true;
+		
+		for( let j=0; j<accContentDesktop.length; j++ ){
+			let realHeightDesktop = accContentDesktop[j].offsetHeight;
+			accContentDesktop[j].setAttribute("data-height", realHeightDesktop + "px");
+			accContentDesktop[j].style.height = 0;
+		}
+		
+		for( let i=0; i<accTitleDesktop.length; i++ ){
+			accTitleDesktop[i].onclick = function(){
+				let openedAccDesktop = this.getAttribute('href').replace('#', '');
+
+				if( this.classList.contains("active") ){
+					this.classList.remove("active");
+					document.getElementById(openedAccDesktop).style.height = 0;
+					
+					return false;
+				}
+				
+				if( singleModeDesktop ){						
+					for(let k=0; k<accTitleDesktop.length; k++) {
+						accTitleDesktop[k].classList.remove("active");
+					}
+
+					for(let j=0; j<accContentDesktop.length; j++) {
+						accContentDesktop[j].style.height = 0;
+					}
+				}
+				
+				this.classList.add("active");
+				
+				document.getElementById(openedAccDesktop).style.height = accContentDesktop[i].getAttribute("data-height");
+				
+				return false;
+			}
+    }
+    
+
+    let accTitle = document.getElementsByClassName("acc-heading");
+		let accContent = document.getElementsByClassName("acc-content");
+		let singleMode = true;
+		
+		for( let j=0; j<accContent.length; j++ ){
+			let realHeight = accContent[j].offsetHeight;
+			accContent[j].setAttribute("data-height", realHeight + "px");
+			accContent[j].style.height = 0;
+		}
+		
+		for( let i=0; i<accTitle.length; i++ ){
+			accTitle[i].onclick = function(){
+				let openedAcc = this.getAttribute('href').replace('#', '');
+
+				if( this.classList.contains("active") ){
+					this.classList.remove("active");
+					document.getElementById(openedAcc).style.height = 0;
+					
+					return false;
+				}
+				
+				if( singleMode ){						
+					for(let k=0; k<accTitle.length; k++) {
+						accTitle[k].classList.remove("active");
+					}
+
+					for(let j=0; j<accContent.length; j++) {
+						accContent[j].style.height = 0;
+					}
+				}
+				
+				this.classList.add("active");
+				
+				document.getElementById(openedAcc).style.height = accContent[i].getAttribute("data-height");
+				
+				return false;
+			}
+    }
+    
+
+
+$('.qtybox .btnqty').on('click', function(){
+          var qty = parseInt($(this).parent('.qtybox').find('.quantity-input').val());
+          if($(this).hasClass('qtyplus')) {
+            qty++;
+          }else {
+            if(qty > 1) {
+              qty--;
+            }
+          }
+          qty = (isNaN(qty))?1:qty;
+          $(this).parent('.qtybox').find('.quantity-input').val(qty);
+        }); 
+
+
+      $('.pdp-images.slideshow').slick({
+      autoplay: true,
+      slidesToShow: 1,
+       slidesToScroll: 1,
+      fade: true,
+      useTransform: true,
+      arrows: true,
+      dots: true,
+      autoplaySpeed: 5000,
+      adaptiveHeight: false,
+      pauseOnHover: true,
+      customPaging: function(slick,index) {
+                        var targetImage = slick.$slides.eq(index).find('img').attr('src');
+                        return '<img src=" ' + targetImage + ' "/>';
+                    },
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            fade: false
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            fade: false,
+            arrows: false,
+            dots: true,
+            customPaging: function (slider, i) {
+          return $('<button type="button" />').text(i + 1);
+        },
+            lazyLoad: $(this).find('[data-lazy]').length > 0 ? 'progressive' : null
+          }
+        }
+      ]
+    });
+    
+    
+    
+    
+    var selectCallback = function(variant, selector) {
+    
+  
+  // BEGIN SWATCHES
+  if (variant) {
+    var form = jQuery('#' + selector.domIdPrefix).closest('form');
+    for (var i=0,length=variant.options.length; i<length; i++) {
+      var radioButton = form.find('.swatch[data-option-index="' + i + '"] :radio[value="' + variant.options[i] +'"]');
+      if (radioButton.size()) {
+        radioButton.get(0).checked = true;
+      }
+    }
+  }
+  // END SWATCHES
+  
+  
+      if (variant) {
+        // Swap image.
+        if (variant.featured_image) {
+          var newImage = variant.featured_image; // New image object.
+          var mainImageDomEl = jQuery('.product-photo-container img')[0]; // DOM element of main image we need to swap.
+          Shopify.Image.switchImage(newImage, mainImageDomEl, switchImage); // Define switchImage (the callback) in your theme's JavaScript file.
+        }
+        
+        // Selected a valid variant that is available.
+        if (variant.available) {
+              
+          // Enabling add to cart button.
+          jQuery('#add').removeClass('disabled').prop('disabled', false).val({{ add_to_cart | json }});
+        
+          // If item is backordered yet can still be ordered, we'll show special message.
+          if (variant.inventory_management && variant.inventory_quantity <= 0) {
+            jQuery('#selected-variant').html({{ product.title | json }}{% unless hide_default_title %} + ' - ' + variant.title{% endunless %});
+            jQuery('#backorder').removeClass("hidden");
+          } else {
+            jQuery('#backorder').addClass("hidden");
+          }
+          
+        } else {
+          // Variant is sold out.
+          jQuery('#backorder').addClass('hidden');
+          jQuery('#add').val({{ sold_out | json }}).addClass('disabled').prop('disabled', true);       
+        }
+        
+        // Whether the variant is in stock or not, we can update the price and compare at price.
+        if ( variant.compare_at_price > variant.price ) {
+          jQuery('#product-price').html('<span class="product-price sans--medium on-sale">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") +'</span>'+'&nbsp;<s class="product-compare-price">'+Shopify.formatMoney(variant.compare_at_price, "{{ shop.money_format }}")+ '</s>');
+          jQuery('#mobileProductPrice').html('<span class="topProductPrice on-sale">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") +'</span>'+'&nbsp;<s class="product-compare-price">'+Shopify.formatMoney(variant.compare_at_price, "{{ shop.money_format }}")+ '</s>');
+
+        } else {
+          jQuery('#mobileProductPrice').html('<span class="topProductPrice fw--600">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") + '</span>' );
+          jQuery('#product-price').html('<span class="product-price sans--medium fw--600">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") + '</span>' );
+        }         
+      } else {
+        // variant doesn't exist.
+        jQuery('#product-price, mobileProductPrice').empty();
+        jQuery('#backorder').addClass('hidden');
+        jQuery('#add').val({{ unavailable | json }}).addClass('disabled').prop('disabled', true);
+      }      
+    
+     
+    };
+      
+    jQuery(function($) {
+    
+      new Shopify.OptionSelectors('product-select', { product: {{ product | json }}, onVariantSelected: selectCallback, enableHistoryState: true });
+      
+      // Add label if only one product option and it isn't 'Title'.
+      {% if product.options.size == 1 and product.options.first != 'Title' %}
+        $('.selector-wrapper:eq(0)').prepend('<label class="form-label form-label--alternate form-label--inlineSmall">{{ product.options.first }}</label>');
+      {% endif %}
+    
+    });
+    
+    Shopify.Image.preload({{ product.images | json }}, 'grande');
+    Shopify.Image.preload({{ product.images | json }}, '1024x1024');
+    
+  
+  
+  jQuery(function() {
+    jQuery('.swatch :radio').change(function() {
+      var optionIndex = jQuery(this).closest('.swatch').attr('data-option-index');
+      var optionValue = jQuery(this).val();
+      jQuery(this)
+        .closest('form')
+        .find('.single-option-selector')
+        .eq(optionIndex)
+        .val(optionValue)
+        .trigger('change');
+    });
+  });
+  
+  
+  
+    </script>
+

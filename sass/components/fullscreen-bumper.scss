@@ -1,0 +1,9 @@
+.fullscreen-bumper {
+	margin-top: -50%;
+	position: relative;
+	z-index: -10;
+	
+	@include breakpoint(md) {
+		margin-top: -30%;
+	}
+}

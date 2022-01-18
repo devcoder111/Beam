@@ -1,0 +1,205 @@
+<div class="pt2 mt0 mb0 mt3--md mb0--md" style="background-color: #F6FAFF;">
+    <div class="tc pt10 pb4 pr"  >     		
+			<img class="pt10 pb5" src="{{ 'lot-page-icon.png' | asset_url }}"/>
+            <h2 class="sans--large fw--600 mb0 ws--pre-line color--blue">certificate of quality assurance <br>and third-party lab results
+            </h2>      
+        </div>
+        <div class="pt0 pb2--md pr" >
+            <div class="pr m4--md mt0--md">
+                <div class="grid-container contained" >
+                    <div class="row align--center">                        
+                        <div class="col c8--md c8--lg pt1--md">
+                            <div class="rich-text ">
+                                <p class="sans--body text-center">the variety pack brings you all the benefits of elevate balance, energy and recovery in one convenient box.
+									 balance keeps your gut happy (pre + probiotics), energy sustains your output (citrulline + green coffee bean extract) 
+									 while recovery helps restore collagen and support joint health (collagen peptides + BCAA).* five servings of each product
+									  included, elevate hydration does not contain cbd.
+                                </p>
+                            </div>                                               
+                        </div>
+                    </div>
+					<div class="row align--center">
+						<div class="col c12--sm c4--md c4--lg pt5--md">
+							<div class="search-line">
+								<input class="search-lot" placeholder="lot number..."/>
+								<button class="sans--body search-lot__btn">search</button>
+							</div>							
+						</div>
+					</div>
+					<div class="row align--center">
+						<div class="col c12--sm c8--md c8--lg c6--xl c4--xxl pt5--md">
+							<div class="row align--center mb8" id="search-resut">
+								<p class="sans--medium-large mb2 color--blue pt3 fw--600 no-result__text">oops! no results found</p>
+								<div class="lot-explain">
+									<p class="fw--600 sans--body mt6 mb2 color--blue lowercase">
+										how do I located my lot number?
+									</p>
+									<p class="fw--400 sans--body mb1 lowercase">
+										Lorem ipsum dolor site amet, consectetur adipiscing elit, sed od eiusmod tempor incididunt utet
+									</p>
+								</div>
+								<div class="lot-data no-result">
+									<div class="lot-heading">
+										<p class="db tc fw--600 sans--body mb1 color--blue lowercase">
+											results:
+										</p>
+									</div>
+									<div class="lot-result">
+									</div>									
+								</div>							
+							</div>	
+						</div>
+					</div>
+					
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<style>
+	input.search-lot {
+		padding: 10px 100px 10px 20px;
+		border: none;
+		border-bottom: 1px solid #000;
+	}
+	input.search-lot::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    	color:    #2f358e;
+	}
+	input.search-lot:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+		color:    #2f358e;
+		opacity:  1;
+	}
+	input.search-lot::-moz-placeholder { /* Mozilla Firefox 19+ */
+		color:    #2f358e;
+		opacity:  1;
+	}
+	input.search-lot:-ms-input-placeholder { /* Internet Explorer 10-11 */
+		color:    #2f358e;
+	}
+	input.search-lot::-ms-input-placeholder { /* Microsoft Edge */
+		color:    #2f358e;
+	}
+
+	input.search-lot::placeholder { /* Most modern browsers support this now. */
+		color:    #2f358e;
+	}
+	input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+	/* Firefox */
+	input[type=number] {
+		-moz-appearance: textfield;
+	}
+	.lot-data {
+		background-color: #fff;
+		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.1);
+		border-radius: 5px;	
+	}
+	.lot-heading, .lot-container {
+		display: flex;
+		align-items: center;
+		padding: 20px 40px;
+	}
+	.lot-heading {
+		justify-content: end;
+		border-bottom: 1px solid rgba(0,0,0,0.1);
+	}
+	.lot-heading p {
+		margin-bottom: 0px;
+	}
+	.lot-container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.lot-view a {
+		background-color: #DBECFE;
+		padding: 5px 20px;
+		border-radius: 4px;
+		border: 1px solid rgba(0,0,0,0.1);
+	}
+	.search-line {
+		position: relative;
+	}
+	.search-line input {
+		width: 100%;
+		color: #2f358e;
+	}
+	.search-lot__btn {
+		background-color: #2f358e;
+		color: #fff;
+		padding: 5px 30px;
+		border-radius: 50px;
+		position: absolute;
+		right: 0px;
+	}
+	.lot-data.no-result {
+		display: none;
+	}
+	.lot-data.result {
+		display: block;
+	}
+	.no-result__text {
+		display: none;
+	}
+	.no-result__text.show {
+		display: block;
+	}
+	.lot-explain.hide {
+		display: none;		
+	}
+</style>
+
+<script>	
+	$(".search-lot__btn").click(function(){
+		var lotnumber = $("input.search-lot").val();		
+		var lotlink = "";			
+		var loopbool = false;
+		var url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTu7trgyvPnNWx4-kqCFvIDnQE8ntLqnwhptnygu-MmPux4boE6s4Q7eIymi861PwNkm5qPV00PMGBk/pub?gid=0&single=true&output=csv";
+		$(".no-result__text").removeClass("show");
+		$(".lot-explain").removeClass("hide");	
+		$(".lot-data").addClass("no-result").removeClass("result");	
+		$(".lot-result").empty();
+		$.ajax({
+			url: url,
+			success: function (data) {		
+				var item = data.split("\n");
+				$.each(item, function (i, ioo) {				
+						var pdfline = ioo.split(",");
+						var pdfnumber = pdfline[0];
+						var pdflink = pdfline[1];
+						if(lotnumber == pdfnumber) {
+								$(".lot-data").removeClass("no-result").addClass("result");
+								loopbool = true;
+								lotlink = pdfline[1];
+								var temp = lotlink.split("/");
+								var filename = temp[temp.length - 1].split("?")[0]									
+								$(".lot-explain").addClass("hide");				
+								
+								$(".lot-result").append('<div class="lot-container">' +
+										'<div class="lot-number">' + 
+											'<p class="sans--small fw--400 ">' + filename + '</p>' +
+										'</div>' +
+										'<div class="lot-view">' +
+											'<a target="_blank" class="sans--body color--blue" href="' + lotlink + '" >view</a>' +
+										'</div>' + 
+									'</div>');									
+						}else {	
+							console.log("Ooop");						
+						}
+								
+				
+				});
+				if(loopbool == false) {					
+					$(".no-result__text").addClass("show");				
+				}				
+			},
+			error: function (err) {				
+			}
+		});		
+	});	
+</script>

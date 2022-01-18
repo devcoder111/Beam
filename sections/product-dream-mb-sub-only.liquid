@@ -1,0 +1,1038 @@
+{% assign add_to_cart = 'subscribe' %}
+{% assign sold_out = 'Sold Out' %}
+{% assign unavailable = 'Unavailable' %}
+{% assign product_id = 4528614113335 %}
+
+<div class="productView container mt3 mb4 hide--md">
+    <div itemscope itemtype="http://schema.org/Product">
+
+        <div data-event-type="product" data-entity-id="{{product.id}}" data-name="{{product.title}}">
+
+
+            {% assign variant = product.selected_or_first_available_variant %}
+            {% assign featured_image = product.selected_or_first_available_variant.featured_image | default:
+            product.featured_image %}
+
+            <div class="mt0 mt2--md pt4">
+                <form action="/cart/add" data-productid="{{ product.id }}" method="post" class="product-form"
+                    id="add-to-cart" enctype="multipart/form-data">
+                    <div class="container">
+                        <div class="tl">
+                            {% include 'stars-dream' %}
+                        </div>
+                        <div class="mb1">
+                            <h1 class="sans--medium-large fw--600 color--blue"
+                                style="line-height: 1; margin-bottom: 4px;" temprop="name">wake up with theSkimm. wind down with dream.</h1>
+                            <p class="sans--small fw--600 color--gray">{{ product.type }}</p>
+                        </div>
+					</div>
+					<div class="of--hidden" data-image-gallery>
+                        <div class="pdp-images slideshow slideshow-mobile product-photo-container">
+                            {% for image in product.images%}
+                            {% if forloop.index != 6 %}
+                            {% if image != featured_image %}
+                            {% if image != product.images[0] %}
+                            <div class="slide slide-{{ forloop.index }}">
+                                <img src="{{ image.src | product_img_url: '800x600', crop: 'center' }}">
+                            </div>
+                            {% endif %}
+                            {% endif %}
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+
+                    </div>
+
+
+                    <div class="container">
+                        <div class="pl1--md">
+                            <div class="">
+                                <div class="">
+                                    <div class="">
+                                        <div class="pt0 pt3--lg">
+
+
+                                            <div class="hero__product-description rich-text" itemprop="description">
+                                                {{ product.description }}
+                                            </div>
+                                            <p id="detailsModalBtn1"
+                                                class="mt2 mb2 fw--600 hero__product-description pointer underline color--blue">
+                                                <span class="hide--md">tap</span><span class="show--md">click</span> for nutrition info</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media__fixed">
+
+                                    {% if product.available and product.variants.size > 1 %}
+                                    {% render 'swatch' for product.options as swatch %}
+                                    {% endif %}
+
+                                    {% assign hide_default_title = false %}
+                                    {% if product.variants.size == 1 and product.variants.first.title contains 'Default'
+                                    %}
+                                    {% assign hide_default_title = true %}
+                                    {% endif %}
+                                    <div id="product-variants"
+                                        class="select--product-option{% if hide_default_title %} hidden{% endif %}">
+                                        <select id="product-select" class="form-select" name="id"
+                                            data-productid="{{ product.id }}">
+                                            {% for variant in product.variants %}
+                                            <option class="form-select" {% if
+                                                variant==product.selected_or_first_available_variant %} selected{% endif
+                                                %} value="{{ variant.id }}">
+                                                {{ variant.title }} - {{ variant.price | money }}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <div class="mt3 mb3" style="margin-left: -40px; margin-right: -40px;">
+                                        <div class="" style="background-color: #f0f0ff;">
+                                            <div class="row align--middle">
+                                                <div class="col c2 c1--md"></div>
+                                                <div class="col c3" style="margin-top: -10px;margin-bottom: -16px;">
+                                                    <img class="pl1--md" style="max-width: 100%;"
+                                                        src="{{ 'mug-frother_combo1.png' | asset_url }}">
+                                                </div>
+                                                <div class="col c5 c8--md">
+                                                    <p class="sans--small tc tl--md fw--600 color--blue">
+                                                        subscription includes a beam mug + frother </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="sub-only">
+                             
+                                        <div class="sans--body">
+                                            <p class="fl fw--600 color--blue">subscribe & save 20%</p>
+                                            <div id="product-price" itemprop="offers" itemscope
+                                                itemtype="http://schema.org/Offer" class="fr delta">
+                                                <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+                                                {% if product.available %}
+                                                <link itemprop="availability" href="http://schema.org/InStock" />
+                                                {% else %}
+                                                <link itemprop="availability" href="http://schema.org/OutOfStock" />
+                                                {% endif %}
+                                                <p>
+                                                    {% assign variant = product.selected_or_first_available_variant %}
+                                                    {% if product.compare_at_price > product.price %}
+                                                    <span class="product-price color--blue fw--600 on-sale" itemprop="price">{{ variant.price |
+                                                        money }}</span>
+                                                    <s class="product-compare-price">{{ variant.compare_at_price | money
+                                                        }}</s>
+                                                    {% else %}
+                                                    <span class="product-price sans--medium fw--600" itemprop="price">{{
+                                                        variant.price | money }}</span>
+                                                    {% endif %}
+                                                </p>
+                                            </div>
+    
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="sans--small color--blue">monthly subscription; change or cancel anytime</div>
+    
+                                        </div>  
+    
+
+
+                                        <div class="sans--body bg-light-gray tc p2 pb3 pl1 pr1">use the code <span class="fw--600 color--blue">THESKIMM</span> for an additional <span class="fw--600 color--blue">15% off</span></div>
+
+
+                                    <div id="backorder" class="hidden tc">
+                                        <p>{{ '%s is back-ordered. We will ship it separately in 10 to 15 days.' |
+                                            replace: '%s', '<span id="selected-variant"></span>' }}</p>
+                                    </div>
+
+                                    <div id="product-add" class="form-action">
+                                        <div class="qtydiv">
+                                            <div class="qtybox">
+                                                <span class="btnqty qtyminus icon-minus">-</span>
+                                                <input type="text" id="productQuantity" name="quantity" value="1"
+                                                    min="1" class="quantity-selector quantity-input" readonly="">
+                                                <span class="btnqty qtyplus icon-plus">+</span>
+                                            </div>
+                                        </div>
+                                        <a title="add tp cart" id=""
+                    class="add_to_cart_dream1 button button--primary pt1 pb1 tc fw--800">subscribe 
+                </a>
+                                    </div>
+
+                                    {% include 'guarantee' %}
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+        </form>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<div class="mt10 pt2 pr color--primary of--hidden show--md bg--blue-light hero--desktop">
+    <picture class="">
+        <source srcset="{{ 'hero-dream-NEW-V2.jpg' | asset_url }}" media="(min-width: 800px)" />
+        <img class="hero__cover" alt="Hero image - Sleep" src="{{ 'hero-dream-NEW-V2.jpg' | asset_url }}" />
+    </picture>
+    <div class="push-up full-width mt4">
+        <div class="grid-container contained">
+            <div class="row mt0 pt3 pt0--md mt0--md mb2 pb0--md mb0--md">
+                <div class="col c4--md c6--lg c7--xl c8--xxxl ">
+                </div>
+                <div class="col c12 c12--sm c7--md c6--lg c5--xl c4--xxxl show--md bg--white rounded-more mb4"
+                    style="max-width: 520px !important;">
+                    <div class="p3" itemscope itemtype="http://schema.org/Product">
+
+                        <div data-event-type="product" data-entity-id="{{product.id}}" data-name="{{product.title}}">
+
+
+                            {% assign variant = product.selected_or_first_available_variant %}
+                            {% assign featured_image = product.selected_or_first_available_variant.featured_image |
+                            default: product.featured_image %}
+
+                            <form action="/cart/add" data-productid="{{ product.id }}" method="post"
+                                class="product-form" id="add-to-cart" enctype="multipart/form-data">
+                                <div class="">
+                                    <div class="">
+                                        <div class="">
+
+                                            <div class="mb1 show--lg">
+                                                <div class="mb2">
+                                                    <span class="rounded bg--purple color--white pl2 pr2"
+                                                        style="padding-top: 4px; padding-bottom: 4px;">best
+                                                        seller</span>
+                                                </div>
+                                                <h2 class="sans--large fw--600 color--blue" style="margin-bottom: 4px;"
+                                                    temprop="name">wake up with theSkimm. wind down with dream.</h2>
+                                                <!-- <p class="sans--small fw--600 color--gray">{{ product.type }}</p> -->
+                                                {% include 'stars-dream' %}
+
+                                            </div>
+
+
+                                            <div class="rich-text sans--body-new" itemprop="description">
+                                                {{ product.description }}
+                                            </div>
+                                            <p id="detailsModalBtn2"
+                                            class="show--md mt2 mb2 mb4--md fw--600 sans--body pointer underline color--blue"><span
+                                                class="hide--md">tap</span><span class="show--md">click</span> for nutrition info</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media__fixed">
+
+                                    {% if product.available and product.variants.size > 1 %}
+                                    {% render 'swatch' for product.options as swatch %}
+                                    {% endif %}
+
+                                    {% assign hide_default_title = false %}
+                                    {% if product.variants.size == 1 and product.variants.first.title contains 'Default'
+                                    %}
+                                    {% assign hide_default_title = true %}
+                                    {% endif %}
+                                    <div id="product-variants"
+                                        class="select--product-option{% if hide_default_title %} hidden{% endif %}">
+                                        <select id="product-select" class="form-select" name="id"
+                                            data-productid="{{ product.id }}">
+                                            {% for variant in product.variants %}
+                                            <option class="form-select" {% if
+                                                variant==product.selected_or_first_available_variant %} selected{% endif
+                                                %} value="{{ variant.id }}">
+                                                {{ variant.title }} - {{ variant.price | money }}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+
+
+                                    <div class="mt3 mb4" style="margin-left: -40px; margin-right: -40px;">
+                                        <div class="" style="background-color: #f0f0ff;">
+                                            <div class="row align--middle">
+                                                <div class="col c1"></div>
+                                                <div class="col c3--md" style="margin-top: -10px;margin-bottom: -16px;">
+                                                    <img class="pl1" style="max-width: 100%;"
+                                                        src="{{ 'mug-frother_combo1.png' | asset_url }}">
+                                                </div>
+                                                <div class="col c8--md">
+                                                    <p class="sans--small tc tl--md fw--600 color--blue">
+                                                        subscription includes a beam mug + frother </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                         <div class="sub-only">
+                             
+                                    <div class="sans--body">
+                                        <p class="fl fw--600 color--blue">subscribe & save 20%</p>
+                                        <div id="product-price" itemprop="offers" itemscope
+                                            itemtype="http://schema.org/Offer" class="fr delta">
+                                            <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+                                            {% if product.available %}
+                                            <link itemprop="availability" href="http://schema.org/InStock" />
+                                            {% else %}
+                                            <link itemprop="availability" href="http://schema.org/OutOfStock" />
+                                            {% endif %}
+                                            <p>
+                                                {% assign variant = product.selected_or_first_available_variant %}
+                                                {% if product.compare_at_price > product.price %}
+                                                <span class="product-price color--blue fw--600 on-sale" itemprop="price">{{ variant.price |
+                                                    money }}</span>
+                                                <s class="product-compare-price">{{ variant.compare_at_price | money
+                                                    }}</s>
+                                                {% else %}
+                                                <span class="product-price sans--medium fw--600" itemprop="price">{{
+                                                    variant.price | money }}</span>
+                                                {% endif %}
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="sans--small color--blue">monthly subscription; change or cancel anytime</div>
+
+                                    </div>  
+
+                                    <div class="sans--body bg-light-gray tc p2 pb0">use the code <span class="fw--600 color--blue">THESKIMM</span> for an additional <span class="fw--600 color--blue">15% off</span></div>
+
+
+
+                                    <div id="backorder" class="hidden tc">
+                                        <p>{{ '%s is back-ordered. We will ship it separately in 10 to 15 days.' |
+                                            replace: '%s', '<span id="selected-variant"></span>' }}</p>
+                                    </div>
+
+                                    <div id="product-add" class="form-action mt3 mb3">
+                                        <div class="qtydiv">
+                                            <div class="qtybox">
+                                                <span class="btnqty qtyminus icon-minus">-</span>
+                                                <input type="text" id="productQuantity" name="quantity" value="1"
+                                                    min="1" class="quantity-selector quantity-input" readonly="">
+                                                <span class="btnqty qtyplus icon-plus">+</span>
+                                            </div>
+                                        </div>
+                                        <a title="add tp cart" id=""
+                    class="add_to_cart_dream1 button button--primary pt1 pb1 tc fw--800">subscribe 
+                </a>
+                                   
+                                    </div>
+
+                                    {% include 'guarantee' %}
+
+                                </div>
+
+                        </div>
+                    </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Section 2 -->
+<div class="pt1 pb1 tc color--white hidden" style="background-color: #8c8cf0;">
+    <div class="marquee">
+        <div class="track">
+            <div class="content">
+                non-gmo <span class="pl3 pr3 pl8--md pr8--md">•</span> dairy free <span
+                    class="pl3 pr3 pl8--md pr8--md">•</span> gluten free<span class="pl3 pr3 pl8--md pr8--md">•</span>
+                no sugar added<span class="pl3 pr3 pl8--md pr8--md">•</span>
+                non-gmo <span class="pl3 pr3 pl8--md pr8--md">•</span> dairy free <span
+                    class="pl3 pr3 pl8--md pr8--md">•</span> gluten free<span class="pl3 pr3 pl8--md pr8--md">•</span>
+                no sugar added<span class="pl3 pr3 pl8--md pr8--md">•</span>               
+                non-gmo <span class="pl3 pr3 pl8--md pr8--md">•</span> dairy free <span
+                    class="pl3 pr3 pl8--md pr8--md">•</span> gluten free<span class="pl3 pr3 pl8--md pr8--md">•</span>
+                no sugar added<span class="pl3 pr3 pl8--md pr8--md">•</span>
+                non-gmo <span class="pl3 pr3 pl8--md pr8--md">•</span> dairy free <span
+                    class="pl3 pr3 pl8--md pr8--md">•</span> gluten free<span class="pl3 pr3 pl8--md pr8--md">•</span>
+                no sugar added<span class="pl3 pr3 pl8--md pr8--md">•</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<div class="tc pt2 pb2 pt6--md pb2--md grid-section">
+    <div class="container">
+		<div class="col c6--lg c6--md c12--sm">
+			<h4 class="color--purple sans--large fw--600">98%</h4>
+			<h5 class="color--blue sans--large fw--400" style="font-style: italic;font-size:24px !important">fall asleep faster when taking dream.<span class="cross-text">†</span></h5>
+		</div>
+		<div class="col c6--lg c6--md c12--sm">
+			<h4 class="color--purple sans--large fw--600">99%</h4>
+			<h5 class="color--blue sans--large fw--400 " style="font-style: italic;font-size:24px !important"> experience better sleep quality.<span class="cross-text">†</span></h5>
+		</div>      
+    </div>
+</div>
+
+
+<div class="mt4--md mb10--md pt2--md">
+
+    <div class="mt10--md mb10--md" style="background-color: #f0f0ff;">
+        <div class="container">
+            <div class="row align--middle">
+                <div class="col c5--md show--md" style="margin-top: -100px;margin-bottom: -80px;">
+                    <img class="full-width rounded-image" src="{{ 'dream1.jpg' | asset_url }}">
+                </div>
+                <div class="col c2 hide--md"></div>
+                <div class="col pt3 c8 hide--md">
+                    <img class="full-width rounded-image" src="{{ 'dream1.jpg' | asset_url }}">
+                </div>
+                <div class="col c1 show--md"></div>
+                <div class="col c6--md">
+                    <div class="tc mt3 hide--md "><span style="width: 38px;" class="dib ml1 mb1"><img class="full-width"
+                                src="{{ 'zzz.png' | asset_url }}"></span></div>
+                    <h2 class="sans--large tc tl--md fw--600 mt3 mt0--md mb2 color--blue">the power of dream <span
+                            style="width: 38px;" class="show--md dib ml1 mb1"><img class="full-width"
+                                src="{{ 'zzz.png' | asset_url }}"></span></h2>
+                    <p class="sans--body tc tl--md fw--400 mb4 color--black">
+                        with dream powder, you’re getting more than just quality shuteye. you’re providing your body
+                        with sleep-enhancing* vitamins and minerals, such as magnesium, reishi, l-theanine, and nano
+                        hemp.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="tc row mt10--md mb4--md pt6 align--center">
+    <div class="col c11 c10--md c10--lg">
+        <h2 class="sans--large tc fw--600 mb2 color--blue">what’s in <br class="show--md">your dream powder?</h2>
+
+
+        <div style="max-width: 1600px; margin-left: auto; margin-right: auto" class="pt4--md pb3 pb4--md"  id="new-ingredient-section">
+            <div class="show--md row align--center">
+                <div class="col c4--md mb2 mb4--md">
+                    <p class="tc"><span class="dib">
+                            <picture class="promo__press-logo p1"><img class="promo__press-logo"
+                                    style="max-width: 90px;" src="{{ 'icon-magnesium.png' | asset_url }}">
+                            </picture>
+                        </span>
+                    </p>
+                    <h4 class="tc color--blue fw--600 pb2 pt1">reishi</h4>
+                    <h5 class="tc pl1 pr1 pl5--md pr5--md">
+                        mushroom superfood that helps to support the body’s sleep cycle as well as manage stress*
+                    </h5>
+                </div>
+                <div class="col c4--md mb2 mb4--md">
+                    <p class="tc"><span class="dib">
+                            <picture class="promo__press-logo p1"><img class="promo__press-logo"
+                                    style="max-width: 90px;" src="{{ 'icon-melatonin.png' | asset_url }}">
+                            </picture>
+                        </span>
+                    </p>
+                    <h4 class="tc color--blue fw--600 pb2 pt1">magnesium</h4>
+                    <h5 class="tc pl1 pr1 pl5--md pr5--md">
+                        mineral that aids the body’s ability to fall asleep by producing melatonin and regulating the
+                        nervous system*
+                    </h5>
+                </div>
+                <div class="col c4--md mb2 mb4--md">
+                    <p class="tc"><span class="dib">
+                            <picture class="promo__press-logo p1"><img class="promo__press-logo"
+                                    style="max-width: 90px;" src="{{ 'icon-hemp.png' | asset_url }}">
+                            </picture>
+                        </span>
+                    </p>
+                    <h4 class="tc color--blue fw--600 pb2 pt1">nano hemp</h4>
+                    <h5 class="tc pl1 pr1 pl5--md pr5--md">
+                        particles with the highest absorption potential to naturally support inflammation, balance, and
+                        sleep*
+                    </h5>
+                </div>
+                <div class="col c4--md mb2 mb4--md">
+                    <p class="tc"><span class="dib">
+                            <picture class="promo__press-logo p1"><img class="promo__press-logo"
+                                    style="max-width: 90px;" src="{{ 'icon-reishi.png' | asset_url }}">
+                            </picture>
+                        </span>
+                    </p>
+                    <h4 class="tc color--blue fw--600 pb2 pt1">l-theanine</h4>
+                    <h5 class="tc pl1 pr1 pl5--md pr5--md">
+                        amino acid that promotes relaxation, calmness and helps improve sleep quality* </h5>
+                </div>
+                <div class="col c4--md mb2 mb4--md">
+                    <p class="tc"><span class="dib">
+                            <picture class="promo__press-logo p1"><img class="promo__press-logo"
+                                    style="max-width: 90px;" src="{{ 'icon-Ltheanine.png' | asset_url }}">
+                            </picture>
+                        </span>
+                    </p>
+                    <h4 class="tc color--blue fw--600 pb2 pt1">melatonin</h4>
+                    <h5 class="tc pl1 pr1 pl5--md pr5--md">
+                        compound that regulates the body’s circadian rhythm, promoting restful sleep*
+                    </h5>
+                </div>
+            </div>
+
+            <div class="ingredient-slider hide--md">
+                <div class="db mb2">
+                    <p class="tc"><span class="dib">
+                            <picture class="promo__press-logo p1"><img class="promo__press-logo"
+                                    style="max-width: 90px;" src="{{ 'icon-magnesium.png' | asset_url }}">
+                            </picture>
+                        </span>
+                    </p>
+                    <h4 class="tc color--blue fw--600 pb2 pt1">reishi</h4>
+                    <h5 class="tc pl1 pr1 pl5--md pr5--md">
+                        mushroom superfood that helps to support the body’s sleep cycle as well as manage stress*
+                    </h5>
+                </div>
+                <div class="db mb2">
+                    <p class="tc"><span class="dib">
+                            <picture class="promo__press-logo p1"><img class="promo__press-logo"
+                                    style="max-width: 90px;" src="{{ 'icon-melatonin.png' | asset_url }}">
+                            </picture>
+                        </span>
+                    </p>
+                    <h4 class="tc color--blue fw--600 pb2 pt1">magnesium</h4>
+                    <h5 class="tc pl1 pr1 pl5--md pr5--md">
+                        mineral that aids the body’s ability to fall asleep by producing melatonin and regulating the
+                        nervous system*
+                    </h5>
+                </div>
+                <div class="db mb2">
+                    <p class="tc"><span class="dib">
+                            <picture class="promo__press-logo p1"><img class="promo__press-logo"
+                                    style="max-width: 90px;" src="{{ 'icon-hemp.png' | asset_url }}">
+                            </picture>
+                        </span>
+                    </p>
+                    <h4 class="tc color--blue fw--600 pb2 pt1">nano hemp</h4>
+                    <h5 class="tc pl1 pr1 pl5--md pr5--md">
+                        particles with the highest absorption potential to naturally support inflammation, balance, and
+                        sleep*
+                    </h5>
+                </div>
+                <div class="db mb2">
+                    <p class="tc"><span class="dib">
+                            <picture class="promo__press-logo p1"><img class="promo__press-logo"
+                                    style="max-width: 90px;"  src="{{ 'icon-reishi.png' | asset_url }}">
+                            </picture>
+                        </span>
+                    </p>
+                    <h4 class="tc color--blue fw--600 pb2 pt1">l-theanine</h4>
+                    <h5 class="tc pl1 pr1 pl3--md pr3--md">
+                        amino acid that promotes relaxation, calmness and helps improve sleep quality* </h5>
+                </div>
+                <div class="db mb2">
+                    <p class="tc"><span class="dib">
+                            <picture class="promo__press-logo p1"><img class="promo__press-logo"
+                                    style="max-width: 90px;" src="{{ 'icon-Ltheanine.png' | asset_url }}">
+                            </picture>
+                        </span>
+                    </p>
+                    <h4 class="tc color--blue fw--600 pb2 pt1">melatonin</h4>
+                    <h5 class="tc pl1 pr1 pl5--md pr5--md">
+                        compound that regulates the body’s circadian rhythm, promoting restful sleep*
+                    </h5>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="mt6 mt10--md mb10--md">
+
+    <div class="mt10--md mb10--md" style="background-color: #f0f0ff;">
+        <div class="container">
+            <div class="row align--middle">
+                <div class="col c2 hide--md"></div>
+                <div class="col pt3 c8 hide--md">
+                    <img class="full-width rounded-image"
+                        src="{{ 'dream_rebrand-lifestyle_08-enjoy.jpg' | asset_url }}">
+                </div>
+                <div class="col c6--md pt4--md">
+                    <div class="tc mt3 hide--md "><span style="width: 38px;" class="dib ml1 mb1"><img
+                                class="full-width half-moon" src="{{ 'half-moon.png' | asset_url }}"></span></div>
+
+                    <h2 class="sans--large tc tl--md fw--600 mt3 mt0--md mb2 color--blue">how to enjoy <span style="width: 38px;"
+                            class="dib show--md ml1 mb1"><img class="full-width half-moon"
+                                src="{{ 'half-moon.png' | asset_url }}"></span></h2>
+                    <p class="sans--body tc tl--md fw--400 mb4 mb10--md color--black">
+                        put at least 1 scoop of dream powder into a mug of warm milk or hot water and blend using your
+                        beam frother for a cozy frothy finish. sip 20-30 minutes before bedtime then enjoy your deepest
+                        night’s sleep.
+                    </p>
+                </div>
+                <div class="col c1 show--md"></div>
+
+                <div class="col c5--md show--md" style="margin-top: -100px;margin-bottom: -80px;">
+                    <img class="full-width rounded-image"
+                        src="{{ 'dream_rebrand-lifestyle_08-enjoy.jpg' | asset_url }}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<div class="mb2 mt5--md pt3 pb7 mb3--md container" >
+    <div class="pt4 pb4 pb6--md">
+        <div class="brand-slider" id="new-brand-slider">
+            <div class="mb2 mb0--md pl1 pr1">
+                <p class="tc"><span class="dib">
+                        <picture class="promo__press-logo p1"><img class="promo__press-logo" style="max-width: 130px;"
+                                src="{{ 'maxim-logo.png' | asset_url }}">
+                        </picture>
+                    </span>
+                </p>
+                <h5 class="tc">"these pro-athlete-approved hemp products will improve physical and mental wellness."</h5>
+            </div>
+            <div class="mb2 mb0--md pl1 pr1">
+                <p class="tc"><span class="dib">
+
+                        <picture class="promo__press-logo"><img class="promo__press-logo"
+                                src="https://beam.imgix.net/beam-homepage-presslogo-forbes@2x.png?mtime=20190725113953&amp;auto=format&amp;h=100&amp;q=90&amp;w=320">
+                        </picture>
+                    </span>
+                </p>
+                <h5 class="tc db">"[beam] is a great addition to an athlete’s nightly routine."</h5>
+            </div>
+
+
+            <div class="mb2 mb0--md pl1 pr1">
+                <p class="tc"><span class="dib">
+
+                        <picture class="promo__press-logo"><img class="promo__press-logo"
+                                src="https://beam.imgix.net/beam-homepage-presslogo-realsimple@2x_190725_183951.png?mtime=20190725113951&amp;auto=format&amp;h=100&amp;q=90&amp;w=320">
+                        </picture>
+                    </span>
+                </p>
+                <h5 class="tc">"i've started using [beam] hemp everyday... and it changed my life."</h5>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="mt4 mb10--md pt2--md">
+
+    <div class="mt10--md mb10--md" style="background-color: #f0f0ff;">
+        <div class="container">
+            <div class="row align--middle">
+                <div class="col c5--md show--md" style="margin-top: -100px;margin-bottom: -80px;">
+                    <img class="full-width rounded-image"
+                        src="{{ 'dream2.jpg' | asset_url }}">
+                </div>
+                <div class="col c2 hide--md"></div>
+                <div class="col pt3 c8 hide--md">
+                    <img class="full-width rounded-image"
+                        src="{{ 'dream2.jpg' | asset_url }}">
+                </div>
+                <div class="col c1 show--md"></div>
+                <div class="col c6--md">
+                    <div class="tc mt3 hide--md "><span style="width: 38px;" class="dib ml1 mb1"><img class="full-width"
+                                src="{{ 'coffee-mug.png' | asset_url }}"></span></div>
+                    <h2 class="sans--large tc tl--md fw--600 mt3 mt0--md mb2 color--blue pr">your new night-time ritual <span
+                            style="width: 38px;position: absolute; top: -8px; right: -29px"
+                            class="show--md dib ml1 mb1"><img class="full-width"
+                                src="{{ 'coffee-mug.png' | asset_url }}"></span></h2>
+                    <p class="sans--body tc tl--md fw--400 mb4 mb8--md color--black">
+                        we suggest preparing your cup of dream about 30 minutes before bedtime. calming, nightly rituals
+                        help signal to your body and mind that it’s time to wind down once and for all. so whether you
+                        want to read, meditate or journal before bed, dream slips seamlessly into your night-time
+                        routine.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="show--md mt1 mb1">
+    <div class="mt1 mb2"><br>
+    </div>
+</div>
+
+<div class="mt4 mb3 mt7--md mb10--md">
+    <div class="container pt2--md pb2--md">
+        <div class="row">
+
+            <div class="col hide--md mb2 mb0--md">
+                <div class="">
+                    <div class="pr">
+                        <div class="push-up">
+                            <picture class="full-width">
+                                <source srcset="{{ 'mathewfras__b_e_a_c_o_n_2021_01_29_07_06_30.jpg' | asset_url }}"
+                                    media="(min-width: 800px)"><img class="full-width rounded-image"
+                                    alt="an all-natural alternative"
+                                    src="{{ 'mathewfras__b_e_a_c_o_n_2021_01_29_07_06_30.jpg' | asset_url }}">
+                            </picture>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col c7--md c6--lg pt1--md mb3 tc tl--md">
+                <h6 class="sans--body mb3"><span class="color--white bg--purple fw--600"
+                        style="padding: 2px 16px; border-radius: 5px; opacity: .6;">they love us</span></h6>
+
+                <h2 class="fw--600 sans--large mb2 color--blue">the fittest man on earth loves dream powder</h2>
+                <h3 class="fw--300 sans--body mb2 color--blue">"i’ve always been a big promoter of sleep. not just any kind of
+                    sleep, quality sleep. i blackout my room, i turn the temperature down, i’ve found the perfect
+                    mattress and i aim for 9-10 hours a night. getting to sleep is always the hardest part. i pack my
+                    days with uppers, like espresso and preworkout, that a cup of beam dream before bed is exactly what
+                    i need to help coax me to sleep."</h3>
+
+                <h2 class="sans--medium color--blue"><span class="fw--600">-mat fraser</span><span style="font-style: italic;">&nbsp 5x fittest man on earth</span></h2>
+                
+
+            </div>
+            <div class="col c1--lg show--md"></div>
+
+            <div class="col c5--md c5--lg mb2 mb0--md show--md">
+                <div class="">
+                    <div class="pr">
+                        <div class="push-up">
+                            <picture class="full-width">
+                                <source srcset="{{ 'mathewfras__b_e_a_c_o_n_2021_01_29_07_06_30.jpg' | asset_url }}"
+                                    media="(min-width: 800px)"><img class="full-width rounded-image"
+                                    alt="an all-natural alternative"
+                                    src="{{ 'mathewfras__b_e_a_c_o_n_2021_01_29_07_06_30.jpg' | asset_url }}">
+                            </picture>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="full-width pt6--md">
+    <div class="row bg--blue align--middle gutter--none">
+        <div class="col tc c6--md" style="background-color: #E6F1FF;">
+            <img class="full-width" src="{{ 'dream-subs.jpg' | asset_url }}">
+            <h2 class="fw--600 sans--medium mt3 mb2 color--blue">dream subscription</h2>
+            <h3 class="fw--300 sans--body color--blue mb1">join + save. skip or cancel anytime.</h3>
+
+            <span class="media__fixed tc"><span class="db color--blue fw--600 sans--medium">
+                    $76.00
+                    <s class="compare-at-price color--blue">$95.00</s>
+                </span></span>
+
+            <p class="sans--small color--blue fw--300 pt2">beam mug + frother • monthly delivery, no commitment</p>
+            <div class="sans--body bg-light-gray tc p2 pl1 pr1">use the code <span class="fw--600 color--blue">THESKIMM</span> for an additional <span class="fw--600 color--blue">15% off</span></div>
+
+            <div class="media__fixed mt2 mb5"><a title="learn more" id=""
+                    class="add_to_cart_dream1 pill--blue pt1 pb1 tc fw--800">subscribe and save 
+                </a></div>
+        </div>
+        <div class="col c6--md bg--blue color--white">
+            <div class="p3 tc" style="max-width: 540px; margin: 0 auto;">
+                <img class="" style="max-width: 62px;" src="{{ 'heart.png' | asset_url }}">
+                <h2 class="sans--medium fw--600 mt3 mb1">say hello to your beam team.</h2>
+                <p class="sans--body mb3">a letter from us to you.</p>
+                <p class="sans--body">“it’s you, our customer, who makes beam everything it is: a community that
+                    believes in a constant pursuit for better. whatever better means for you, we’re here to support you
+                    in the journey.”
+                </p>
+                <p class="sans--body mt3">–johnny</p>
+                <span class="sans--small" style="font-style: italic;">your customer experience superhero</span>
+
+                <p class="sans--body mt4 fw--600">have questions? shoot us a text at <br class="hide--md">1-844-595-6972
+                </p>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="mt4 mb3 mt10--md mb10--md new-theone" id="insta-section">
+    <div class="row text-center">
+		<img style="max-width: 40px;" src="{{ 'purple-insta.png' | asset_url }}" />
+		<h2 class="fw--600 sans--large mt2 mb2 color--purple"> how do you dream? </h2>
+		<p class="sans--body fw--600 color--blue mb4" style="font-style: italic;"><a href="https://www.instagram.com/beam/" target="_blank">@beam</a></p>
+	</div>
+	<div class="row">
+		<div class="col c2--lg c6--md c6--sm insta-img">
+			<img src="{{ 'insta1.jpg' | asset_url }}">
+		</div>
+		<div class="col c2--lg c6--md c6--sm insta-img">
+			<img src="{{ 'insta2.jpg' | asset_url }}">
+		</div>
+		<div class="col c2--lg c6--md c6--sm insta-img">
+			<img src="{{ 'insta3.jpg' | asset_url }}">
+		</div>
+		<div class="col c2--lg c6--md c6--sm insta-img">
+			<img src="{{ 'insta4.jpg' | asset_url }}">
+		</div>
+		<div class="col c2--lg c6--md c6--sm insta-img show--md">
+			<img src="{{ 'insta5.jpg' | asset_url }}">
+		</div>
+		<div class="col c2--lg c6--md c6--sm insta-img show--md">
+			<img src="{{ 'insta6.jpg' | asset_url }}">
+		</div>
+		<div class="col c2--lg c6--md c6--sm insta-img show--md">
+			<img src="{{ 'insta7.jpg' | asset_url }}">
+		</div>
+		<div class="col c2--lg c6--md c6--sm insta-img show--md">
+			<img src="{{ 'insta8.jpg' | asset_url }}">
+		</div>
+		<div class="col c2--lg c6--md c6--sm insta-img show--lg">
+			<img src="{{ 'insta9.jpg' | asset_url }}">
+		</div>
+		<div class="col c2--lg c6--md c6--sm insta-img show--lg">
+			<img src="{{ 'insta10.jpg' | asset_url }}">
+		</div>
+		<div class="col c2--lg c6--md c6--sm insta-img show--lg">
+			<img src="{{ 'insta11.jpg' | asset_url }}">
+		</div>	
+		<div class="col c2--lg c6--md c6--sm insta-img show--lg">
+			<img src="{{ 'insta12.jpg' | asset_url }}">
+		</div>		
+	</div>
+</div>
+
+<div class="productView container mt1 mt2--md mb5">
+    <div itemscope itemtype="http://schema.org/Product">
+
+        <div data-event-type="product" data-entity-id="{{product.id}}" data-name="{{product.title}}">
+
+
+            {% assign variant = product.selected_or_first_available_variant %}
+            {% assign featured_image = product.selected_or_first_available_variant.featured_image | default:
+            product.featured_image %}
+
+            <div class="mt0 mt0--md pt0">
+                <form action="/cart/add" data-productid="{{ product.id }}" method="post" class="product-form"
+                    id="add-to-cart" enctype="multipart/form-data">
+
+                    <div class="container hide--lg">
+
+                        <div class="row">
+                            <div class="col">
+
+                                <div class="mb1">
+                                    <h1 class="sans--medium-large color--blue fw--600" style="line-height: 1"
+                                        temprop="name">dream powder</h1>
+                                    <p class="sans--small fw--600 color--gray">{{ product.type }}</p>
+                                </div>
+
+                            </div>
+                            <div class="col">
+
+                                <div class="tl mb2">
+                                    {% include 'stars-dream' %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row gutter--none">
+
+                        <div class="col c5--md c6--lg c7--xl show--md">
+
+                            <div class="of--hidden" data-image-gallery>
+
+                                <div class="pdp-images slideshow slideshow-second product-photo-container" id="new-dream-second">
+                                    {% for image in product.images%}
+                                    {% if forloop.index != 7 %}
+                                    {% if image != featured_image %}
+                                    {% if image != product.images[0] %}
+                                    <div class="slide slide-{{ forloop.index }}">
+                                        <img src="{{ image.src | product_img_url: '800x600', crop: 'center' }}">
+                                    </div>
+                                    {% endif %}
+                                    {% endif %}
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+
+                            </div>
+
+                            <div class="row" style="background-color: rgba(139, 140, 239, 0.07); margin: 0; margin-top: 0px; display: flex; align-items: center;">
+								<div class="col c6--md c6--sm text-center" style="border-right: 1px solid #2C2F84;">
+									<div class="detail-icon" style="padding: 10px 20px;">
+										<img  style="height: 25px;"  src="{{ 'shipping-icon.png' | asset_url}}" />
+										<p class="color--blue fw--600" style="font-size: 16px;">free shipping</p>
+										<p class="color--blue" style="font-size: 13px;">for U.S. orders over $75 • <a> learn more</a> </p>
+									</div>
+								</div>
+								<div class="col c6--md c6--sm text-center" >
+									   <div class="detail-icon" style="padding: 10px 20px;">
+										<img style="height: 25px;" src="{{ 'return-icon.png' | asset_url}}" />
+										<p class="color--blue fw--600" style="font-size: 16px;">easy returns</p>
+										<p  class="color--blue" style="font-size: 13px;">return within 30 days of shiop date • <a > learn more</a> </p>
+									</div>
+								</div>
+							</div>
+
+                        </div>
+                        <div class="col c7--md c6--lg c5--xl">
+                            <div class="pl1--md">
+                                <div class="container-mobile">
+                                    <div class="">
+                                        <div class="">
+                                            <div class="pt0 pt3--lg">
+
+                                                <div class="mb1 show--lg">
+                                                    <h1 class="sans--large color--blue fw--400" temprop="name">
+                                                        dream powder</h1>
+														<!-- <p class="sans--small fw--600 color--gray">{{ product.type }}</p> -->
+                                                    {% include 'stars-dream' %}
+                                                </div>
+
+
+                                                <div class="sans--body-new rich-text" itemprop="description">
+                                                    {{ product.description }}
+                                                </div>
+                                                <p id="detailsModalBtn"
+                                                    class="mt2 mb2 fw--600 hero__product-description pointer underline color--blue">
+                                                    <span class="hide--md">tap</span><span class="show--md">click</span>
+                                                    for nutrition info</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="media__fixed">
+
+                                        {% if product.available and product.variants.size > 1 %}
+                                        {% render 'swatch' for product.options as swatch %}
+                                        {% endif %}
+
+                                        {% assign hide_default_title = false %}
+                                        {% if product.variants.size == 1 and product.variants.first.title contains
+                                        'Default' %}
+                                        {% assign hide_default_title = true %}
+                                        {% endif %}
+                                        <div id="product-variants"
+                                            class="select--product-option{% if hide_default_title %} hidden{% endif %}">
+                                            <select id="product-select" class="form-select" name="id"
+                                                data-productid="{{ product.id }}">
+                                                {% for variant in product.variants %}
+                                                <option class="form-select" {% if
+                                                    variant==product.selected_or_first_available_variant %} selected{%
+                                                    endif %} value="{{ variant.id }}">
+                                                    {{ variant.title }} - {{ variant.price | money }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+
+
+                                        <div class="mt4 mb3" style="margin-left: -40px; margin-right: -40px;">
+                                            <div class="" style="background-color: #f0f0ff;">
+                                                <div class="row align--middle">
+                                                    <div class="col c2 c1--md"></div>
+                                                    <div class="col c3" style="margin-top: -10px;margin-bottom: -16px;">
+                                                        <img class="pl1--md" style="max-width: 100%;"
+                                                            src="{{ 'mug-frother_combo1.png' | asset_url }}">
+                                                    </div>
+                                                    <div class="col c5 c8--md">
+                                                        <p class="sans--small tc tl--md fw--600 color--blue">
+                                                            subscription includes a beam mug + frother </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="sub-only">
+                             
+                                            <div class="sans--body">
+                                                <p class="fl fw--600 color--blue">subscribe & save 20%</p>
+                                                <div id="product-price" itemprop="offers" itemscope
+                                                    itemtype="http://schema.org/Offer" class="fr delta">
+                                                    <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+                                                    {% if product.available %}
+                                                    <link itemprop="availability" href="http://schema.org/InStock" />
+                                                    {% else %}
+                                                    <link itemprop="availability" href="http://schema.org/OutOfStock" />
+                                                    {% endif %}
+                                                    <p>
+                                                        {% assign variant = product.selected_or_first_available_variant %}
+                                                        {% if product.compare_at_price > product.price %}
+                                                        <span class="product-price color--blue fw--600 on-sale" itemprop="price">{{ variant.price |
+                                                            money }}</span>
+                                                        <s class="product-compare-price">{{ variant.compare_at_price | money
+                                                            }}</s>
+                                                        {% else %}
+                                                        <span class="product-price sans--medium fw--600" itemprop="price">{{
+                                                            variant.price | money }}</span>
+                                                        {% endif %}
+                                                    </p>
+                                                </div>
+        
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="sans--small color--blue">monthly subscription; change or cancel anytime</div>
+        
+                                            </div>  
+
+
+                                            <div class="sans--body bg-light-gray tc pt1 pb2 pl1 pr1">use the code <span class="fw--600 color--blue">THESKIMM</span> for an additional <span class="fw--600 color--blue">15% off</span></div>
+
+
+                                        <div id="backorder" class="hidden tc">
+                                            <p>{{ '%s is back-ordered. We will ship it separately in 10 to 15 days.' |
+                                                replace: '%s', '<span id="selected-variant"></span>' }}</p>
+                                        </div>
+
+                                        <div id="product-add" class="form-action">
+                                            <div class="qtydiv">
+                                                <div class="qtybox">
+                                                    <span class="btnqty qtyminus icon-minus">-</span>
+                                                    <input type="text" id="productQuantity" name="quantity" value="1"
+                                                        min="1" class="quantity-selector quantity-input" readonly="">
+                                                    <span class="btnqty qtyplus icon-plus">+</span>
+                                                </div>
+                                            </div>
+                                            <a title="add tp cart" id=""
+                                            class="add_to_cart_dream1 button button--primary pt1 pb1 tc fw--800">subscribe 
+                                        </a>
+                                        </div>
+
+                                        {% include 'guarantee' %}
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>

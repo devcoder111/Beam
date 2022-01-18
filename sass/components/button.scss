@@ -1,0 +1,666 @@
+%button {
+	@include font-smoothing;
+	@include body-font-size;
+	font-family: $font-family-austin;
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+	border: none;
+	background: none;
+	text-align: center;
+	cursor: pointer;
+	user-select: none;
+	appearance: none;
+	color: inherit;
+	
+	&:focus {
+		outline: none;
+	}
+
+	&:disabled,
+	&.disabled {
+		cursor: not-allowed;
+
+		&.loading {
+			cursor: wait;
+		}
+	}
+
+	&.loading {
+		cursor: wait;
+	}
+
+	&.tl {
+		text-align: left;
+	}
+}
+
+button {
+	@extend %button;
+}
+
+//
+// === Normal Buttons ===
+//
+
+.button--primary {
+	@extend %button;
+	height: $button-height-mobile;
+	line-height: $button-height-mobile;
+	background-color: color(blue);
+	color: color(white);
+	padding: 0 20px;
+	font-family: $font-family-poppins;
+	font-size: 12px;
+	font-weight: 600;
+	min-width: 160px;
+	transition: 200ms background-color ease-out;
+	border-radius: 60px;
+
+
+	@include breakpoint(md) {
+		height: 60px;
+		line-height: 60px;
+		font-size: 22px;
+	}
+
+	&:hover,
+	&:focus {
+		background-color: darken(color(blue), 10%);
+		outline: none;
+	}
+}
+
+
+  
+.template-product
+.button--primary {
+  width: 60%;
+  float: right;
+  text-transform: lowercase;
+  font-size: 18px;
+  @include breakpoint(md) {
+	height: 60px;
+	line-height: 60px;
+	font-size: 22px;
+	border-radius: 60px;
+	width: 66% !important;
+}
+}
+
+.button--checkout {
+	@extend %button;
+	height: $button-height-mobile;
+	line-height: $button-height-mobile;
+	background-color: color(blue);
+	color: color(white);
+	padding: 0 20px;
+	font-family: $font-family-poppins;
+	font-size: 28px;
+	font-weight: 600;
+	transition: 200ms background-color ease-out;
+	border-radius: 46px;
+
+	@include breakpoint(md) {
+		font-size: 22px;
+	}
+
+	&:hover,
+	&:focus {
+		background-color: darken(color(blue), 10%);
+	}
+}
+
+
+//
+// === Waves ===
+//
+
+.button--wave-primary-top {
+	@extend %button;
+	position: relative;
+	min-width: 200px;
+	height: $wave-button-height + 7px;
+	font-size: 24px;
+	line-height: 24px;
+	font-family: $font-family-poppins;
+	font-weight: 600;
+	color: color(blue);
+	border: 1px solid color(blue);
+	border-top: none;
+	background: color(white);
+	padding: 12px 18px 12px;
+	transition: height 200ms cubic-bezier(0, 0, 0, 1), 300ms background-color ease-out;
+
+	@include breakpoint(md) {
+		font-size: 24px;
+		line-height: 24px;
+	}
+
+	&:after {
+		content: '';
+		display: block;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: -5px;
+		bottom: 0;
+		background: url('../assets/button-white-blue.png');
+		background-size: 100% 6px;
+		background-repeat: no-repeat;
+	}
+
+	&.dark {
+		background-color: color(blue);
+		color: color(white);
+
+		&:after {
+			background: url('../assets/button-blue-blue.png');
+			background-size: 100% 6px;
+			background-repeat: no-repeat;
+		}
+	}
+
+	&:hover,
+	&:focus {
+		height: $wave-button-height + 15px;
+	}
+}
+
+.button--wave-primary-bottom {
+	@extend %button;
+	position: relative;
+	min-width: 140px;
+	height: $wave-button-height - 5px;
+	font-size: 12px;
+	line-height: 12px;
+	font-family: $font-family-poppins;
+	font-weight: 600;
+	color: color(blue);
+	border: 1px solid color(blue);
+	border-bottom: none;
+	background: color(white);
+	padding: 12px 18px 10px;
+	transition: height 200ms cubic-bezier(0, 0, 0, 1), padding 200ms cubic-bezier(0, 0, 0, 1);
+
+	@include breakpoint(md) {
+		font-size: 13px;
+	}
+
+	&:after {
+		content: '';
+		display: block;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 5px;
+		background: url('../assets/button-white-blue.png');
+		background-size: 100% 6px;
+		background-repeat: no-repeat;
+		transform: rotate(180deg);
+		transform-origin: center;
+	}
+
+	&.dark {
+		background-color: color(blue);
+		color: color(white);
+
+		&:after {
+			background: url('../assets/button-blue-blue.png');
+			background-size: 100% 6px;
+			background-repeat: no-repeat;
+		}
+	}
+}
+
+.button--wave-secondary-bottom {
+	@extend %button;
+	position: relative;
+	min-width: 140px;
+	height: $wave-button-height - 5px;
+	font-size: 12px;
+	line-height: 12px;
+	font-family: $font-family-poppins;
+	font-weight: 600;
+	color: color(blue);
+	border: 1px solid color(blue);
+	border-bottom: none;
+	padding: 12px 18px 5px;
+	transition: height 200ms cubic-bezier(0, 0, 0, 1), padding 200ms cubic-bezier(0, 0, 0, 1);
+
+	@include breakpoint(md) {
+		font-size: 13px;
+		line-height: 13px;
+	}
+
+	&:after {
+		content: '';
+		display: block;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 4px;
+		background: url('../assets/button-tan-blue.png');
+		background-size: 100% 6px;
+		background-repeat: no-repeat;
+		transform: rotate(180deg);
+		transform-origin: center;
+	}
+}
+
+.big-wave {
+	position: relative;
+	height: auto;
+padding-top: 60px;
+padding-bottom: 60px;
+}
+
+#brandsIcons img {
+	width: 76%;
+	@include breakpoint(md) {
+		max-width: 82px;
+		max-height: 40px;
+		width: 96%;
+	}
+
+}
+//
+// === Specialty ===
+//
+
+.button--primary-square {
+	@extend %button;
+	position: relative;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	font-family: $font-family-poppins;
+	font-weight: 600;
+	background: color(blue);
+	color: color(white);
+	padding: 0 2px;
+
+	&:disabled {
+		opacity: 1;
+		> * {
+			opacity: 0.5;
+		}
+	}
+}
+
+.button--secondary-square {
+	@extend %button;
+	position: relative;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	font-family: $font-family-poppins;
+	font-weight: 600;
+	color: color(blue);
+	border: 1px solid color(blue);
+	background: color(white);
+	padding: 0 2px;
+
+	&:disabled {
+		opacity: 1;
+		> * {
+			opacity: 0.5;
+		}
+	}
+}
+
+
+.button--index {
+	@extend %button;
+	position: relative;
+	width: 20px;
+	height: 20px;
+	line-height: 18px;
+	border-radius: 20px;
+	font-family: $font-family-poppins;
+	font-weight: 600;
+	font-size: 11px;
+	color: color(blue);
+	border: 1px solid color(blue);
+	
+	&.active {
+		background-color: color(blue);
+		color: color(white);
+	}
+}
+
+.button--newsletter {
+	@extend %button;
+	border-bottom: 1px solid currentColor;
+	height: 50px;
+	font-family: $font-family-poppins;
+	font-weight: 600;
+	line-height: 56px;
+	padding: 0 10px;
+	font-size: 12px;
+
+	@include breakpoint(md) {
+		font-size: 13px;
+	}
+}
+
+.button--cart {
+	@extend %button;
+	border: 1px solid color(blue);
+	color: color(blue);
+	height: 18px;
+	min-width: 18px;
+	line-height: 16px;
+	font-family: $font-family-poppins;
+	font-weight: 600;
+	padding: 0 2px;
+	font-size: 11px;
+
+	&.active {
+		border-color: color(blue);
+		background: color(blue);
+		color: color(white);
+	}
+
+	@include breakpoint(md) {
+		height: 20px;
+		min-width: 20px;
+		font-size: 12px;
+		line-height: 18px;
+	}
+}
+
+.color--white .button--cart {
+	border-color: color(white);
+	background-color: transparent;
+	color: color(white);
+
+	&.active {
+		border-color: color(white);
+		background-color: color(white);
+		color: color(blue);
+	}
+}
+
+//
+// === Product Select ===
+//
+
+.select--product-option select{
+	@extend %button;
+	height: $button-height-select;
+	line-height: $button-height-select;
+	padding: 0 20px;
+	text-align: left;
+	transition: 200ms background-color ease-out;
+	border: solid 1px color(tan);
+	margin-top: 8px;
+
+	&:hover,
+	&:focus {
+		border: solid 1px color(blue);
+	}
+
+	&.open {
+		background: color(blue);
+	}
+
+	&.selected {
+		background: color(blue);
+		color: color(white);
+	}
+
+	&.no-transition {
+		transition: none;
+	}
+}
+
+.select__dropdown--product-option {
+	position: absolute;
+	bottom: 100%;
+	left: -1px;
+	right: -1px;
+	border: 1px solid color(blue);
+	background: color(white);
+}
+
+//
+// === Quick Add ===
+//
+
+.button--quick-add {
+	@extend %button;
+	background: #fff;
+	border: 1px solid color(blue);
+	height: $button-height-quick-add;
+	line-height: $button-height-quick-add;
+	padding: 0 10px;
+	font-family: $font-family-poppins;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.product-card {
+	transition: background-color 150ms ease-out;
+	background-color: #fff;
+
+	:hover,
+	&.touch-enabled {
+		.product-card__footer {
+			opacity: 1;
+			transform: translate3d(0, 0, 0);
+			pointer-events: auto;
+			transition: transform 350ms cubic-bezier(0, 0, 0, 1) 50ms, opacity 350ms ease-out 50ms;
+		}
+	}
+
+	&.active {
+		background-color: color(white);
+	}
+}
+
+.product-card__footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	transition: transform 350ms cubic-bezier(0, 0, 0, 1) 300ms, opacity 250ms ease-out 50ms;
+	opacity: 0;
+	transform: translate3d(0, 5px, 0);
+	pointer-events: none;
+}
+
+.product-card__marker {
+	width: 80px;
+	height: 80px;
+	border-radius: 80px;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	z-index: 1;
+	transition: transform 350ms cubic-bezier(0, 0, 0, 1);
+
+	> * {
+		position: absolute;
+		top: 50%;
+		left: 0;
+		right: 0;
+		transform: translateY(-50%);
+	}
+
+	&.active {
+		transform: translate3d(0, -5px, 0);
+	}
+}
+
+.product-card__video {
+	opacity: 0;
+	transition: opacity 600ms ease-out;
+
+	&.active {
+		opacity: 1;
+	}
+}
+
+.select--quick-add {
+	@extend %button;
+	background: color(white);
+	height: $button-height-quick-add - 2px;
+	line-height: $button-height-quick-add - 2px;
+	padding: 0 20px;
+	text-align: left;
+	
+	&.open {
+		background: color(tan);
+	}
+
+	&.selected {
+		background: color(blue);
+		color: color(white);
+	}
+}
+
+.button--submit-quick-add {
+	@extend %button;
+	background: color(blue);
+	height: $button-height-quick-add - 2px;
+	width: $button-height-quick-add - 2px;
+	line-height: $button-height-quick-add - 2px;
+}
+
+.select__dropdown--product-option.quick-add {
+	position: absolute;
+	bottom: calc(100% - 1px);
+	border: 1px solid color(blue);
+	background: color(white);
+
+	.select--product-option {
+		height: $button-height-quick-add;
+		line-height: $button-height-quick-add;
+	}
+}
+
+//
+// === Quiz ===
+//
+
+.button--mobile-quiz {
+	@extend %button;
+	font-family: $font-family-poppins;
+	font-size: 12px;
+	font-weight: 600;
+	height: 90px;
+	line-height: 132px;
+	background-image: linear-gradient(to bottom, rgba(color(blue-light), 0), rgba(color(blue-light), 0.75), color(blue-light));
+
+	&.cta {
+		display: block;
+		width: 100%;
+		z-index: $z-index-cta;
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		transition: transform 300ms cubic-bezier(0, 0, 0, 1);
+		transform: translate3d(0, 100%, 0);
+
+		&.active {
+			transform: translate3d(0, 0, 0);
+		}
+	}
+}
+
+.button--big-question {
+	@extend %button;
+	background-color: white;
+	border: 5px solid #D7D1C8;
+	min-height: 100px;
+	padding-left: 10px;
+	padding-right: 10px;
+	transition: 200ms background-color ease-out;
+
+	&.active {
+		border-color: color(blue);
+	}
+
+	@include breakpoint(md) {
+		min-height: 200px;
+	}
+
+	&:hover,
+	&:focus {
+		background-color: color(tan);
+	}
+}
+
+.button--multi-question {
+	@extend %button;
+	background: white;
+	border: 5px solid #D7D1C8;
+	min-height: 100px;
+	padding-left: 10px;
+	padding-right: 10px;
+	transition: 200ms background-color ease-out;
+
+	&.active {
+		border-color: color(blue);
+	}
+
+	@include breakpoint(md) {
+		min-height: 120px;
+	}
+
+	&:hover,
+	&:focus {
+		background-color: color(tan);
+	}
+}
+
+.button--collection-tag {
+	transition: 300ms opacity ease-out;
+	width: 100px;
+
+	.product-tag__image {
+		transition: 300ms transform cubic-bezier(0, 0, 0, 1);
+	}
+
+	&.active {
+		.product-tag__image {
+			transform: translate3d(0, -5px, 0);
+		}
+	}
+}
+
+.custom-button--wave-primary-top {
+float: none;
+font-size: 22px;
+width: 264px;
+margin: 0 auto;
+padding: 6px;
+display: block;
+position: relative;
+min-width: 140px;
+line-height: 16px;
+color: #2F358E;
+background: #FFF;
+text-align: center;
+font-weight: 600;
+font-family: "Poppins", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Ubuntu, Helvetica Neue, sans-serif
+}
+@include breakpoint(md) {
+	.custom-button--wave-primary-top {
+		margin: 0
+	}
+}
+
+.custom-button--wave-primary-top span {
+    padding-left: 14px;
+}

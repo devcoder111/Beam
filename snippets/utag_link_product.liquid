@@ -1,0 +1,25 @@
+{% if settings.tealium_enabled %}
+  
+<script type="text/javascript">
+  const addButton = document.getElementById('add');
+  let productQty = document.getElementById("productQuantity").value;
+
+  addButton.addEventListener('click', function() { 
+    let productQty = document.getElementById("productQuantity").value;
+    utag.link({
+    "product_id"               : ["{{ product.id }}"],                           //Required
+    "product_name"             : ["{{ product.title }}"],  //Required
+    "product_price"            : ["{{ variant.price | money_without_currency }}"],                             //Required
+    "product_unit_price"       : ["{{ variant.price | money_without_currency }}"],                             //Required
+    "product_quantity"         : productQty,                                        //Required
+    "product_sku"              : ["{{ variant.sku }}"],                   //Required
+    "tealium_event"            : "cart_add"                                        //Required                                     
+    }); 
+  },
+  false
+  );
+  </script>
+
+  {% include 'utag' %}
+
+{% endif %}

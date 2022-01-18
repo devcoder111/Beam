@@ -1,0 +1,478 @@
+<div class="pr color--primary of--hidden hide--md">
+
+    <div class="push-up full-width bg--blue-light">
+            <div class="mt2 pt6 pb2" >
+                <a href="/products/sleep-powder"><img style="width: 100%; line-height: 0;" alt="Hero image - Dream" src="{{ 'dream-ab-test-square.jpg' | asset_img_url: '1000x800', crop: 'center', format: 'pjpg' }}" /></a>
+
+                <div class="pl2 pr2">
+                    <div class="sans--xxl tc mb2 pl4--md">
+
+                        <h2 class="hero-main-title sans--xl color--blue mt2 mb2 fw--300">
+                            your nightly drink <span class="fw--600">for better sleep</span>
+                        </h2>
+                        <p class="sans--medium hero-sub-title color--blue pb3 pb4--lg fw--300">
+                            a delicious blend of sleep-enhancing vitamins, minerals, nano hemp and more.
+                        </p>
+
+                    <div class="tc"><a class="dib custom-button--wave-primary-top link--opacity rounded" style="color: #fff !important; line-height: 2; background-color: #2f358e !important"  title="get yours now" href="/products/sleep-powder">shop dream <span>→</span></a></div>
+                    </div>
+                </div>
+
+            </div>
+    </div>
+
+</div>
+
+<div class="mt10 pr color--primary of--hidden show--md bg--blue-light hero--desktop">
+    <a title="get yours now" href="/products/sleep-powder"><picture class="">
+        <source srcset="{{ 'dream-ab-test-horizontal.jpg' | asset_url }}" media="(min-width: 800px)" />
+        <img class="hero__cover" alt="Hero image - Sleep" src="{{ 'dream-ab-test-horizontal.jpg' | asset_url }}" /></picture>
+        </a>
+    <div class="push-up full-width mt4">
+        <div class="grid-container contained">
+            <div class="row mt0 pt3 pt0--md mt0--md mb2 pb0--md mb0--md" >
+
+                <div class="col c12 c12--sm c6--md c5--lg c5--xl show--md">
+                    <div class="tc tl--md mb2 p5 pl4--lg pr3--lg pl3--md">
+                    <h2 class="hero-main-title sans--large fw--600 color--blue mt2 mb3 show--md">
+                        your nightly drink<br><span class="fw--600">for better sleep</span>
+
+                    </h2>
+                    <p class="sans--medium hero-sub-title color--blue pb5" style="max-width: 400px;">a delicious blend of sleep-enhancing vitamins, minerals, nano hemp and more.</p>
+                    <div class="tl"><a class="dib custom-button--wave-primary-top link--opacity rounded" style="color: #fff !important; line-height: 2; background-color: #2f358e !important"  title="get yours now" href="/products/sleep-powder">shop dream <span>→</span></a></div>
+                    </div>
+                </div>
+                <div class="col c12 c12--sm c7--md c8--lg show--md">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<img height="1" width="1" style="border-style:none;" alt=""
+src="https://insight.adsrvr.org/track/pxl/?adv=iv5xfdn&ct=0:5gakoxv&fmt=3" />
+{% unless settings.homepage_page == blank or pages[settings.homepage_page].empty? %}
+{% assign page = pages[settings.homepage_page] %}
+<div class="rte grid-margins">
+  {{ page.content }}
+</div>
+{% endunless %}
+
+
+<div class="row align--center mt2 mb1 mt3--md mb2--md">
+    <div class="col c10--sm c7--md c6--xl">
+        <div class="tc">
+            <h3 style="line-height: 1.4;" class="fw--400 sans--medium mb3 pl1 pr1 color--new-blue">beam creates the highest quality functional supplements for better balance, performance, recovery, and sleep.</h3>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="mt1 mb5 mt2--md mb8--md">
+<div class="container tc benefits-grid">
+    <h2 class="fw--600 sans--large mb4 color--blue pr1 pl1">what do you need?</h2>
+<div class="row gutter--none">
+    <div class="col c6 c3--md">
+        <div class="p1">
+            <a href="/collections/balance"><img style="width: 100%;" src="{{ 'balance-WDYN.jpg' | asset_url }}"></a>
+        </div>
+    </div>
+    <div class="col c6 c3--md">
+        <div class="p1">
+        <a href=" /collections/energy"><img style="width: 100%;" src="{{ 'performance-WDYN.jpg' | asset_url }}"></a>
+        </div>
+    </div>
+    <div class="col c6 c3--md">
+        <div class="p1">
+        <a href="/collections/recovery"><img style="width: 100%;" src="{{ 'recovery-WDYN.jpg' | asset_url }}"></a>
+    </div>
+    </div>
+    <div class="col c6 c3--md">
+        <div class="p1">
+        <a href="/collections/sleep"><img style="width: 100%;" src="{{ 'sleep-WDYN.jpg' | asset_url }}"></a>
+    </div>
+    </div>       
+</div>
+</div>
+
+</div>
+
+
+
+
+{% unless settings.homepage_collection == blank or collections[settings.homepage_collection].empty? %}
+{% assign collection = collections[settings.homepage_collection] %}
+<div class="mb6 mt2 pt4 pb4 pt6--md pb6--md tc bg--blue-light">
+<h2 class="fw--600 sans--large mb4 color--blue pr1 pl1">we think you’ll love these</h2>
+
+      <div class="grid-container contained">
+          <div class="row align--center">
+              <div class="col c9--lg">
+                  <div class="row gutter--vertical align--center">
+
+                            {% for product in collection.products %}
+                            <div class="col c6--sm c4--md">
+                                <div class="product-card pb1">
+                                    {% include 'product-grid-hydration' with 'three-per-row' %}
+                                </div>
+                            </div>
+                            {% endfor %}
+
+
+</div>
+</div>
+</div>
+</div>
+<div class="mt3 tc">
+<a href="/collections/all-products-collection-page-products-collection-page" class="button--wave-primary-bottom">shop all</a>
+</div>
+</div>
+
+{% endunless %}
+
+
+<div class="mt6 mb8 mt6--md mb10--md">
+<div style="max-width: 1200px;" class="container pt2--md pb2--md">
+    <div class="brand-slider">
+        <div class="mb2 mb0--md pl1 pr1">
+            <p class="tc"><a title="external press"
+                    href="https://www.gq.com/gallery/20-best-cbd-products-on-weed-day" class="dib"
+                    target="_blank">
+                    <picture class="promo__press-logo p1"><img class="promo__press-logo" style="max-width: 130px;"
+                            src="{{ 'maxim-logo.png' | asset_url }}">
+                    </picture>
+                </a>
+            </p>
+            <h5 class="tc">"these pro-athlete-approved hemp products will improve physical and mental wellness."</h5>
+        </div>
+        <div class="mb2 mb0--md pl1 pr1">
+            <p class="tc"><a title="external press"
+                    href="https://www.forbes.com/sites/bradjaphe/2019/03/18/a-pair-of-former-pro-athletes-team-up-to-get-in-the-cbd-game/#4ea8aa8c1c9d"
+                    class="dib" target="_blank">
+                    <picture class="promo__press-logo"><img class="promo__press-logo" 
+                            src="https://beam.imgix.net/beam-homepage-presslogo-forbes@2x.png?mtime=20190725113953&amp;auto=format&amp;h=100&amp;q=90&amp;w=320">
+                    </picture>
+                </a>
+            </p>
+            <h5 class="tc db">"[beam] is a great addition to an athlete’s nightly routine."</h5>
+        </div>
+
+
+        <div class="mb2 mb0--md pl1 pr1">
+            <p class="tc"><a title="external press"
+                    href="https://www.realsimple.com/health/mind-mood/stress/the-one-benefits-review-beam"
+                    class="dib" target="_blank">
+                    <picture class="promo__press-logo"><img class="promo__press-logo"
+                            src="https://beam.imgix.net/beam-homepage-presslogo-realsimple@2x_190725_183951.png?mtime=20190725113951&amp;auto=format&amp;h=100&amp;q=90&amp;w=320">
+                    </picture>
+                </a>
+            </p>
+            <h5 class="tc">"i've started using [beam] hemp oil everyday... and it changed my life."</h5>
+        </div>
+
+    </div>
+</div>
+</div>
+
+
+<div class="bg--blue-light">
+<div class="mt2 mb8 mt6--md mb1--md pt3 pt6--md">
+
+    <div class="grid-container contained pt2--md pb2--md">
+        <div class="row">
+            <div class="col c1 show--xl"></div>
+            <div class="col c5--md mb3 mb0--md">
+                <div class=" promo__pull-flush--left">
+                    <div class="pr">
+                        <div class="push-up">
+                            <picture class="full-width">
+                                <source
+                                    srcset="{{ 'elevate-5050-block-v2.jpg' | asset_url }}"
+                                    media="(min-width: 800px)"><img class="full-width"
+                                    alt="meet dream"
+                                    src="{{ 'elevate-5050-block-v2.jpg' | asset_url }}">
+                            </picture>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col c1 show--md"></div>
+
+            <div class="col c6--md c4--xl pt3--lg pt5--xl">
+                
+                <div class="tc tl--md">
+                    <h2 class="sans--large fw--600 mb2 color--blue">introducing elevate hydration powders</h2>
+                    <div class="rich-text mb2 mb4--lg">
+                        <p>our first non-hemp product line here to give your body the electrolytes it craves. three unique hydration powders deliver balance, performance and recovery support.
+                        </p>
+                        <p>make your gut happy with elevate balance, boost your energy with elevate performance and restore collagen and support joint health* with elevate recovery.</p>
+                    </p>
+                    </div>
+                    <div class="show--md media media--forward gutter--none">
+                        <div class="media__fixed"><a title="learn more" class="button--wave-primary-bottom"
+                                href="/collections/hydration-powders">shop elevate</a>
+                        </div>
+                    </div>
+                    <p class="hide--md tc"><a title="learn more" class="button--wave-primary-bottom"
+                        href="/collections/hydration-powders">shop elevate</a></p>
+                
+                </div>
+                
+            </div>
+            <div class="col c1 show--xl"></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="mt5 mb0 mt7--md pb6 pb2--md">
+
+<div class="grid-container contained pt2--md pb2--md">
+    <div class="row direction--rev--md">
+        <div class="col c5--md mb3 mb0--md">
+            <div class="promo__pull-flush--right">
+                <div class="pr">
+                    <div class="push-up">
+                        <picture class="full-width">
+                            <source
+                                srcset="{{ 'beam-baker-5050.jpg' | asset_url }}"
+                                media="(min-width: 800px)"><img class="full-width" alt="shop dream"
+                                src="{{ 'beam-baker-5050.jpg' | asset_url }}">
+                        </picture>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col c1 show--xl" ></div>
+        <div class="col c6--md c4--xl pt2--md">
+            <div class="tc tl--md">
+
+                <h2 class="sans--large fw--600 mb2 color--blue">baker beams on sundays.</h2>
+                <div class="rich-text mb2 mb4--lg">
+                    <p>we are so pumped to announce that baker mayfield has officially joined the #beamteam. from college walk-on to heisman trophy winner to starting quarterback in the nfl, baker’s bringing his larger-than-life energy and talent to our team.
+                    </p>
+                    <p>
+                        "i’m always trying to figure out how to be at peak performance and how to get there and stay there, both mentally and physically. i found out about beam a few years ago and fell in love with it. i use it every day, it’s a huge part of finding consistency in the roller coaster year of 2020.”
+                    </p>
+                </div>
+                <div class="show--md media media--forward media--horizontal gutter--none">
+                    <div class="media__fixed"><a title="learn more" class="button--wave-primary-bottom"
+                            href="/collections/bakers-favorites">shop baker's favorites</a></p>
+                </div>
+            </div>
+                <p class="hide--md tc"><a title="learn more" class="button--wave-primary-bottom"
+                    href="/collections/bakers-favorites">shop baker's favorites</a></p>
+                </div>       
+        </div>
+        <div class="col c1 show--md"></div>
+</div>
+</div>
+</div>
+
+<div class="mt5 mb0 mt7--md pb6 pb2--md">
+
+<div class="grid-container contained pt2--md pb2--md">
+    <div class="row">
+        <div class="col c1 show--xl"></div>
+        <div class="col c5--md mb3 mb0--md">
+            <div class=" promo__pull-flush--left">
+                <div class="pr">
+                    <div class="push-up">
+                        <picture class="full-width">
+                            <source
+                                srcset="{{ 'learn-more-boost.jpg' | asset_url }}"
+                                media="(min-width: 800px)"><img class="full-width"
+                                alt="meet dream"
+                                src="{{ 'learn-more-boost.jpg' | asset_url }}">
+                        </picture>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col c1 show--md"></div>
+
+        <div class="col c6--md c4--xl pt3--lg pt5--xl">
+            
+            <div class="tc tl--md">
+                <h2 class="sans--large fw--600 mb2 color--blue">How does hemp work?</h2>
+                <div class="rich-text mb2 mb4--lg">
+                    <p>everyone has their own ECS system that's in charge of regulating the body and maintaining homeostasis. hemp interacts with that control system to keep you feeling your best.
+                    </p>
+                </div>
+                <div class="show--md media media--forward gutter--none">
+                    <div class="media__fixed"><a title="learn more" class="button--wave-primary-bottom"
+                            href="/pages/education">learn more</a>
+                    </div>
+                </div>
+                <p class="hide--md tc"><a title="learn more" class="button--wave-primary-bottom"
+                    href="/pages/education">learn more</a></p>
+            
+            </div>
+            
+        </div>
+        <div class="col c1 show--xl"></div>
+    </div>
+</div>
+</div>
+
+<div class="mt5 mb0 mt7--md pb6">
+
+<div class="grid-container contained pt2--md pb2--md">
+    <div class="row direction--rev--md">
+        <div class="col c5--md mb3 mb0--md">
+            <div class="promo__pull-flush--right">
+                <div class="pr">
+                    <div class="push-up">
+                        <picture class="full-width">
+                            <source
+                                srcset="{{ 'learn-more-dream.jpg' | asset_url }}"
+                                media="(min-width: 800px)"><img class="full-width" alt="shop dream"
+                                src="{{ 'learn-more-dream.jpg' | asset_url }}">
+                        </picture>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col c1 show--xl" ></div>
+        <div class="col c6--md c4--xl pt2--md">
+            <div class="tc tl--md">
+
+                <h2 class="sans--large fw--600 mb2 color--blue">what is the difference between nano and regular hemp?
+                </h2>
+                <div class="rich-text mb2 mb4--lg">
+                    <p>two words: surface area. when you break hemp molecules down to tiny droplets, your body has a dramatically increased ability to absorb hemp. it’s the next level in our hemp innovation that makes beam so much better. 
+                    </p>
+                </div>
+                <div class="show--md media media--forward media--horizontal gutter--none">
+                    <div class="media__fixed"><a title="learn more" class="button--wave-primary-bottom"
+                            href="/pages/education">learn more</a></p>
+                </div>
+            </div>
+                <p class="hide--md tc"><a title="learn more" class="button--wave-primary-bottom"
+                    href="/pages/education">learn more</a></p>
+                </div>       
+        </div>
+        <div class="col c1 show--md"></div>
+</div>
+</div>
+</div>
+
+</div>
+
+
+
+<div class="mt7 mb4 mt4--md mb7--md">
+<div class="container pt2--md pb2--md">
+    <div class="row">
+        <div class="col c7--md c6--lg pt3--md mb3 tc tl--md">
+<h2 class="fw--600 sans--large mb2 color--blue">hear why they love us</h2>
+              <h3 class="fw--300 sans--medium mb2">"beam's mission is to help their customers experience better, and I think they’ve nailed it."</h3>
+              
+                <h2 class="sans--medium fw--600">- Peter Rahal</h2>
+                    <span>co-founder of RX bar</span>
+
+            </div>
+            <div class="col c1--lg show--md"></div>
+
+        <div class="col c5--md c5--lg mb2 mb0--md">
+            <div class=" promo__pull-flush--left">
+                <div class="pr">
+                  <div class="box-shadow align--right"></div>
+                  <div class="push-up">
+                          <picture class="full-width">
+                              <source
+                                  srcset="{{ 'peter_rahal_1.jpg' | asset_url }}"
+                                  media="(min-width: 800px)"><img class="full-width"
+                                  alt="an all-natural alternative"
+                                  src="{{ 'peter_rahal_1.jpg' | asset_url }}">
+                          </picture>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
+
+    </div>
+</div>
+</div>
+</div>
+
+
+
+<div class="mt4 mb4 mt0--md mb8--md">
+<div class="container">
+    <div class="row">
+        <div class="col c6--md">
+            <a href="/pages/refer"><img class="full-width" src="{{ 'give20-get20.jpg' | asset_url }}"></a>
+        </div>
+        <div class="col c6--md mt2 mt0--md">
+            <a href="/pages/sezzle"><img class="full-width" src="{{ 'sezzle.jpg' | asset_url }}">
+    </div>
+    </div>
+</div>
+</div>
+<div class="mt3 mb5 tc hide--md">
+<a href="https://beamtlc.com/pages/sms-support" class="fw--600 sans--medium underline color--primary">need help? text us!</a>
+</div>
+
+
+<script>
+
+
+
+$('.brand-slider').slick({
+  autoplay: true,
+  slidesToShow: 3,
+   slidesToScroll: 1,
+  fade: false,
+  useTransform: true,
+  arrows: false,
+  dots: false,
+  autoplaySpeed: 5000,
+  adaptiveHeight: false,
+  pauseOnHover: true,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        fade: false
+      }
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 1,
+        fade: false,
+        arrows: false,
+        dots: true,
+        customPaging: function (slider, i) {
+      return $('<button type="button" />').text(i + 1);
+        }
+      }
+    }
+  ]
+});
+</script>
+
+<style>
+@media screen and (max-width: 600px) {
+.template-index .slick-dots {
+top: auto !important;
+bottom: -20px !important;
+left: auto !important;
+right: auto;
+text-align: center;
+}
+.template-index .slick-dots li button {
+background-color: #C2C2C2;
+}
+.template-index .slick-dots li.slick-active button {
+background-color: #2F358E;
+}
+}
+</style>

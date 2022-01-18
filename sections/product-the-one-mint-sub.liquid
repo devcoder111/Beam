@@ -1,0 +1,584 @@
+{% assign add_to_cart = 'Add to cart' %}
+{% assign sold_out = 'Sold Out' %}
+{% assign unavailable = 'Unavailable' %}
+{% assign product_id = 4528589439031 %}
+
+
+<div class="mt6 mt10--md pt2 pr color--primary of--hidden hero--desktop">
+    <picture class="show--md">
+        <source srcset="{{ 'theone-mint-hero.jpg' | asset_url }}" media="(min-width: 800px)" />
+        <img class="hero__cover" alt="Hero image - Sleep" src="{{ 'theone-mint-hero.jpg' | asset_url }}" />
+    </picture>
+
+
+
+    <div class="container hide--md">
+        <div class="tl">
+            {% include 'stars-the-one' %}
+        </div>
+        <div class="mb2 pr">
+            <h1 class="sans--medium-large fw--600 color--blue"
+                style="line-height: 1; margin-bottom: 4px;" temprop="name">the one</h1>
+                <span class="pa" style="right:0px;top:-24px;max-width: 100px;">
+                    <img class="" style="width: 100%;" alt="flavor - mint" src="{{ 'icon_mint-flavor.png' | asset_url }}" />
+                </span>
+        </div>
+
+
+    </div>
+
+    <div style="" class="tc ml3 the-one-icons hide--md">
+        <div class="mb2 mt3"><img style="width: 66%;" alt="" src="{{ 'icon_balance.png' | asset_url }}" />
+             <h5 class="color--white fw--600">balance</h5>
+        </div>
+        <div class="mb2 mt3"><img style="width: 66%;" alt="" src="{{ 'icon_calm.png' | asset_url }}" />
+         <h5 class="color--white fw--600">calm</h5>
+    </div>
+    <div class="mb2 mt3"><img style="width: 66%;" alt="" src="{{ 'icon_relaxation.png' | asset_url }}" />
+     <h5 class="color--white fw--600">relaxation</h5>
+</div>
+
+     </div>
+
+    <img class="hide--md" style="max-width: 100%;" alt="Hero image - Sleep" src="{{ 'hero-the-one-mobile-3.jpg' | asset_url }}" />
+
+    <div class="mt0 mb1 hide--md" style="margin-top: -8px;">
+        <div class="p2 tc" style="background-color: #EAF4FF; margin-left: -40px; margin-right: -40px;">
+                
+                    <p class="sans--small hide--md tc fw--600 color--blue">
+                       <div class="fw--600 color--blue">subscription perks</div> 20% off • free shipping • monthly delivery
+                    </p>
+        </div>
+    </div>
+    <div class="push-up full-width mt4--md">
+        <div class="grid-container contained">
+            <div class="row mt0 pt3--md pt0--md mt0--md mb2 pb0--md mb0--md">
+                
+                <div class="col c4--md c5--lg c6--xl c7--xxxl show--md">
+                    <div style="" class="tc ml3 the-one-icons">
+                       <div class="mb6 mt3"><img style="width: 100%;" alt="" src="{{ 'icon_balance.png' | asset_url }}" />
+                            <h5 class="color--white fw--600">balance</h5>
+                       </div>
+                       <div class="mb6 mt3"><img style="width: 100%;" alt="" src="{{ 'icon_calm.png' | asset_url }}" />
+                        <h5 class="color--white fw--600">calm</h5>
+                   </div>
+                   <div class="mb3 mt3"><img style="width: 100%;" alt="" src="{{ 'icon_relaxation.png' | asset_url }}" />
+                    <h5 class="color--white fw--600">relaxation</h5>
+               </div>
+
+                    </div>
+                </div>
+                <div class="col c12 c12--sm c7--md c7--lg c6--xl c5--xxxl bg--white rounded-more mb0 mb4--md pr"
+                    style="max-width: 580px !important;">
+                    <div class="p3" itemscope itemtype="http://schema.org/Product">
+
+                        <div data-event-type="product" data-entity-id="{{product.id}}" data-name="{{product.title}}">
+
+                        
+                                    {% assign variant = product.selected_or_first_available_variant %}
+                                    {% assign featured_image = product.selected_or_first_available_variant.featured_image | default:
+                                    product.featured_image %}
+                                <form action="/cart/add" data-productid="{{ product.id }}" method="post" class="product-form"
+                                id="add-to-cart" enctype="multipart/form-data">
+                                            <div class="mb1 show--lg">
+       
+                                                <h2 class="sans--large fw--600 color--blue mb3"
+                                                    temprop="name">the one {% include 'stars-the-one' %}</h2>
+
+                                            <span class="pa" style="right:40px;top:20px;max-width: 120px;">
+                                                <img class="" style="width: 100%;" alt="flavor - mint" src="{{ 'icon_mint-flavor.png' | asset_url }}" />
+                                            </span>
+                                            </div>
+                                            <h3 class="sans--medium tc tl--md fw--600 color--blue" style="margin-bottom: 4px;">
+                                            something for everyone
+                                        </h3>
+                                            <div class="rich-text tc tl--md sans--body" itemprop="description">
+                                                choose the one that’s best for you. <span id="detailsModalBtn2"
+                                                class="show--md ml2 mt2 mb2 mb4--md fw--600 pointer underline color--blue"><span
+                                                    class="hide--md">tap</span><span class="show--md">click</span> for nutrition info</span>
+                                            </div>
+
+                                <div class="media__fixed mt2">
+
+                                    {% if product.available and product.variants.size > 1 %}
+                                    {% render 'swatch-the-one-2' for product.options as swatch %}
+                                    {% endif %}
+
+                                    {% assign hide_default_title = false %}
+                                    {% if product.variants.size == 1 and product.variants.first.title contains 'Default'
+                                    %}
+                                    {% assign hide_default_title = true %}
+                                    {% endif %}
+                                    <div id="product-variants"
+                                        class="select--product-option hidden{% if hide_default_title %} hidden{% endif %}">
+                                        <select id="product-select" class="form-select" name="id"
+                                            data-productid="{{ product.id }}">
+                                            {% for variant in product.variants %}
+                                            <option class="form-select" {% if
+                                                variant==product.selected_or_first_available_variant %} selected{% endif
+                                                %} value="{{ variant.id }}">
+                                                {{ variant.title }} - {{ variant.price | money }}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+<div class="hide-md mb2"></div>
+
+                                    <div class="mt3 mb4 show--md">
+                                        <div class="p2 tc" style="background-color: #EAF4FF; margin-left: -40px; margin-right: -40px;">
+                                                    <p class="sans--small show--md tc fw--400 color--blue">
+                                                        <span class="fw--600 color--blue pr1">subscription perks</span> 20% off • free shipping • monthly delivery
+                                                    </p>
+                                        </div>
+                                    </div>
+                                    <!-- Begin ReCharge code -->
+                                    {% if product.available %}{% include 'subscription-product-dream' %}{% endif %}
+                                    <!-- End ReCharge code -->
+
+
+                                    <div id="product-add" class="form-action mt3 mb3">
+                                        <div class="qtydiv">
+                                            <div class="qtybox">
+                                                <span class="btnqty qtyminus icon-minus">-</span>
+                                                <input type="text" id="productQuantity" name="quantity" value="1"
+                                                    min="1" class="quantity-selector quantity-input" readonly="">
+                                                <span class="btnqty qtyplus icon-plus">+</span>
+                                            </div>
+                                        </div>
+                                        <input type="submit" name="add" id="add" class="button button--primary"
+                                            value="{{ add_to_cart | escape }}">
+                                    </div>
+
+                                    {% include 'guarantee' %}
+
+                                </div>
+
+    
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+<div class="productView container mt4 mb4 hidden">
+    <div itemscope itemtype="http://schema.org/Product">
+
+        <div data-event-type="product" data-entity-id="{{product.id}}" data-name="{{product.title}}">
+
+
+            {% assign variant = product.selected_or_first_available_variant %}
+            {% assign featured_image = product.selected_or_first_available_variant.featured_image | default:
+            product.featured_image %}
+
+            <div class="mt0 mt2--md pt4">
+                <form action="/cart/add" data-productid="{{ product.id }}" method="post" class="product-form"
+                    id="add-to-cart" enctype="multipart/form-data">
+
+
+
+                    <div class="container">
+                        <div class="pl1--md">
+                            <div class="">
+                 
+                                <div class="media__fixed">
+
+                                    {% if product.available and product.variants.size > 1 %}
+                                    {% render 'swatch-the-one-2' for product.options as swatch %}
+                                    {% endif %}
+
+                                    {% assign hide_default_title = false %}
+                                    {% if product.variants.size == 1 and product.variants.first.title contains 'Default'
+                                    %}
+                                    {% assign hide_default_title = true %}
+                                    {% endif %}
+                                    <div id="product-variants"
+                                        class="select--product-option{% if hide_default_title %} hidden{% endif %}">
+                                        <select id="product-select" class="form-select" name="id"
+                                            data-productid="{{ product.id }}">
+                                            {% for variant in product.variants %}
+                                            <option class="form-select" {% if
+                                                variant==product.selected_or_first_available_variant %} selected{% endif
+                                                %} value="{{ variant.id }}">
+                                                {{ variant.title }} - {{ variant.price | money }}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+
+                                    <div class="mt3 mb3">
+                                        <div class="p2 tc" style="background-color: #EAF4FF; margin-left: -40px; margin-right: -40px;">
+        
+                                                    <p class="sans--small tc fw--600 color--blue">
+                                                        <div class="fw--600 color--blue">subscription perks</div> 20% off • free shipping • monthly delivery
+                                                    </p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Begin ReCharge code -->
+                                    {% if product.available %}{% include 'subscription-product-dream' %}{% endif %}
+                                    <!-- End ReCharge code -->
+                                    <div class="sans--small pb2 hidden">
+                                        <div id="product-price" itemprop="offers" itemscope
+                                            itemtype="http://schema.org/Offer" class="delta">
+                                            <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+                                            {% if product.available %}
+                                            <link itemprop="availability" href="http://schema.org/InStock" />
+                                            {% else %}
+                                            <link itemprop="availability" href="http://schema.org/OutOfStock" />
+                                            {% endif %}
+                                            <p>
+                                                {% assign variant = product.selected_or_first_available_variant %}
+                                                {% if product.compare_at_price > product.price %}
+                                                <span class="product-price on-sale" itemprop="price">{{ variant.price |
+                                                    money }}</span>
+                                                <s class="product-compare-price">{{ variant.compare_at_price | money
+                                                    }}</s>
+                                                {% else %}
+                                                <span class="product-price sans--medium fw--600" itemprop="price">{{
+                                                    variant.price | money }}</span>
+                                                {% endif %}
+                                            </p>
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                    <div id="backorder" class="hidden tc">
+                                        <p>{{ '%s is back-ordered. We will ship it separately in 10 to 15 days.' |
+                                            replace: '%s', '<span id="selected-variant"></span>' }}</p>
+                                    </div>
+
+                                    <div id="product-add" class="form-action">
+                                        <div class="qtydiv">
+                                            <div class="qtybox">
+                                                <span class="btnqty qtyminus icon-minus">-</span>
+                                                <input type="text" id="productQuantity" name="quantity" value="1"
+                                                    min="1" class="quantity-selector quantity-input" readonly="">
+                                                <span class="btnqty qtyplus icon-plus">+</span>
+                                            </div>
+                                        </div>
+                                        <input type="submit" name="add" id="add" class="button button--primary"
+                                            value="{{ add_to_cart | escape }}">
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+        </form>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+
+<div class="pt1 pb1 tc mb0 mb2--md bg--blue color--white hidden">
+    <div class="marquee">
+        <div class="track">
+          <div class="content">
+            “beam does exactly what you want, magic.” -danica patrick<span class="pl4 pr4">•</span>
+            “i fell in love with beam. i use it every day.” -baker mayfield<span class="pl4 pr4">•</span>
+            ‘’beam is going to be the nike of the wellness world.” -billy horschel<span class="pl4 pr4">•</span>
+            “beam does exactly what you want, magic.” -danica patrick<span class="pl4 pr4">•</span>
+            “i fell in love with beam. i use it every day.” -baker mayfield<span class="pl4 pr4">•</span>
+            ‘’beam is going to be the nike of the wellness world.” -billy horschel<span class="pl4 pr4">•</span>            
+            “beam does exactly what you want, magic.” -danica patrick<span class="pl4 pr4">•</span>
+            “i fell in love with beam. i use it every day.” -baker mayfield<span class="pl4 pr4">•</span>
+            ‘’beam is going to be the nike of the wellness world.” -billy horschel<span class="pl4 pr4">•</span>
+            “beam does exactly what you want, magic.” -danica patrick<span class="pl4 pr4">•</span>
+            “i fell in love with beam. i use it every day.” -baker mayfield<span class="pl4 pr4">•</span>
+            ‘’beam is going to be the nike of the wellness world.” -billy horschel<span class="pl4 pr4">•</span>                
+        </div>
+        </div>
+      </div>
+
+    </div>
+
+<div class="mt4--md mb10--md pt2--md">
+
+    <div class="mt10--md mb10--md" style="background-color: #EAF4FF;">
+        <div class="container">
+            <div class="row align--middle">
+                <div class="col c5--md show--md" style="margin-top: -100px;margin-bottom: -80px;">
+                    <img class="full-width rounded-image" src="{{ 'module-1_the-one-the-only_SQUARE.jpg' | asset_url }}">
+                </div>
+                <div class="col c2 hide--md"></div>
+                <div class="col pt3 c8 hide--md">
+                    <img class="full-width rounded-image" src="{{ 'module-1_the-one-the-only_SQUARE.jpg' | asset_url }}">
+                </div>
+                <div class="col c1 show--md"></div>
+                <div class="col c6--md">
+                    <div class="tc mt3 hide--md "><span style="width: 38px;" class="dib ml1 mb1"><img class="full-width"
+                                src="{{ 'icon_the-one-the-only.png' | asset_url }}"></span></div>
+                    <h2 class="sans--large tc tl--md fw--600 mt3 mt0--md mb2 color--blue">the one, the only <span
+                            style="width: 38px;" class="show--md dib ml0 mb1"><img class="full-width"
+                                src="{{ 'icon_the-one-the-only.png' | asset_url }}"></span></h2>
+                    <p class="sans--body tc tl--md fw--400 mb4 color--black">
+                        our approach to hemp oil is simple: source only the best, most sustainable ingredients. organic hemp seed and grape seed oils help compounds stay intact so you can absorb all the benefits of our hemp tincture. less stress and more calm = a better state of mind.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="mt4 mb4 mt5--md mb2--md">
+    <div class="container pt2--md pb2--md">
+      <div class="row align--center">
+          <div class="col c11--md c10--lg">
+              <img style="max-width: 60px;text-align:center;margin-right: auto;margin-left: auto;display:block" class="mb3 mb5--md" src="{{ 'icon_whats-in-the-one.png' | asset_url }}">
+  
+      <h2 class="fw--600 sans--large mb3 color--blue tc mb6--md">what’s in the one?</h2>
+  
+        <div class="row">
+  
+            <div class="col c3--md c3--lg pt1--md mb1 mb3--md tc tr--md">
+                  <div class="description-tab">
+                    <div class="dib sans--medium fw--600 valueprops mb1" id="valuepropsDefaultOpen" onclick="openVP(event, 'vpHemp')">hemp oil<span class="link--wave db"></span></div><br>
+                    <div class="dib sans--medium fw--600 valueprops mb1" onclick="openVP(event, 'vpHydration')">hemp seed oil<span class="link--wave db"></span></div><br>
+                    <div class="dib sans--medium fw--600 valueprops mb1" onclick="openVP(event, 'vpPower')">grape seed oil<span class="link--wave db"></span></div><br>
+                  </div>
+                </div>
+                <div class="col c1"></div>
+  
+            <div class="col c10 c8--md c8--lg mb2 mb0--md">
+                <div id="vpHemp" class="valuepropscontent">
+                    <p class="sans--medium">
+                        our hemp oil is 20:1 hemp to cbg, resulting in a product that preserves the integrity of beneficial compounds, fatty acids and terpenes.
+                    </p>
+                </div>
+              <div id="vpHydration" class="valuepropscontent">
+                <p class="sans--medium">
+                    helps bind compounds to healthy fats, which protects them all the way into your digestive system. plus, it doesn’t contain coconut, a known allergen. 
+                </p>
+              </div>
+              <div id="vpPower" class="valuepropscontent">
+                <p class="sans--medium">
+                    flavorless grapeseed oil helps compounds stay intact as you digest and just like hemp seed oil, it’s the kind of fat compounds love.
+                </div>
+
+          </div>
+  
+      </div>
+  </div>
+  
+        </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row align--center">
+        <div class="col c10--md">
+    <img class="show--md" style="width: 100%;" src="{{ 'NC-Icons.png' | asset_url }}">
+    <img class="hide--md" style="width: 100%;" src="{{ 'NC-icons-mobile.png' | asset_url }}">
+    </div>
+</div>
+</div>
+
+<div class="pt8--md"></div>
+
+
+<div class="mt6 mt10--md mb10--md">
+    <div class="mt10--md mb10--md" style="background-color: #EAF4FF;">
+        <div class="container">
+            <div class="row align--middle">
+                <div class="col c2 hide--md"></div>
+                <div class="col pt3 c8 hide--md">
+                    <img class="full-width rounded-image"
+                        src="{{ 'module-2_how-to-enjoy_SQUARE.jpg' | asset_url }}">
+                </div>
+                <div class="col c6--md pt4--md">
+                    <div class="tc mt3 hide--md "><span style="width: 38px;" class="dib ml1 mb1"><img
+                                class="full-width half-moon" src="{{ 'icon_how-to-enjoy.png' | asset_url }}"></span></div>
+
+                    <h2 class="sans--large tc tl--md fw--600 mt3 mt0--md mb2 color--blue">how to enjoy <span style="width: 38px;"
+                            class="dib show--md ml1 mb1"><img class="full-width half-moon"
+                                src="{{ 'icon_how-to-enjoy.png' | asset_url }}"></span></h2>
+                    <div class="sans--body tc tl--md fw--400 mb4 mb10--md color--black" style="max-width: 460px;">
+                        <p class="mb1">the one is known for its versatility.</p>
+                        <p class="mb1"><span class="color--blue fw--600">mix into your drink</span><br class="hide--md"> add one dropper to your daily coffee, tea or smoothie.</p>
+                        <p><span class="color--blue fw--600">drop under your tongue</span><br class="hide--md"> this will allow it to reach your digestive system faster. hold for 30 seconds and then swallow.</p>
+                    </div>
+                        
+                </div>
+                <div class="col c1 show--md"></div>
+
+                <div class="col c5--md show--md" style="margin-top: -100px;margin-bottom: -80px;">
+                    <img class="full-width rounded-image"
+                        src="{{ 'module-2_how-to-enjoy_SQUARE.jpg' | asset_url }}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+<div class="tc pt6 pb2 pt10--md pb10--md">
+    <div class="container">
+        <h4 class="color--blue sans--large fw--200 pr10--md pl10--md" style="font-style: italic;">92% of people felt a noticeable sense of calmness after taking the one. <sub class="sans--medium">**</sub></h4>
+        <h4 class="color--blue sans--large fw--200 pr10--md pl10--md mt4" style="font-style: italic;">84% of people felt their mood improve after taking the one. <sub class="sans--medium">**</sub></h4>
+    </div>
+</div>
+
+
+
+
+
+<div class="mt4 mb10--md pt2--md">
+
+    <div class="mt10--md mb10--md" style="background-color: #EAF4FF;">
+        <div class="container">
+            <div class="row align--middle">
+                <div class="col c5--md show--md" style="margin-top: -100px;margin-bottom: -80px;">
+                    <img class="full-width rounded-image"
+                        src="{{ 'the-one_rebrand-lifestyle_02.jpg' | asset_url }}">
+                </div>
+                <div class="col c2 hide--md"></div>
+                <div class="col pt3 c8 hide--md">
+                    <img class="full-width rounded-image"
+                        src="{{ 'the-one_rebrand-lifestyle_02.jpg' | asset_url }}">
+                </div>
+                <div class="col c1 show--md"></div>
+                <div class="col c6--md">
+                    <div class="tc mt3 hide--md "><span style="width: 38px;" class="dib ml1 mb1"><img class="full-width"
+                                src="{{ 'icon_new-daily-ritual.png' | asset_url }}"></span></div>
+                    <h2 class="sans--large tc tl--md fw--600 mt3 mt0--md mb2 color--blue pr" style="max-width: 460px;">your new daily ritual <span
+                            style="width: 38px;position: absolute; top: -8px; right: -29px"
+                            class="show--md dib ml1 mb1"><img class="full-width"
+                                src="{{ 'icon_new-daily-ritual.png' | asset_url }}"></span></h2>
+                    <p class="sans--body tc tl--md fw--400 mb4 mb8--md color--black">
+                        daily rituals keep us centered and balanced, and the one’s adaptability to any routine does just that. enjoy every day, as needed, whether that’s keeping it with your toothbrush for a morning dose or storing it on your counter for that lunchtime reminder, taking it at the same time each day will help you reap all the benefits.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="show--md mt1 mb1">
+    <div class="mt1 mb2"><br>
+    </div>
+</div>
+
+<div class="mt4 mb3 mt7--md mb10--md">
+    <div class="container pt2--md pb2--md">
+        <div class="row">
+
+            <div class="col hide--md mb2 mb0--md">
+                <div class="">
+                    <div class="pr">
+                        <div class="push-up">
+                            <picture class="full-width">
+                                <source srcset="https://cdn.shopify.com/s/files/1/0264/4076/1399/products/the-one-danica_800x800_crop_center.jpg?v=1614234003"
+                                    media="(min-width: 800px)"><img class="full-width rounded-image"
+                                    alt="an all-natural alternative"
+                                    src="https://cdn.shopify.com/s/files/1/0264/4076/1399/products/the-one-danica_800x800_crop_center.jpg?v=1614234003">
+                            </picture>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col c7--md c6--lg pt1--md mb3 tc tl--md">
+                <h6 class="sans--body mb3"><span class="color--white bg--purple fw--600"
+                        style="padding: 2px 16px; border-radius: 5px; opacity: .6;">why top athletes love the one</span></h6>
+
+                <h3 class="fw--300 sans--medium mb2">"i invested in beam because this stuff really works. i have used other hemp products and I didn’t notice anything, but beam does what it says it’s supposed to do."</h3>
+
+                <h2 class="sans--medium fw--600">-danica patrick</h2>
+                <span>former professional racecar driver 
+                </span>
+
+            </div>
+            <div class="col c1--lg show--md"></div>
+
+            <div class="col c5--md c5--lg mb2 mb0--md show--md">
+                <div class="">
+                    <div class="pr">
+                        <div class="push-up">
+                            <picture class="full-width">
+                                <source srcset="https://cdn.shopify.com/s/files/1/0264/4076/1399/products/the-one-danica_800x800_crop_center.jpg?v=1614234003"
+                                    media="(min-width: 800px)"><img class="full-width rounded-image"
+                                    alt="an all-natural alternative"
+                                    src="https://cdn.shopify.com/s/files/1/0264/4076/1399/products/the-one-danica_800x800_crop_center.jpg?v=1614234003">
+                            </picture>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="mb5 mt5--md pt3 pb7 mb6--md container" style="background-color: #EAF4FF;">
+    <div class="pt4 pb6 pb10--md">
+        <div class="brand-slider">
+            <div class="mb2 mb0--md pl1 pr1">
+                <p class="tc"><span class="dib">
+                        <picture class="promo__press-logo p1"><img class="promo__press-logo" style="max-width: 130px;"
+                                src="{{ 'maxim-logo.png' | asset_url }}">
+                        </picture>
+                    </span>
+                </p>
+                <h5 class="tc">"these pro-athlete-approved hemp products will improve physical and mental wellness."</h5>
+            </div>
+            <div class="mb2 mb0--md pl1 pr1">
+                <p class="tc"><span class="dib">
+
+                        <picture class="promo__press-logo"><img class="promo__press-logo"
+                                src="https://beam.imgix.net/beam-homepage-presslogo-forbes@2x.png?mtime=20190725113953&amp;auto=format&amp;h=100&amp;q=90&amp;w=320">
+                        </picture>
+                    </span>
+                </p>
+                <h5 class="tc db">"[beam] is a great addition to an athlete’s nightly routine."</h5>
+            </div>
+
+
+            <div class="mb2 mb0--md pl1 pr1">
+                <p class="tc"><span class="dib">
+
+                        <picture class="promo__press-logo"><img class="promo__press-logo"
+                                src="https://beam.imgix.net/beam-homepage-presslogo-realsimple@2x_190725_183951.png?mtime=20190725113951&amp;auto=format&amp;h=100&amp;q=90&amp;w=320">
+                        </picture>
+                    </span>
+                </p>
+                <h5 class="tc">"i've started using [beam] hemp everyday... and it changed my life."</h5>
+            </div>
+
+        </div>
+    </div>
+</div>
+
